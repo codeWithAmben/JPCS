@@ -1,0 +1,88 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary Files
+*.tmp
+*.temp
+*.cache
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Node Modules (if using npm in future)
+node_modules/
+package-lock.json
+
+# Build Directories
+dist/
+build/
+
+# Environment Variables
+.env
+.env.local
+.env.production
+
+# Database Files
+*.sql
+*.sqlite
+*.db
+
+# XML Database Files (contain user data)
+database/users.xml
+database/members.xml
+database/registrations.xml
+database/inquiries.xml
+database/newsletter.xml
+database/event_registrations.xml
+
+# Uploaded files (user content)
+assets/uploads/
+uploads/
+
+# Compressed Files
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Image Processing
+*.psd
+*.ai
+
+# Documentation Build
+docs/_build/
+
+# Test Coverage
+coverage/
+*.cover
+.coverage
+
+# Other
+.sass-cache/

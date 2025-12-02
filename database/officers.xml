@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<officers>
+  <officer>
+    <id>off_001</id>
+    <name>Mr. Joseph Rizalde E. Guillo</name>
+    <position>Chapter Adviser</position>
+    <category>Executive</category>
+    <order>1</order>
+    <photo>ADVISER.jpg</photo>
+    <email>adviser@jpcs-malvar.edu.ph</email>
+    <bio>Experienced educator and technology advocate dedicated to nurturing the next generation of IT professionals.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_002</id>
+    <name>Jaynellan Almary O. Magpantay</name>
+    <position>President</position>
+    <category>Executive</category>
+    <order>2</order>
+    <photo>PRESIDENT.jpg</photo>
+    <email>president@jpcs-malvar.edu.ph</email>
+    <bio>Leading the JPCS Malvar Chapter with vision and dedication for academic excellence.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_003</id>
+    <name>Ralph Gabriel T. Loleng</name>
+    <position>VP for Internal Affairs</position>
+    <category>Executive</category>
+    <order>3</order>
+    <photo>LOLENG.jpg</photo>
+    <email>vp.internal@jpcs-malvar.edu.ph</email>
+    <bio>Managing internal operations and member welfare.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_004</id>
+    <name>Mard Jonas Prato</name>
+    <position>VP for External Affairs</position>
+    <category>Executive</category>
+    <order>4</order>
+    <photo>PRATO.jpg</photo>
+    <email>vp.external@jpcs-malvar.edu.ph</email>
+    <bio>Building partnerships and external relations for the chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_005</id>
+    <name>Ernest Vincent Aidan L. Mabilangan</name>
+    <position>General Secretary</position>
+    <category>Executive</category>
+    <order>5</order>
+    <photo>MABILANGAN.jpg</photo>
+    <email>secretary@jpcs-malvar.edu.ph</email>
+    <bio>Documenting chapter activities and maintaining records.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_006</id>
+    <name>Hazel Anne Malitig</name>
+    <position>Finance Officer</position>
+    <category>Executive</category>
+    <order>6</order>
+    <photo>MALITIG.jpg</photo>
+    <email>finance@jpcs-malvar.edu.ph</email>
+    <bio>Managing chapter finances and budget allocations.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_007</id>
+    <name>Kisha Rain Enaje</name>
+    <position>Auditor</position>
+    <category>Executive</category>
+    <order>7</order>
+    <photo>ENAJE.jpg</photo>
+    <email>auditor@jpcs-malvar.edu.ph</email>
+    <bio>Ensuring financial transparency and accountability.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_008</id>
+    <name>Joyce Ann Abiera</name>
+    <position>P.R.O.</position>
+    <category>Executive</category>
+    <order>8</order>
+    <photo>ABIERA.jpg</photo>
+    <email>pro@jpcs-malvar.edu.ph</email>
+    <bio>Public Relations Officer managing chapter communications.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_009</id>
+    <name>Kim Valencia</name>
+    <position>2nd Year Governor</position>
+    <category>Governor</category>
+    <order>9</order>
+    <photo>VALENCIA.jpg</photo>
+    <email>gov2@jpcs-malvar.edu.ph</email>
+    <bio>Representing 2nd year students.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_010</id>
+    <name>Danice C. Cajilo</name>
+    <position>3rd Year Governor</position>
+    <category>Governor</category>
+    <order>10</order>
+    <photo>CAJILO.jpg</photo>
+    <email>gov3@jpcs-malvar.edu.ph</email>
+    <bio>Representing 3rd year students.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_011</id>
+    <name>Renfer John D. Roxas</name>
+    <position>4th Year Governor</position>
+    <category>Governor</category>
+    <order>11</order>
+    <photo>ROXAS.jpg</photo>
+    <email>gov4@jpcs-malvar.edu.ph</email>
+    <bio>Representing 4th year students.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_012</id>
+    <name>Kim Nicole Barrion</name>
+    <position>Director for Membership</position>
+    <category>Director</category>
+    <order>12</order>
+    <photo>BARRION.jpg</photo>
+    <email>dir.membership@jpcs-malvar.edu.ph</email>
+    <bio>Leading membership recruitment and retention.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_013</id>
+    <name>Nicole Macaraig</name>
+    <position>Director for Special Projects</position>
+    <category>Director</category>
+    <order>13</order>
+    <photo>MACARAIG.jpg</photo>
+    <email>dir.projects@jpcs-malvar.edu.ph</email>
+    <bio>Managing special initiatives and projects.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_014</id>
+    <name>Shiela May M. Brucal</name>
+    <position>Director for Budget</position>
+    <category>Director</category>
+    <order>14</order>
+    <photo>BRUCAL.jpg</photo>
+    <email>dir.budget@jpcs-malvar.edu.ph</email>
+    <bio>Budget planning and financial oversight.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_015</id>
+    <name>Cyrus Wilson</name>
+    <position>Director for Media</position>
+    <category>Director</category>
+    <order>15</order>
+    <photo>WILSON.jpg</photo>
+    <email>dir.media@jpcs-malvar.edu.ph</email>
+    <bio>Media production and content management.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_016</id>
+    <name>Ama</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>16</order>
+    <photo>AMA.jpg</photo>
+    <email>ama@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_017</id>
+    <name>Bantog</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>17</order>
+    <photo>BANTOG.jpg</photo>
+    <email>bantog@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_018</id>
+    <name>Benedicto</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>18</order>
+    <photo>BENEDICTO.jpg</photo>
+    <email>benedicto@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_019</id>
+    <name>Cabaluna</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>19</order>
+    <photo>CABALUNA.jpg</photo>
+    <email>cabaluna@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_020</id>
+    <name>Cadlawon</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>20</order>
+    <photo>CADLAWON.jpg</photo>
+    <email>cadlawon@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_021</id>
+    <name>Cordero</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>21</order>
+    <photo>CORDERO.jpg</photo>
+    <email>cordero@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_022</id>
+    <name>Dayto</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>22</order>
+    <photo>DAYTO.jpg</photo>
+    <email>dayto@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_023</id>
+    <name>Edulza</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>23</order>
+    <photo>EDULZA.jpg</photo>
+    <email>edulza@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_024</id>
+    <name>Esmaya</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>24</order>
+    <photo>ESMAYA.jpg</photo>
+    <email>esmaya@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_025</id>
+    <name>Espiritu</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>25</order>
+    <photo>ESPIRITU.jpg</photo>
+    <email>espiritu@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_026</id>
+    <name>Huelgas</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>26</order>
+    <photo>HUELGAS.jpg</photo>
+    <email>huelgas@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_027</id>
+    <name>Magpantay</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>27</order>
+    <photo>MAGPANTAY.jpg</photo>
+    <email>magpantay@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_028</id>
+    <name>Meera</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>28</order>
+    <photo>MEERA.jpg</photo>
+    <email>meera@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_029</id>
+    <name>Mendoza</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>29</order>
+    <photo>MENDOZA.jpg</photo>
+    <email>mendoza@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_030</id>
+    <name>Micua</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>30</order>
+    <photo>MICUA.jpg</photo>
+    <email>micua@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_031</id>
+    <name>Montablan</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>31</order>
+    <photo>MONTABLAN.jpg</photo>
+    <email>montablan@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_032</id>
+    <name>Pecho</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>32</order>
+    <photo>PECHO.jpg</photo>
+    <email>pecho@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_033</id>
+    <name>Penaredondo</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>33</order>
+    <photo>PENAREDONDO.jpg</photo>
+    <email>penaredondo@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_034</id>
+    <name>Ramilo</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>34</order>
+    <photo>RAMILO.jpg</photo>
+    <email>ramilo@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_035</id>
+    <name>Tapia</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>35</order>
+    <photo>TAPIA.jpg</photo>
+    <email>tapia@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_036</id>
+    <name>Trinidad</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>36</order>
+    <photo>TRINIDAD.jpg</photo>
+    <email>trinidad@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_037</id>
+    <name>Ulan</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>37</order>
+    <photo>ULAN.jpg</photo>
+    <email>ulan@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_038</id>
+    <name>Venturillo</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>38</order>
+    <photo>VENTURILLO.jpg</photo>
+    <email>venturillo@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+  <officer>
+    <id>off_039</id>
+    <name>Villegas</name>
+    <position>Member</position>
+    <category>Member</category>
+    <order>39</order>
+    <photo>VILLEGAS.jpg</photo>
+    <email>villegas@jpcs-malvar.edu.ph</email>
+    <bio>Active member of JPCS Malvar Chapter.</bio>
+    <status>active</status>
+    <term_start>2025-01-01</term_start>
+    <term_end>2026-12-31</term_end>
+    <created_at>2025-12-01 10:00:00</created_at>
+  </officer>
+</officers>

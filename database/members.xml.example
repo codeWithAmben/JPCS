@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JPCS Malvar Chapter - Members Database Template
+    Copy this file to members.xml
+    Contains member registration data - sensitive!
+-->
+<members>
+    <!--
+    Example member structure:
+    <member>
+        <id>1</id>
+        <student_id>20-12345</student_id>
+        <first_name>Juan</first_name>
+        <last_name>Dela Cruz</last_name>
+        <email>juan@example.com</email>
+        <course>BSIT</course>
+        <year_level>3</year_level>
+        <contact_number>09123456789</contact_number>
+        <status>active</status>
+        <membership_date>2024-01-01</membership_date>
+    </member>
+    -->
+</members>

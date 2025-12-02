@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events>
+    <event>
+        <id>evt_default_001</id>
+        <title>Annual Tech Summit 2026</title>
+        <date>2026-03-15</date>
+        <time>09:00 AM</time>
+        <location>Main Auditorium, BatStateU TNEU Malvar</location>
+        <description>Join us for our biggest event of the year! The Annual Tech Summit features inspiring keynote speakers from leading tech companies, hands-on workshops covering the latest technologies, and networking opportunities with industry professionals. Don't miss this chance to expand your knowledge and connect with fellow tech enthusiasts!</description>
+        <category>Conference</category>
+        <max_participants>200</max_participants>
+        <registration_fee>500</registration_fee>
+        <registration_deadline>2026-03-10</registration_deadline>
+        <status>active</status>
+        <created_at>2025-12-01 10:00:00</created_at>
+    </event>
+    <event>
+        <id>evt_default_002</id>
+        <title>Web Development Workshop</title>
+        <date>2026-01-20</date>
+        <time>02:00 PM</time>
+        <location>Computer Laboratory 1</location>
+        <description>Learn modern web development with React, Node.js, and MongoDB. Hands-on coding session with experienced developers.</description>
+        <category>Workshop</category>
+        <max_participants>50</max_participants>
+        <registration_fee>0</registration_fee>
+        <registration_deadline>2026-01-18</registration_deadline>
+        <status>active</status>
+        <created_at>2025-12-01 10:00:00</created_at>
+    </event>
+    <event>
+        <id>evt_default_003</id>
+        <title>Hackathon 2026</title>
+        <date>2026-04-10</date>
+        <time>08:00 AM</time>
+        <location>Innovation Hub</location>
+        <description>48-hour coding challenge where teams compete to build innovative solutions to real-world problems. Exciting prizes await!</description>
+        <category>Competition</category>
+        <max_participants>100</max_participants>
+        <registration_fee>200</registration_fee>
+        <registration_deadline>2026-04-05</registration_deadline>
+        <status>active</status>
+        <created_at>2025-12-01 10:00:00</created_at>
+    </event>
+</events>

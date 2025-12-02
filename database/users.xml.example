@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JPCS Malvar Chapter - Users Database Template
+    Copy this file to users.xml and add your users
+    NEVER commit users.xml to version control!
+-->
+<users>
+    <!--
+    Example user structure:
+    <user>
+        <id>1</id>
+        <username>admin</username>
+        <email>admin@example.com</email>
+        <password>$2y$10$hashedpassword</password>
+        <role>admin</role>
+        <first_name>Admin</first_name>
+        <last_name>User</last_name>
+        <google_id></google_id>
+        <created_at>2024-01-01 00:00:00</created_at>
+        <status>active</status>
+    </user>
+    -->
+</users>

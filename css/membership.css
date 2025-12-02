@@ -1,0 +1,280 @@
+/* ============================================
+   JPCS Malvar - Membership Page Styles
+   ============================================ */
+
+/* Membership Section Container */
+.membership-section {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 40px 20px;
+}
+
+.membership-section h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #ff6a00;
+}
+
+.membership-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Benefits Grid */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+/* Benefit Card */
+.benefit-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.benefit-card h3 {
+    color: #ff6a00;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.benefit-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Requirements Section */
+.requirements-section {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.requirements-section h2 {
+    color: #ff6a00;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+.requirements-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.requirements-section li {
+    padding: 12px 0 12px 35px;
+    position: relative;
+    color: #555;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.requirements-section li:last-child {
+    border-bottom: none;
+}
+
+.requirements-section li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #ff6a00;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: 25px;
+    height: 25px;
+    background: rgba(255, 106, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Membership Types/Plans */
+.membership-plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.plan-card {
+    background: white;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card.featured {
+    border: 3px solid #ff6a00;
+    transform: scale(1.05);
+}
+
+.plan-card.featured::before {
+    content: 'POPULAR';
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    background: #ff6a00;
+    color: white;
+    padding: 5px 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transform: rotate(45deg);
+}
+
+.plan-card h3 {
+    color: #ff6a00;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.plan-price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.plan-price span {
+    font-size: 1rem;
+    color: #999;
+    font-weight: normal;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.plan-features li {
+    padding: 10px 0;
+    color: #666;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-features li::before {
+    content: '✓';
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Join CTA Section */
+.join-cta {
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #ff6a00, #ff8c42);
+    border-radius: 10px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.join-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+}
+
+.join-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.join-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    position: relative;
+    opacity: 0.95;
+}
+
+.join-cta .btn {
+    background: white;
+    color: #ff6a00;
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.3s;
+    position: relative;
+}
+
+.join-cta .btn:hover {
+    background: #f5f5f5;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .membership-section h1 {
+        font-size: 2.2rem;
+    }
+    
+    .membership-intro {
+        font-size: 1rem;
+    }
+    
+    .benefits-grid {
+        gap: 20px;
+    }
+    
+    .benefit-card {
+        padding: 25px;
+    }
+    
+    .requirements-section {
+        padding: 25px;
+    }
+    
+    .join-cta {
+        padding: 40px 20px;
+    }
+    
+    .join-cta h2 {
+        font-size: 1.8rem;
+    }
+    
+    .plan-card.featured {
+        transform: scale(1);
+    }
+}
