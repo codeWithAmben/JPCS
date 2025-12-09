@@ -1,103 +1,381 @@
-# JPCS Malvar Chapter Website
+# 🎓 JPCS Malvar Chapter Website
 
 <p align="center">
   <img src="assets/images/LOGO.png" alt="JPCS Logo" width="120">
 </p>
 
 <p align="center">
-  <strong>Official website for the Junior Philippine Computer Society (JPCS) Malvar Chapter</strong><br>
+  <strong>🌟 Official Website & Membership Management System</strong><br>
+  Junior Philippine Computer Society (JPCS) Malvar Chapter<br>
   Batangas State University TNEU - JPLPC Malvar
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PHP-7.4+-777BB4?style=flat&logo=php" alt="PHP Version">
-  <img src="https://img.shields.io/badge/Database-XML-orange?style=flat" alt="Database">
-  <img src="https://img.shields.io/badge/Auth-Google_OAuth_2.0-4285F4?style=flat&logo=google" alt="OAuth">
+  <img src="https://img.shields.io/badge/PHP-7.4+-777BB4?style=for-the-badge&logo=php" alt="PHP">
+  <img src="https://img.shields.io/badge/Database-XML-FF6B6B?style=for-the-badge&logo=xml" alt="XML">
+  <img src="https://img.shields.io/badge/Auth-Google_OAuth_2.0-4285F4?style=for-the-badge&logo=google" alt="OAuth">
+  <img src="https://img.shields.io/badge/Email-PHPMailer-FF6B35?style=for-the-badge&logo=gmail" alt="PHPMailer">
+  <img src="https://img.shields.io/badge/Chat-Tawk.to-00D084?style=for-the-badge&logo=livechat" alt="Live Chat">
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="License">
+  <img src="https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=flat" alt="Status">
+  <img src="https://img.shields.io/badge/Version-2.0.0-blue?style=flat" alt="Version">
 </p>
 
 ---
 
 ## 📋 Table of Contents
 
-- [About](#-about)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Security](#-security)
-- [API Reference](#-api-reference)
-- [User Roles](#-user-roles)
-- [Database Schema](#-database-schema)
-- [Contributing](#-contributing)
+- [🎯 About](#-about)
+- [⚡ Features](#-features)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Installation Guide](#-installation-guide)
+- [⚙️ Configuration](#️-configuration)
+- [🔐 Security](#-security)
+- [📧 Email System](#-email-system)
+- [🗺️ Image Maps](#️-image-maps)
+- [🎨 Live Chat](#-live-chat)
+- [📱 Responsive Design](#-responsive-design)
+- [👤 User Roles](#-user-roles)
+- [🗄️ Database Schema](#️-database-schema)
+- [🤝 Contributing](#-contributing)
 
 ---
 
-## 📖 About
+## 🎯 About
 
-A full-featured PHP-based membership management system for the JPCS Malvar Chapter. It provides member authentication, event management, announcements, merchandise store, and comprehensive administrative tools.
+A comprehensive, modern PHP-based membership management system designed specifically for the JPCS Malvar Chapter. This system provides a complete digital infrastructure for student organization management, featuring member authentication, event coordination, announcements, merchandise management, and powerful administrative tools.
 
-### Key Highlights
-- **No SQL Database Required** - Uses XML flat-file databases
-- **Google SSO Integration** - OAuth 2.0 authentication
+### 🌟 Key Highlights
+- **📊 No SQL Database Required** - Uses XML flat-file databases for simplicity
+- **🔐 Google SSO Integration** - OAuth 2.0 authentication with fallback
+- **📧 Email Verification System** - PHPMailer with SMTP support
+- **💬 Live Chat Support** - Integrated Tawk.to widget
+- **🗺️ Interactive Image Maps** - Enhanced navigation experience
+- **📱 Mobile-First Design** - Responsive across all devices
+- **🛡️ Role-Based Security** - Granular access control
+- **🎨 Modern UI/UX** - JPCS-themed orange design system
+
+---
+
+## ⚡ Features
+
+### 🌐 Public Features
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **🏠 Homepage** | Hero section, events preview, interactive navigation map | ✅ Complete |
+| **ℹ️ About Page** | Dynamic officer profiles, organization history | ✅ Complete |
+| **📅 Events Calendar** | Upcoming activities and workshops | ✅ Complete |
+| **👥 Membership Info** | Benefits, requirements, application process | ✅ Complete |
+| **📢 Announcements** | Latest news and updates | ✅ Complete |
+| **🛒 JPCS.Mart** | Official merchandise store with categories | ✅ Complete |
+| **🎧 Help Desk** | Contact forms, FAQs, inquiry system | ✅ Complete |
+| **🖼️ Gallery** | Event photos with filtering and categories | ✅ Complete |
+| **📝 Registration** | Online membership application with validation | ✅ Complete |
+| **📧 Email Verification** | Secure account activation workflow | ✅ Complete |
+| **💬 Live Chat** | Real-time support via Tawk.to | ✅ Complete |
+
+### 👤 Member Dashboard
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **📊 Dashboard** | Membership status, event summary, announcements | ✅ Complete |
+| **👤 Profile Management** | Edit personal info, upload photo, change password | ✅ Complete |
+| **🎫 Event Registration** | Register for upcoming events and activities | ✅ Complete |
+| **📬 My Announcements** | Personalized announcement feed | ✅ Complete |
+| **📱 Mobile Responsive** | Full mobile optimization | ✅ Complete |
+
+### 🔧 Admin Panel
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **📈 Analytics Dashboard** | Member statistics, event metrics, system overview | ✅ Complete |
+| **👥 Member Management** | Approve, edit, activate/deactivate members | ✅ Complete |
+| **📅 Event Management** | Full CRUD operations for events | ✅ Complete |
+| **📢 Announcement System** | Create, edit, delete announcements | ✅ Complete |
+| **🖼️ Gallery Manager** | Upload photos, organize by categories | ✅ Complete |
+| **🛒 Product Management** | Merchandise inventory, pricing, stock management | ✅ Complete |
+| **👑 Officer Management** | Manage chapter officers and hierarchy | ✅ Complete |
+| **📋 Registration Review** | Review and process membership applications | ✅ Complete |
+| **🎧 Inquiry Management** | Handle help desk inquiries and feedback | ✅ Complete |
+| **⚙️ System Settings** | Global configuration and maintenance | ✅ Complete |
+
+### 🔐 Authentication & Security
+| Feature | Description | Status |
+|---------|-------------|--------|
+| **🔐 Multi-Factor Login** | Email/password + Google OAuth 2.0 | ✅ Complete |
+| **📧 Email Verification** | Token + 6-digit code verification | ✅ Complete |
+| **🛡️ Role-Based Access** | Admin, Officer, Member permissions | ✅ Complete |
+| **🔒 Session Security** | Secure session management | ✅ Complete |
+| **🚫 Data Protection** | Sensitive file exclusion, bcrypt hashing | ✅ Complete |
+
+---
+
+## 🛠️ Technology Stack
+
+### 📋 Backend
+- **PHP 7.4+** - Server-side scripting
+- **XML Databases** - Flat-file storage for simplicity
+- **PHPMailer 7.0** - SMTP email delivery
+- **Google OAuth 2.0** - Social login integration
+- **bcrypt** - Password hashing security
+
+### 🎨 Frontend
+- **HTML5** - Semantic markup
+- **CSS3** - Modern styling with custom properties
+- **JavaScript ES6** - Interactive functionality
 - **Responsive Design** - Mobile-first approach
-- **Role-Based Access Control** - Admin, Officer, and Member roles
-- **Modern UI** - Clean, professional design with JPCS orange (#ff6a00) theme
+- **Progressive Web App** - PWA features
+
+### 🔧 Third-Party Integrations
+- **Tawk.to** - Live chat support
+- **Google OAuth** - Social authentication
+- **SMTP Email** - Reliable email delivery
+- **Interactive Image Maps** - Enhanced navigation
+
+### 📦 Dependencies
+```json
+{
+  "require": {
+    "phpmailer/phpmailer": "^7.0"
+  }
+}
+```
 
 ---
 
-## 🔒 Security Notice
+## 📁 Project Structure
 
-**IMPORTANT:** Before publishing to GitHub, ensure sensitive files are NOT committed:
-
-### Files that should NEVER be committed:
-| File | Contains |
-|------|----------|
-| `.env` | API keys, OAuth secrets |
-| `database/users.xml` | User credentials (bcrypt hashes) |
-| `database/members.xml` | Member personal data |
-| `database/registrations.xml` | Registration data |
-| `database/inquiries.xml` | User inquiries |
-| `database/newsletter.xml` | Email addresses |
-| `database/event_registrations.xml` | Event registration data |
-| `assets/uploads/` | User uploaded files |
+```
+JPCS/
+├── 📁 admin/                    # Admin dashboard and management
+│   ├── dashboard.php           # Admin analytics dashboard
+│   ├── members.php            # Member management
+│   ├── events.php             # Event management
+│   ├── announcements.php      # Announcement management
+│   ├── gallery.php            # Photo gallery management
+│   ├── products.php           # Merchandise management
+│   ├── officers.php           # Officer management
+│   ├── registrations.php      # Review applications
+│   ├── inquiries.php          # Help desk management
+│   ├── settings.php           # System configuration
+│   └── includes/              # Admin components
+├── 📁 member/                   # Member dashboard
+│   ├── dashboard.php          # Member overview
+│   ├── profile.php            # Profile management
+│   ├── events.php             # Event registration
+│   └── announcements.php      # Member announcements
+├── 📁 pages/                    # Public pages
+│   ├── about.php              # Organization info
+│   ├── events.php             # Public events
+│   ├── membership.php         # Membership info
+│   ├── announcements.php      # Public announcements
+│   ├── jpcsmart.php           # Merchandise store
+│   ├── helpdesk.php           # Support page
+│   ├── gallery.php            # Photo gallery
+│   └── registration.php       # Sign-up form
+├── 📁 includes/                 # Core system files
+│   ├── auth.php               # Authentication functions
+│   ├── db_helper.php          # Database operations (1200+ lines)
+│   ├── functions.php          # Utility functions
+│   ├── email_verification.php # Email verification system
+│   ├── mailer.php             # PHPMailer configuration
+│   ├── image_map.php          # Interactive image maps
+│   ├── tawk_chat.php          # Live chat widget
+│   ├── google_oauth.php       # OAuth integration
+│   └── env_loader.php         # Environment variables
+├── 📁 handlers/                 # Form processing
+│   ├── register.php           # Registration handler
+│   ├── logout.php             # Logout handler
+│   ├── event_registration.php # Event signup
+│   └── sso_callback.php       # OAuth callback
+├── 📁 database/                 # XML data storage
+│   ├── users.xml              # User accounts (excluded from git)
+│   ├── members.xml            # Member details (excluded from git)
+│   ├── events.xml             # Events data
+│   ├── announcements.xml      # Announcements
+│   ├── products.xml           # Merchandise
+│   ├── gallery.xml            # Photo gallery
+│   ├── officers.xml           # Chapter officers
+│   ├── registrations.xml      # Applications
+│   ├── inquiries.xml          # Help desk
+│   ├── newsletter.xml         # Email subscribers
+│   ├── event_registrations.xml # Event signups
+│   ├── verifications.xml      # Email verification tokens
+│   └── *.xml.example         # Database templates
+├── 📁 css/                      # Stylesheets (13 files)
+│   ├── style.css              # Global styles
+│   ├── index.css              # Homepage styles
+│   ├── admin.css              # Admin dashboard styles
+│   ├── member.css             # Member dashboard styles
+│   └── [page].css             # Page-specific styles
+├── 📁 assets/                   # Static resources
+│   ├── images/                # Logos, photos, icons
+│   └── uploads/               # User-uploaded content
+├── 📁 vendor/                   # Composer dependencies
+├── 📄 config.php                # Core configuration
+├── 📄 index.php                 # Homepage
+├── 📄 login.php                 # Authentication page
+├── 📄 verify.php                # Email verification page
+├── 📄 .env                      # Environment variables (excluded)
+├── 📄 .env.example              # Environment template
+├── 📄 .gitignore                # Git exclusions
+├── 📄 composer.json             # PHP dependencies
+└── 📄 README.md                 # This documentation
+```
 
 ---
 
-## 🌟 Features
+## 🚀 Installation Guide
 
-### 🌐 Public Pages
-| Page | Description |
-|------|-------------|
-| **Home** | Hero section, featured events, quick links, products, gallery preview |
-| **About** | Organization history, mission/vision, officer profiles (dynamic from database) |
-| **Events** | Calendar of upcoming activities, workshops, and seminars |
-| **Membership** | Information about joining and membership benefits |
-| **Announcements** | Latest news and chapter updates |
-| **JPCS.Mart** | Official merchandise store with product catalog |
-| **Help Desk** | Contact information, FAQs, and inquiry form |
-| **Gallery** | Photo gallery of past events (synced with admin) |
-| **Registration** | Online membership application form |
+### 📋 Prerequisites
 
-### 👤 Member Features
-| Feature | Description |
-|---------|-------------|
-| Dashboard | Personalized dashboard with membership status |
-| Profile Management | Update personal information and photo |
-| Event Registration | Register for upcoming events |
-| Announcements | View latest chapter updates |
+- **PHP 7.4+** with extensions:
+  - `xml` (for XML parsing)
+  - `curl` (for OAuth and email)
+  - `openssl` (for encryption)
+  - `fileinfo` (for file uploads)
+- **Web Server** (Apache/Nginx with URL rewriting)
+- **Composer** (for PHPMailer dependency)
+- **SMTP Email Account** (Gmail recommended)
 
-### 🔐 Admin Features
-| Feature | Description |
-|---------|-------------|
-| Dashboard | Statistics overview (members, events, officers) |
-| Member Management | Approve, edit, activate/deactivate members |
-| Event Management | Full CRUD for events |
-| Announcement Management | Post and manage announcements |
-| Gallery Management | Upload and organize event photos with categories |
-| Product Management | Manage merchandise inventory and pricing |
-| Officer Management | Manage chapter officers and positions |
+### 1️⃣ Clone Repository
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/JPCS.git
+
+# Navigate to project directory
+cd JPCS
+
+# Set proper permissions
+chmod 755 database/ uploads/ assets/uploads/
+chmod 644 database/*.xml.example
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+# Install PHPMailer via Composer
+composer install
+
+# Or if Composer not available, download PHPMailer manually
+```
+
+### 3️⃣ Database Setup
+
+```bash
+# Copy XML templates to create actual database files
+cp database/users.xml.example database/users.xml
+cp database/members.xml.example database/members.xml
+cp database/verifications.xml.example database/verifications.xml
+
+# Set write permissions
+chmod 666 database/*.xml
+```
+
+### 4️⃣ Environment Configuration
+
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit .env with your configuration
+nano .env
+```
+
+### 5️⃣ Web Server Setup
+
+#### Apache (.htaccess)
+```apache
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ pages/$1.php [L,QSA]
+
+# Security headers
+Header always set X-Content-Type-Options nosniff
+Header always set X-Frame-Options DENY
+Header always set X-XSS-Protection "1; mode=block"
+```
+
+#### Nginx
+```nginx
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+
+location ~ \.php$ {
+    fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+}
+```
+
+---
+
+## ⚙️ Configuration
+
+### 📧 Email Setup (Gmail)
+
+1. **Enable 2-Step Verification** in your Google account
+2. **Generate App Password**:
+   - Go to https://myaccount.google.com/apppasswords
+   - Select "Mail" and "Computer"
+   - Copy the 16-character password
+
+3. **Update .env file**:
+```env
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=xxxx-xxxx-xxxx-xxxx
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your-email@gmail.com
+MAIL_FROM_NAME=JPCS Malvar Chapter
+```
+
+### 🔐 Google OAuth Setup
+
+1. **Create Google Cloud Project**:
+   - Go to https://console.cloud.google.com/
+   - Create new project or select existing
+   - Enable Google+ API
+
+2. **Configure OAuth Consent Screen**:
+   - Add your domain to authorized domains
+   - Set application logo and privacy policy
+
+3. **Create OAuth 2.0 Credentials**:
+   - Go to Credentials > Create Credentials > OAuth 2.0
+   - Add authorized redirect URIs:
+     - `http://localhost/JPCS/sso_callback.php` (development)
+     - `https://yourdomain.com/sso_callback.php` (production)
+
+4. **Update .env file**:
+```env
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_REDIRECT_URI=http://localhost/JPCS/sso_callback.php
+```
+
+### 💬 Live Chat Setup (Tawk.to)
+
+1. **Create Tawk.to Account**: https://www.tawk.to/
+2. **Get Widget Code**: Administration → Channels → Chat Widget
+3. **Update chat widget**: Edit `includes/tawk_chat.php` with your widget ID
+
+### 🧪 Testing Configuration
+
+Visit `http://localhost/JPCS/test_email.php` to verify:
+- ✅ Email configuration
+- ✅ SMTP connection
+- ✅ PHPMailer setup
+
+**⚠️ Important**: Delete `test_email.php` in production!
+
+---
 | Registration Approvals | Review and approve applications |
 | Inquiry Management | View and respond to help desk inquiries |
 | Settings | System configuration |

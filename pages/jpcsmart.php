@@ -167,5 +167,8 @@ foreach ($products as $product) {
         });
     });
 </script>
+
+<?php include '../includes/tawk_chat.php'; ?>
+
 </body>
 </html>

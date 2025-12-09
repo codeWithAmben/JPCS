@@ -1,4 +1,8 @@
 <?php
+/**
+ * Registration Handler with Email Verification
+ * Creates user account with pending status and sends verification email
+ */
 require_once '../config.php';
 
 header('Content-Type: application/json');
@@ -10,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Validate input
 $requiredFields = ['first_name', 'last_name', 'email', 'phone', 'birthdate', 'gender', 
-                   'address', 'school', 'course', 'year_level', 'student_id'];
+                   'address', 'school', 'course', 'year_level', 'student_id', 'password'];
 
 $data = [];
 $errors = [];
@@ -35,8 +39,25 @@ if (!validateEmail($data['email'])) {
 }
 
 // Check if email already exists
-if (getUserByEmail($data['email'])) {
+$existingUser = getUserByEmail($data['email']);
+if ($existingUser) {
+    // Check if unverified - allow re-registration
+    if (isset($existingUser['status']) && $existingUser['status'] === 'pending') {
+        // Resend verification
+        $result = resendVerification($data['email']);
+        echo json_encode([
+            'success' => true,
+            'message' => 'A verification email has been resent to your email address.',
+            'redirect' => SITE_URL . '/verify.php?email=' . urlencode($data['email'])
+        ]);
+        exit;
+    }
     $errors[] = 'An account with this email already exists';
+}
+
+// Validate password strength
+if (strlen($data['password']) < 8) {
+    $errors[] = 'Password must be at least 8 characters long';
 }
 
 // Validate phone
@@ -49,35 +70,35 @@ if (!empty($errors)) {
     exit;
 }
 
-// Create user account
-$password = bin2hex(random_bytes(8)); // Generate temporary password
-$fullName = $data['first_name'] . ' ' . $data['last_name'];
-$userId = createUser($data['email'], $password, $fullName, ROLE_MEMBER);
+// Create user account with verification
+$result = createUserWithVerification([
+    'email' => $data['email'],
+    'password' => $data['password'],
+    'first_name' => $data['first_name'],
+    'last_name' => $data['last_name'],
+    'phone' => $data['phone']
+]);
 
-if (!$userId) {
-    echo json_encode(['success' => false, 'message' => 'Failed to create user account']);
+if (!$result['success']) {
+    echo json_encode(['success' => false, 'message' => $result['message']]);
     exit;
 }
 
-// Create member record
-$memberId = createMember($data, $userId);
+// Create member record with pending status
+$data['user_id'] = $result['user_id'];
+$memberId = createMember($data, $result['user_id']);
 
 if (!$memberId) {
-    deleteUser($userId); // Rollback
-    echo json_encode(['success' => false, 'message' => 'Failed to create member record']);
-    exit;
+    // Member record failed but user account exists - that's okay, they can complete profile later
+    error_log("Member record creation failed for user: " . $result['user_id']);
 }
-
-// Send welcome email with temporary password
-sendEmail(
-    $data['email'],
-    'Welcome to JPCS Malvar Chapter',
-    "Your temporary password is: $password\nPlease login and change your password."
-);
 
 echo json_encode([
     'success' => true,
-    'message' => 'Registration successful! Check your email for login credentials.',
-    'member_id' => $memberId
+    'message' => $result['message'],
+    'redirect' => SITE_URL . '/verify.php?email=' . urlencode($data['email']),
+    'member_id' => $memberId ?? null,
+    // Include code for testing purposes (remove in production)
+    'verification_code' => $result['verification_code'] ?? null
 ]);
 ?>

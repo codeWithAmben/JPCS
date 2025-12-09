@@ -212,5 +212,8 @@ foreach ($galleryItems as $item) {
         });
     });
 </script>
+
+<?php include '../includes/tawk_chat.php'; ?>
+
 </body>
 </html>

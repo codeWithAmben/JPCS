@@ -92,6 +92,8 @@
     <p>&copy; 2025 JPCS Malvar Chapter. All Rights Reserved.</p>
 </footer>
 
+<?php include '../includes/tawk_chat.php'; ?>
+
 <script src="../js/script.js"></script>
 </body>
 </html>

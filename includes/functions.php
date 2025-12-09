@@ -252,15 +252,7 @@ function handleFileUpload($file, $subfolder = '') {
     return ['success' => true, 'filename' => $filename, 'path' => $relativePath];
 }
 
-/**
- * Send email (placeholder - implement with actual mail service)
- */
-function sendEmail($to, $subject, $body, $from = SITE_EMAIL) {
-    // TODO: Implement actual email sending (PHPMailer, SendGrid, etc.)
-    // For now, just log it
-    error_log("Email to: $to, Subject: $subject");
-    return true;
-}
+// sendEmail function moved to includes/mailer.php (uses PHPMailer)
 
 /**
  * Get pagination data

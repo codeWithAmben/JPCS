@@ -248,6 +248,8 @@ usort($members, fn($a, $b) => (int)$a['order'] - (int)$b['order']);
     <p>Email: jpcs.malvar@g.batstate-u.edu.ph</p>
 </footer>
 
+<?php include '../includes/tawk_chat.php'; ?>
+
 <script src="../js/script.js"></script>
 </body>
 </html>

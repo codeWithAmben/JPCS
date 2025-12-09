@@ -97,6 +97,47 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
     <div id="eventContainer">Loading event details...</div>
 </section>
 
+<!-- Interactive Image Map Navigation -->
+<?php include 'includes/image_map.php'; ?>
+<section class="quick-links-map">
+    <h2 class="anton-font" style="font-size: 2rem; margin-bottom: 10px;">🗺️ Interactive Navigation</h2>
+    <p style="color: #666; margin-bottom: 25px;">Click on any section to explore</p>
+    <div class="nav-image-map">
+        <a href="pages/membership.php" class="nav-map-item">
+            <span class="icon">👥</span>
+            <span class="label">Membership</span>
+        </a>
+        <a href="pages/events.php" class="nav-map-item">
+            <span class="icon">📅</span>
+            <span class="label">Events</span>
+        </a>
+        <a href="pages/announcements.php" class="nav-map-item">
+            <span class="icon">📢</span>
+            <span class="label">Announcements</span>
+        </a>
+        <a href="pages/helpdesk.php" class="nav-map-item">
+            <span class="icon">🎧</span>
+            <span class="label">Help Desk</span>
+        </a>
+        <a href="pages/jpcsmart.php" class="nav-map-item">
+            <span class="icon">🛒</span>
+            <span class="label">JPCS.Mart</span>
+        </a>
+        <a href="pages/gallery.php" class="nav-map-item">
+            <span class="icon">🖼️</span>
+            <span class="label">Gallery</span>
+        </a>
+        <a href="pages/about.php" class="nav-map-item">
+            <span class="icon">ℹ️</span>
+            <span class="label">About Us</span>
+        </a>
+        <a href="login.php" class="nav-map-item">
+            <span class="icon">🔐</span>
+            <span class="label">Login</span>
+        </a>
+    </div>
+</section>
+
 <section class="quick-links">
     <h2 class="anton-font" style="font-size: 2rem;">Quick Links</h2>
     <div class="links-grid">
@@ -121,6 +162,8 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
     <p>Batangas State University TNEU - JPLPC Malvar</p>
     <p>Email: jpcs.malvar@g.batstate-u.edu.ph</p>
 </footer>
+
+<?php include 'includes/tawk_chat.php'; ?>
 
 <script src="js/script.js"></script>
 </body>

@@ -34,6 +34,7 @@ define('DB_NEWSLETTER', DATABASE_PATH . '/newsletter.xml');
 define('DB_INQUIRIES', DATABASE_PATH . '/inquiries.xml');
 define('DB_OFFICERS', DATABASE_PATH . '/officers.xml');
 define('DB_EVENT_REGISTRATIONS', DATABASE_PATH . '/event_registrations.xml');
+define('DB_VERIFICATIONS', DATABASE_PATH . '/verifications.xml');
 
 // Session Configuration
 ini_set('session.cookie_httponly', 1);
@@ -73,6 +74,8 @@ define('ITEMS_PER_PAGE', 10);
 require_once INCLUDES_PATH . '/functions.php';
 require_once INCLUDES_PATH . '/db_helper.php';
 require_once INCLUDES_PATH . '/auth.php';
+require_once INCLUDES_PATH . '/mailer.php';
+require_once INCLUDES_PATH . '/email_verification.php';
 
 // Initialize database if not exists
 initializeDatabase();

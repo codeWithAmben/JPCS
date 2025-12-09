@@ -13,8 +13,28 @@ function loginUser($email, $password) {
         return ['success' => false, 'message' => 'Invalid email or password'];
     }
     
+    // Check if account is pending verification
+    if ($user['status'] === 'pending') {
+        return [
+            'success' => false, 
+            'message' => 'Please verify your email before logging in.',
+            'needs_verification' => true,
+            'email' => $email
+        ];
+    }
+    
     if ($user['status'] !== 'active') {
         return ['success' => false, 'message' => 'Account is not active'];
+    }
+    
+    // Check if email is verified (extra check for safety)
+    if (isset($user['email_verified']) && $user['email_verified'] !== 'true') {
+        return [
+            'success' => false, 
+            'message' => 'Please verify your email before logging in.',
+            'needs_verification' => true,
+            'email' => $email
+        ];
     }
     
     if (!verifyPassword($password, $user['password'])) {

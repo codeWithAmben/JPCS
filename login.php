@@ -32,6 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             redirect($redirectUrl);
         } else {
+            // Check if needs email verification
+            if (isset($result['needs_verification']) && $result['needs_verification']) {
+                redirect(SITE_URL . '/verify.php?email=' . urlencode($result['email']));
+            }
             setFlash('error', $result['message']);
         }
     }
@@ -321,5 +325,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
+
+<?php include 'includes/tawk_chat.php'; ?>
+
 </body>
 </html>

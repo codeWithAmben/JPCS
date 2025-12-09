@@ -39,6 +39,9 @@ yarn-error.log*
 node_modules/
 package-lock.json
 
+# Composer Dependencies
+vendor/
+
 # Build Directories
 dist/
 build/
@@ -60,6 +63,11 @@ database/registrations.xml
 database/inquiries.xml
 database/newsletter.xml
 database/event_registrations.xml
+database/verifications.xml
+
+# Email Logs (contain sensitive info)
+logs/email_log.txt
+logs/
 
 # Uploaded files (user content)
 assets/uploads/
