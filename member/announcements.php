@@ -59,11 +59,6 @@ sort($categories);
                         </h1>
                         <p>Stay updated with the latest JPCS announcements</p>
                     </div>
-                    <div class="user-actions">
-                        <a href="../handlers/logout.php" class="btn-logout">
-                            <i data-lucide="log-out"></i> Logout
-                        </a>
-                    </div>
                 </div>
             </div>
             

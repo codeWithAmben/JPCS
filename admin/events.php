@@ -114,13 +114,13 @@ if ($action === 'edit' && $eventId) {
                                 <?php if (!empty($events)): ?>
                                     <?php foreach ($events as $event): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($event['title']); ?></strong></td>
-                                        <td><?php echo formatDate($event['date']); ?></td>
-                                        <td><?php echo htmlspecialchars($event['time']); ?></td>
-                                        <td><?php echo htmlspecialchars($event['location']); ?></td>
-                                        <td><?php echo htmlspecialchars($event['max_participants']); ?></td>
-                                        <td><?php echo formatDate($event['registration_deadline']); ?></td>
-                                        <td>
+                                        <td data-label="Title"><strong><?php echo htmlspecialchars($event['title']); ?></strong></td>
+                                        <td data-label="Date"><?php echo formatDate($event['date']); ?></td>
+                                        <td data-label="Time"><?php echo htmlspecialchars($event['time']); ?></td>
+                                        <td data-label="Location"><?php echo htmlspecialchars($event['location']); ?></td>
+                                        <td data-label="Max Participants"><?php echo htmlspecialchars($event['max_participants']); ?></td>
+                                        <td data-label="Deadline"><?php echo formatDate($event['registration_deadline']); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $event['status'];
                                             $badgeClass = $status === 'active' ? 'badge-success' : 

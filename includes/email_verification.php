@@ -163,7 +163,24 @@ function activateUserAccount($userId) {
             $user->status = 'active';
             $user->email_verified = 'true';
             $user->email_verified_at = date('Y-m-d H:i:s');
-            return saveXML($xml, DB_USERS);
+            
+            if (!saveXML($xml, DB_USERS)) {
+                return false;
+            }
+            
+            // Also update member record status to active
+            $membersXml = loadXML(DB_MEMBERS);
+            if ($membersXml) {
+                foreach ($membersXml->member as $member) {
+                    if ((string)$member->user_id === $userId) {
+                        $member->membership_status = 'active';
+                        saveXML($membersXml, DB_MEMBERS);
+                        break;
+                    }
+                }
+            }
+            
+            return true;
         }
     }
     return false;

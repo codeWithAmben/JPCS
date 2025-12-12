@@ -120,11 +120,11 @@ if ($action === 'edit' && $productId) {
                                 <?php if (!empty($products)): ?>
                                     <?php foreach ($products as $product): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($product['name']); ?></strong></td>
-                                        <td><?php echo htmlspecialchars($product['category']); ?></td>
-                                        <td>₱<?php echo number_format($product['price'], 2); ?></td>
-                                        <td><?php echo htmlspecialchars($product['stock']); ?></td>
-                                        <td>
+                                        <td data-label="Name"><strong><?php echo htmlspecialchars($product['name']); ?></strong></td>
+                                        <td data-label="Category"><?php echo htmlspecialchars($product['category']); ?></td>
+                                        <td data-label="Price">₱<?php echo number_format($product['price'], 2); ?></td>
+                                        <td data-label="Stock"><?php echo htmlspecialchars($product['stock']); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $product['status'];
                                             $badgeClass = $status === 'available' ? 'badge-success' : 'badge-secondary';

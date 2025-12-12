@@ -6,6 +6,5 @@
             <strong><?php echo htmlspecialchars($user['name']); ?></strong><br>
             <small><?php echo htmlspecialchars($user['role']); ?></small>
         </span>
-        <a href="../handlers/logout.php" class="btn btn-danger btn-sm">Logout</a>
     </div>
 </div>

@@ -102,14 +102,16 @@ if ($action === 'edit' && $announcementId) {
                                 <?php if (!empty($announcements)): ?>
                                     <?php foreach ($announcements as $announcement): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($announcement['title']); ?></strong></td>
-                                        <td>
+                                        <td data-label="Title"><strong><?php echo htmlspecialchars($announcement['title']); ?></strong></td>
+                                        <td data-label="Badge">
                                             <?php if ($announcement['badge']): ?>
                                                 <span class="badge badge-warning"><?php echo htmlspecialchars($announcement['badge']); ?></span>
+                                            <?php else: ?>
+                                                <span style="color: #bdc3c7;">—</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><?php echo formatDate($announcement['posted_date'], 'M j, Y g:i A'); ?></td>
-                                        <td>
+                                        <td data-label="Posted"><?php echo formatDate($announcement['posted_date'], 'M j, Y g:i A'); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $announcement['status'];
                                             $badgeClass = $status === 'active' ? 'badge-success' : 'badge-secondary';

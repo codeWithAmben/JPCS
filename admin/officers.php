@@ -130,15 +130,15 @@ if ($action === 'edit' && $officerId) {
                                 <?php if (!empty($officers)): ?>
                                     <?php foreach ($officers as $officer): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($officer['order']); ?></strong></td>
-                                        <td>
+                                        <td data-label="Order"><strong><?php echo htmlspecialchars($officer['order']); ?></strong></td>
+                                        <td data-label="Photo">
                                             <img src="../assets/profiles/<?php echo htmlspecialchars($officer['photo']); ?>" 
                                                  alt="<?php echo htmlspecialchars($officer['name']); ?>"
                                                  style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                                         </td>
-                                        <td><strong><?php echo htmlspecialchars($officer['name']); ?></strong></td>
-                                        <td><?php echo htmlspecialchars($officer['position']); ?></td>
-                                        <td>
+                                        <td data-label="Name"><strong><?php echo htmlspecialchars($officer['name']); ?></strong></td>
+                                        <td data-label="Position"><?php echo htmlspecialchars($officer['position']); ?></td>
+                                        <td data-label="Category">
                                             <?php 
                                             $category = $officer['category'];
                                             $badgeClass = $category === 'Executive' ? 'badge-info' : 
@@ -146,9 +146,9 @@ if ($action === 'edit' && $officerId) {
                                             echo '<span class="badge ' . $badgeClass . '">' . $category . '</span>';
                                             ?>
                                         </td>
-                                        <td><?php echo htmlspecialchars($officer['email']); ?></td>
-                                        <td><?php echo formatDate($officer['term_start'], 'Y') . ' - ' . formatDate($officer['term_end'], 'Y'); ?></td>
-                                        <td>
+                                        <td data-label="Email"><?php echo htmlspecialchars($officer['email']); ?></td>
+                                        <td data-label="Term"><?php echo formatDate($officer['term_start'], 'Y') . ' - ' . formatDate($officer['term_end'], 'Y'); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $officer['status'];
                                             $badgeClass = $status === 'active' ? 'badge-success' : 'badge-secondary';

@@ -59,14 +59,14 @@ $registrations = getAllRegistrations();
                                 <?php if (!empty($registrations)): ?>
                                     <?php foreach ($registrations as $reg): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($reg['first_name'] . ' ' . $reg['last_name']); ?></strong></td>
-                                        <td><?php echo htmlspecialchars($reg['email']); ?></td>
-                                        <td><?php echo htmlspecialchars($reg['phone']); ?></td>
-                                        <td><?php echo htmlspecialchars($reg['school']); ?></td>
-                                        <td><?php echo htmlspecialchars($reg['course']); ?></td>
-                                        <td><?php echo htmlspecialchars($reg['year_level']); ?></td>
-                                        <td><?php echo formatDate($reg['submitted_date']); ?></td>
-                                        <td>
+                                        <td data-label="Name"><strong><?php echo htmlspecialchars($reg['first_name'] . ' ' . $reg['last_name']); ?></strong></td>
+                                        <td data-label="Email"><?php echo htmlspecialchars($reg['email']); ?></td>
+                                        <td data-label="Phone"><?php echo htmlspecialchars($reg['phone']); ?></td>
+                                        <td data-label="School"><?php echo htmlspecialchars($reg['school']); ?></td>
+                                        <td data-label="Course"><?php echo htmlspecialchars($reg['course']); ?></td>
+                                        <td data-label="Year"><?php echo htmlspecialchars($reg['year_level']); ?></td>
+                                        <td data-label="Submitted"><?php echo formatDate($reg['submitted_date']); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $reg['status'];
                                             $badgeClass = $status === 'approved' ? 'badge-success' : 

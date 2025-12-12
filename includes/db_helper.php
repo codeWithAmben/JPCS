@@ -292,8 +292,15 @@ function createMember($data, $userId = null) {
     $member->addChild('user_id', $userId ?? '');
     $member->addChild('member_id', 'JPCS-' . date('Y') . '-' . str_pad(count($xml->member) + 1, 4, '0', STR_PAD_LEFT));
     
+    // Fields that are already handled or should not be stored in member record
+    $excludeFields = ['id', 'user_id', 'member_id', 'password', 'membership_status', 'joined_date', 'expiry_date'];
+    
     foreach ($data as $key => $value) {
-        $member->addChild($key, $value);
+        // Skip excluded fields to avoid duplicates or storing sensitive data
+        if (in_array($key, $excludeFields)) {
+            continue;
+        }
+        $member->addChild($key, htmlspecialchars($value, ENT_XML1, 'UTF-8'));
     }
     
     $member->addChild('membership_status', 'pending');

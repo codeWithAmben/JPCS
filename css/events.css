@@ -2,11 +2,13 @@
    JPCS Malvar - Events Page Styles
    ============================================ */
 
+@import 'variables.css';
+
 /* Events Section Container */
 .events-section {
     max-width: 1200px;
     margin: 50px auto;
-    padding: 20px;
+    padding: var(--space-5);
 }
 
 .events-section h1 {
@@ -152,7 +154,28 @@
 }
 
 /* Responsive */
+@media (max-width: 991px) {
+    .events-section {
+        margin: 40px auto;
+    }
+    
+    .events-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+    }
+    
+    .events-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+}
+
 @media (max-width: 768px) {
+    .events-section {
+        margin: 30px auto;
+        padding: var(--space-4);
+    }
+    
     .events-section h1 {
         font-size: 2.2rem;
     }
@@ -168,5 +191,92 @@
     
     .event-card h3 {
         font-size: 1.5rem;
+    }
+    
+    .event-filters {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .events-section {
+        margin: 20px auto;
+        padding: var(--space-3);
+    }
+    
+    .events-section h1 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    
+    .event-card {
+        padding: 20px;
+    }
+    
+    .event-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .event-date {
+        font-size: 0.9rem;
+    }
+    
+    .event-card p {
+        font-size: 0.9rem;
+    }
+    
+    .event-tag {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .filter-btn {
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+    }
+    
+    .event-actions .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .no-events {
+        padding: 50px 15px;
+        font-size: 1rem;
+    }
+    
+    .no-events::before {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .events-section h1 {
+        font-size: 1.5rem;
+    }
+    
+    .event-card {
+        padding: 16px;
+        border-radius: 8px;
+    }
+    
+    .event-card h3 {
+        font-size: 1.15rem;
+    }
+    
+    .event-actions {
+        margin-top: 15px;
+        padding-top: 15px;
+    }
+    
+    .event-actions .btn {
+        display: block;
+        text-align: center;
     }
 }

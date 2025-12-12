@@ -68,11 +68,6 @@ usort($filteredEvents, function($a, $b) {
                         </h1>
                         <p>Browse and register for upcoming JPCS events</p>
                     </div>
-                    <div class="user-actions">
-                        <a href="../handlers/logout.php" class="btn-logout">
-                            <i data-lucide="log-out"></i> Logout
-                        </a>
-                    </div>
                 </div>
             </div>
             

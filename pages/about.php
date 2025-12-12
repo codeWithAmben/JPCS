@@ -33,41 +33,7 @@ usort($members, fn($a, $b) => (int)$a['order'] - (int)$b['order']);
 
 <body class="inner-page">
 
-<header>
-    <img src="../assets/images/LOGO.png" class="logo" alt="JPCS Logo">
-
-    <nav class="desktop-nav">
-        <a href="../index.php">Home</a>
-        <a href="about.php">About</a>
-
-        <div class="menu-button">
-            <button id="menuBtn">Menu ▼</button>
-            <div class="dropdown" id="dropdownMenu">
-                <a href="events.php">Events</a>
-                <a href="membership.php">Membership</a>
-                <a href="announcements.php">Announcements</a>
-                <a href="jpcsmart.php">JPCS.Mart</a>
-                <a href="helpdesk.php">Help Desk</a>
-                <a href="registration.php">Registration</a>
-                <a href="gallery.php">Gallery</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-    </div>
-
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="../index.php">Home</a>
-        <a href="about.php">About</a>
-        <a href="events.php">Events</a>
-        <a href="membership.php">Membership</a>
-        <a href="announcements.php">Announcements</a>
-        <a href="jpcsmart.php">JPCS.Mart</a>
-        <a href="helpdesk.php">Help Desk</a>
-    </nav>
-</header>
+<?php include '../includes/header.php'; ?>
 
 
 <section class="intro-section">

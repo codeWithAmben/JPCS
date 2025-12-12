@@ -57,12 +57,12 @@ $inquiries = getAllInquiries();
                                 <?php if (!empty($inquiries)): ?>
                                     <?php foreach ($inquiries as $inquiry): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($inquiry['name']); ?></strong></td>
-                                        <td><?php echo htmlspecialchars($inquiry['email']); ?></td>
-                                        <td><?php echo htmlspecialchars($inquiry['subject']); ?></td>
-                                        <td style="max-width: 300px;"><?php echo substr(htmlspecialchars($inquiry['message']), 0, 100) . '...'; ?></td>
-                                        <td><?php echo formatDate($inquiry['submitted_date']); ?></td>
-                                        <td>
+                                        <td data-label="Name"><strong><?php echo htmlspecialchars($inquiry['name']); ?></strong></td>
+                                        <td data-label="Email"><?php echo htmlspecialchars($inquiry['email']); ?></td>
+                                        <td data-label="Subject"><?php echo htmlspecialchars($inquiry['subject']); ?></td>
+                                        <td data-label="Message"><?php echo substr(htmlspecialchars($inquiry['message']), 0, 100) . '...'; ?></td>
+                                        <td data-label="Submitted"><?php echo formatDate($inquiry['submitted_date']); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $inquiry['status'];
                                             $badgeClass = $status === 'replied' ? 'badge-success' : 

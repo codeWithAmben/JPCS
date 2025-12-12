@@ -70,6 +70,9 @@ define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif']);
 // Pagination
 define('ITEMS_PER_PAGE', 10);
 
+// Load environment variables FIRST (before mailer needs them)
+require_once INCLUDES_PATH . '/env_loader.php';
+
 // Include required files
 require_once INCLUDES_PATH . '/functions.php';
 require_once INCLUDES_PATH . '/db_helper.php';

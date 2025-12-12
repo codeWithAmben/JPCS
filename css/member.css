@@ -1,6 +1,8 @@
 /* JPCS Member Dashboard - Modern Professional Design */
 /* Theme: Orange Family (#ff6a00) */
 
+@import 'variables.css';
+
 * { 
     margin: 0; 
     padding: 0; 
@@ -8,14 +10,22 @@
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-primary, 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif);
     background: linear-gradient(135deg, #fff5f0 0%, #ffe8db 100%);
     min-height: 100vh;
 }
 
+/* Dashboard Layout Container */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
 .main-content {
+    flex: 1;
+    margin-left: 260px;
     padding: 40px;
-    max-width: 1400px;
+    min-width: 0;
 }
 
 /* Top Bar */
@@ -23,8 +33,9 @@ body {
     background: white;
     padding: 30px 40px;
     margin: -40px -40px 35px -40px;
+    width: calc(100% + 80px);
     border-bottom: 1px solid #ffe8db;
-    box-shadow: 0 1px 3px rgba(255, 106, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(255, 106, 0, 0.1);
 }
 
 .welcome-section {
@@ -43,7 +54,8 @@ body {
     gap: 12px;
 }
 
-.welcome-text h1 i {
+.welcome-text h1 i,
+.welcome-text h1 svg {
     width: 32px;
     height: 32px;
     color: #ff6a00;
@@ -77,7 +89,8 @@ body {
     cursor: pointer;
 }
 
-.btn-logout i {
+.btn-logout i,
+.btn-logout svg {
     width: 18px;
     height: 18px;
 }
@@ -425,7 +438,8 @@ body {
     background: linear-gradient(135deg, #e05e00, #ff6a00);
 }
 
-.btn i {
+.btn i,
+.btn svg {
     width: 16px;
     height: 16px;
 }
@@ -506,7 +520,8 @@ body {
     letter-spacing: 0.5px;
 }
 
-.badge i {
+.badge i,
+.badge svg {
     width: 12px;
     height: 12px;
 }
@@ -594,11 +609,20 @@ body {
 }
 
 .profile-photo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     margin-bottom: 30px;
-    padding: 20px;
+    padding: 30px 20px;
     background: linear-gradient(135deg, rgba(255, 106, 0, 0.05) 0%, rgba(224, 94, 0, 0.05) 100%);
     border-radius: 12px;
+}
+
+.profile-photo-section .form-group {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 0;
 }
 
 .profile-photo-preview {
@@ -625,7 +649,8 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.profile-photo-placeholder i {
+.profile-photo-placeholder i,
+.profile-photo-placeholder svg {
     width: 80px;
     height: 80px;
     color: #95a5a6;
@@ -748,21 +773,145 @@ body {
     min-width: 250px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ===========================================
+   MEMBER DASHBOARD RESPONSIVE STYLES
+   =========================================== */
+
+/* Sidebar Toggle Button - Hidden by default on desktop */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #ff6a00, #ff8c42);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    box-shadow: 0 4px 15px rgba(255, 106, 0, 0.3);
+    transition: 0.3s;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.sidebar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.sidebar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.sidebar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Sidebar Overlay - Hidden by default */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.sidebar-overlay.active {
+    display: block !important;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Tablet Landscape */
+@media (max-width: 1024px) {
     .main-content {
+        padding: 30px;
+    }
+    
+    .top-bar {
+        padding: 25px 30px;
+        margin: -30px -30px 25px -30px;
+        width: calc(100% + 60px);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: flex;
+    }
+    
+    .sidebar-overlay {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    
+    .sidebar-overlay.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+    
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
         padding: 20px;
+        padding-top: 70px;
     }
     
     .top-bar {
         padding: 20px;
         margin: -20px -20px 20px -20px;
+        width: calc(100% + 40px);
+        padding-left: 70px;
     }
     
     .welcome-section {
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;
+    }
+    
+    .welcome-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .profile-hero {
+        padding: 25px;
     }
     
     .profile-hero-content {
@@ -783,6 +932,10 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .section {
+        margin-bottom: 20px;
+    }
+    
     .section-header {
         flex-direction: column;
         gap: 15px;
@@ -797,18 +950,80 @@ body {
         width: 100%;
         min-width: 100%;
     }
+    
+    .form-row,
+    .form-row-2 {
+        grid-template-columns: 1fr !important;
+        flex-direction: column;
+    }
 }
 
+/* Mobile */
 @media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+        padding-top: 65px;
+    }
+    
+    .top-bar {
+        padding: 15px;
+        margin: -15px -15px 15px -15px;
+        width: calc(100% + 30px);
+        padding-left: 60px;
+    }
+    
     .welcome-text h1 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        gap: 8px;
+    }
+    
+    .welcome-text h1 i,
+    .welcome-text h1 svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .welcome-text p {
+        font-size: 0.85rem;
+    }
+    
+    .btn-logout {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .profile-hero {
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    .profile-avatar {
+        width: 70px;
+        height: 70px;
     }
     
     .profile-details h2 {
         font-size: 1.25rem;
     }
     
+    .profile-meta {
+        justify-content: center;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
     .stat-card .value {
         font-size: 2rem;
+    }
+    
+    .section-body {
+        padding: 20px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
     }
 }

@@ -125,13 +125,13 @@ if ($action === 'edit' && $memberId) {
                                 <?php if (!empty($members)): ?>
                                     <?php foreach ($members as $member): ?>
                                     <tr>
-                                        <td><strong><?php echo htmlspecialchars($member['member_id']); ?></strong></td>
-                                        <td><?php echo htmlspecialchars($member['first_name'] . ' ' . $member['last_name']); ?></td>
-                                        <td><?php echo htmlspecialchars($member['email']); ?></td>
-                                        <td><?php echo htmlspecialchars($member['phone']); ?></td>
-                                        <td><?php echo htmlspecialchars($member['school']); ?></td>
-                                        <td><?php echo htmlspecialchars($member['course']); ?></td>
-                                        <td>
+                                        <td data-label="Member ID"><strong><?php echo htmlspecialchars($member['member_id']); ?></strong></td>
+                                        <td data-label="Name"><?php echo htmlspecialchars($member['first_name'] . ' ' . $member['last_name']); ?></td>
+                                        <td data-label="Email"><?php echo htmlspecialchars($member['email']); ?></td>
+                                        <td data-label="Phone"><?php echo htmlspecialchars($member['phone']); ?></td>
+                                        <td data-label="School"><?php echo htmlspecialchars($member['school']); ?></td>
+                                        <td data-label="Course"><?php echo htmlspecialchars($member['course']); ?></td>
+                                        <td data-label="Status">
                                             <?php 
                                             $status = $member['membership_status'];
                                             $badgeClass = $status === 'active' ? 'badge-success' : 
@@ -139,7 +139,7 @@ if ($action === 'edit' && $memberId) {
                                             echo '<span class="badge ' . $badgeClass . '">' . strtoupper($status) . '</span>';
                                             ?>
                                         </td>
-                                        <td><?php echo formatDate($member['joined_date']); ?></td>
+                                        <td data-label="Joined"><?php echo formatDate($member['joined_date']); ?></td>
                                         <td class="actions">
                                             <a href="?action=edit&id=<?php echo $member['id']; ?>" class="btn-sm btn-info">Edit</a>
                                             <form method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this member?');">

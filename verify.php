@@ -270,14 +270,7 @@ if (isset($_GET['email'])) {
 </head>
 <body class="inner-page">
 
-<header>
-    <img src="assets/images/LOGO.png" class="logo" alt="JPCS Logo">
-    <nav class="desktop-nav">
-        <a href="index.php">Home</a>
-        <a href="pages/about.php">About</a>
-        <a href="login.php">Login</a>
-    </nav>
-</header>
+<?php include 'includes/header.php'; ?>
 
 <div class="verify-container">
     <div class="verify-header">

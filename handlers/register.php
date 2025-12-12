@@ -41,7 +41,7 @@ if (!validateEmail($data['email'])) {
 // Check if email already exists
 $existingUser = getUserByEmail($data['email']);
 if ($existingUser) {
-    // Check if unverified - allow re-registration
+    // Check if unverified - allow re-registration (resend verification)
     if (isset($existingUser['status']) && $existingUser['status'] === 'pending') {
         // Resend verification
         $result = resendVerification($data['email']);
@@ -52,7 +52,31 @@ if ($existingUser) {
         ]);
         exit;
     }
-    $errors[] = 'An account with this email already exists';
+
+    // If the account exists and is active but there's no corresponding member record,
+    // allow completing membership by creating the member record linked to the existing user.
+    $existingMember = getMemberByUserId($existingUser['id']);
+    if (!$existingMember) {
+        $memberData = $data;
+        unset($memberData['password']);
+        unset($memberData['email']);
+        $memberData['user_id'] = $existingUser['id'];
+
+        $memberId = createMember($memberData, $existingUser['id']);
+        if ($memberId) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Your membership has been completed for the existing account.',
+                'redirect' => SITE_URL . '/member/dashboard.php',
+                'member_id' => $memberId
+            ]);
+            exit;
+        } else {
+            $errors[] = 'Failed to create membership for existing account.';
+        }
+    } else {
+        $errors[] = 'An account with this email already exists';
+    }
 }
 
 // Validate password strength
@@ -85,8 +109,13 @@ if (!$result['success']) {
 }
 
 // Create member record with pending status
-$data['user_id'] = $result['user_id'];
-$memberId = createMember($data, $result['user_id']);
+// Remove sensitive/redundant fields before storing in member record
+$memberData = $data;
+unset($memberData['password']);  // Password is already hashed and stored in users.xml
+unset($memberData['email']);     // Email is already stored in users.xml
+$memberData['user_id'] = $result['user_id'];
+
+$memberId = createMember($memberData, $result['user_id']);
 
 if (!$memberId) {
     // Member record failed but user account exists - that's okay, they can complete profile later

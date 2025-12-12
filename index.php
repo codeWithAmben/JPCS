@@ -26,43 +26,7 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
 
 <body class="home-page">
 
-<header>
-    <img src="assets/images/LOGO.png" class="logo" alt="JPCS Logo">
-
-    <nav class="desktop-nav">
-        <a href="index.php">Home</a>
-        <a href="pages/about.php">About</a>
-        <a href="login.php">Login</a>
-
-        <div class="menu-button">
-            <button id="menuBtn">Menu ▼</button>
-            <div class="dropdown" id="dropdownMenu">
-                <a href="pages/events.php">Events</a>
-                <a href="pages/membership.php">Membership</a>
-                <a href="pages/announcements.php">Announcements</a>
-                <a href="pages/jpcsmart.php">JPCS.Mart</a>
-                <a href="pages/helpdesk.php">Help Desk</a>
-                <a href="pages/registration.php">Registration</a>
-                <a href="pages/gallery.php">Gallery</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-    </div>
-
-    <nav class="mobile-nav" id="mobileNav">
-        <a href="index.php">Home</a>
-        <a href="pages/about.php">About</a>
-        <a href="login.php">Login</a>
-        <a href="pages/events.php">Events</a>
-        <a href="pages/membership.php">Membership</a>
-        <a href="pages/announcements.php">Announcements</a>
-        <a href="pages/jpcsmart.php">JPCS.Mart</a>
-        <a href="pages/helpdesk.php">Help Desk</a>
-    </nav>
-</header>
+<?php include 'includes/header.php'; ?>
 
 <section class="hero">
     <img src="assets/images/JPCS.gif" class="hero-gif" alt="JPCS Background">

@@ -2,11 +2,13 @@
    JPCS Malvar - Announcements Page Styles
    ============================================ */
 
+@import 'variables.css';
+
 /* Announcements Section Container */
 .announcements-section {
     max-width: 900px;
     margin: 50px auto;
-    padding: 20px;
+    padding: var(--space-5);
 }
 
 .announcements-section h1 {
@@ -163,6 +165,11 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .announcements-section {
+        margin: 30px auto;
+        padding: var(--space-4);
+    }
+    
     .announcements-section h1 {
         font-size: 2.2rem;
         margin-bottom: 35px;
@@ -179,5 +186,86 @@
     
     .announcement-header h3 {
         font-size: 1.3rem;
+    }
+    
+    .announcements-filter {
+        gap: 8px;
+    }
+    
+    .announcements-filter .filter-btn {
+        padding: 6px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .announcements-section {
+        margin: 20px auto;
+        padding: var(--space-3);
+    }
+    
+    .announcements-section h1 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+    
+    .announcement-item {
+        padding: 16px;
+        margin-bottom: 16px;
+        border-left-width: 4px;
+    }
+    
+    .announcement-header h3 {
+        font-size: 1.15rem;
+        min-width: auto;
+    }
+    
+    .announcement-date {
+        font-size: 0.8rem;
+    }
+    
+    .announcement-badge {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .announcement-body {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    .announcement-category {
+        padding: 3px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .no-announcements {
+        padding: 40px 15px;
+        font-size: 1rem;
+    }
+    
+    .no-announcements::before {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .announcements-section h1 {
+        font-size: 1.5rem;
+    }
+    
+    .announcement-item {
+        padding: 14px;
+        border-radius: 8px;
+    }
+    
+    .announcement-header h3 {
+        font-size: 1.05rem;
+    }
+    
+    .announcements-filter .filter-btn {
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        border-radius: 15px;
     }
 }

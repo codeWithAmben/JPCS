@@ -3,23 +3,7 @@
    Common styles for all public-facing pages
    ============================================ */
 
-/* CSS Variables for consistent theming */
-:root {
-    --primary-color: #ff6a00;
-    --primary-dark: #e05e00;
-    --primary-light: #ff8c42;
-    --text-dark: #333;
-    --text-medium: #555;
-    --text-light: #666;
-    --text-muted: #999;
-    --bg-light: #f9f9f9;
-    --bg-white: #fff;
-    --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
-    --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
-    --border-radius: 10px;
-    --transition: 0.3s ease;
-}
+@import 'variables.css';
 
 /* ============================================
    Page Section Base
@@ -27,7 +11,7 @@
 .page-section {
     max-width: 1200px;
     margin: 50px auto;
-    padding: 20px;
+    padding: var(--space-5);
 }
 
 .page-section.narrow {

@@ -36,11 +36,6 @@ $upcomingEvents = array_filter($events, function($event) {
                         </h1>
                         <p>Here's what's happening with your membership today</p>
                     </div>
-                    <div class="user-actions">
-                        <a href="../handlers/logout.php" class="btn-logout">
-                            <i data-lucide="log-out"></i> Logout
-                        </a>
-                    </div>
                 </div>
             </div>
             

@@ -26,125 +26,9 @@ $stats = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - <?php echo SITE_NAME; ?></title>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/admin.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-        }
-        
-        .dashboard {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            min-height: 100vh;
-        }
-        
-        .sidebar {
-            background: linear-gradient(180deg, #2c3e50, #34495e);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        }
-        
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-        
-        .admin-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #f5882fc9;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .sidebar-header h2 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: #ff6a00;
-        }
-        
-        .sidebar-header p {
-            font-size: 0.85rem;
-            color: #95a5a6;
-        }
-        
-        .sidebar-menu {
-            list-style: none;
-            padding: 20px 0;
-        }
-        
-        .sidebar-menu li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 20px;
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.95rem;
-        }
-        
-        .sidebar-menu li a i {
-            width: 20px;
-            height: 20px;
-            stroke-width: 2;
-        }
-        
-        .sidebar-menu li a:hover,
-        .sidebar-menu li a.active {
-            background: rgba(255, 106, 0, 0.2);
-            border-left: 4px solid #ff6a00;
-            padding-left: 16px;
-        }
-        
-        .main-content {
-            padding: 30px;
-            overflow-y: auto;
-        }
-        
-        .top-bar {
-            background: white;
-            padding: 25px 30px;
-            margin: -30px -30px 30px -30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        
-        .welcome {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-        
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .btn-logout {
-            padding: 10px 24px;
-            background: #e74c3c;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: 0.3s;
-            font-weight: 600;
-        }
-        
-        .btn-logout:hover {
-            background: #c0392b;
-            transform: translateY(-2px);
-        }
-        
+        /* Dashboard-specific styles */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -352,32 +236,44 @@ $stats = [
             font-size: 1rem;
             margin-bottom: 5px;
         }
+        
+        /* Responsive styles for dashboard */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat-card .value {
+                font-size: 1.8rem;
+            }
+            .section {
+                padding: 20px;
+            }
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="../assets/images/LOGO.png" alt="JPCS Logo" class="admin-logo">
-                <h2>JPCS Admin Panel</h2>
-                <p><?php echo htmlspecialchars($user['name']); ?></p>
-            </div>
-            
-            <ul class="sidebar-menu">
-                <li><a href="dashboard.php" class="active"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
-                <li><a href="members.php"><i data-lucide="users"></i> Manage Members</a></li>
-                <li><a href="officers.php"><i data-lucide="user-circle"></i> Manage Officers</a></li>
-                <li><a href="events.php"><i data-lucide="calendar"></i> Manage Events</a></li>
-                <li><a href="announcements.php"><i data-lucide="megaphone"></i> Announcements</a></li>
-                <li><a href="gallery.php"><i data-lucide="image"></i> Gallery</a></li>
-                <li><a href="products.php"><i data-lucide="shopping-cart"></i> Products</a></li>
-                <li><a href="registrations.php"><i data-lucide="clipboard-list"></i> Registrations</a></li>
-                <li><a href="inquiries.php"><i data-lucide="message-square"></i> Inquiries</a></li>
-                <li><a href="settings.php"><i data-lucide="settings"></i> Settings</a></li>
-                <li><a href="../index.php"><i data-lucide="globe"></i> View Website</a></li>
-                <li><a href="../handlers/logout.php"><i data-lucide="log-out"></i> Logout</a></li>
-            </ul>
-        </aside>
+        <?php include 'includes/sidebar.php'; ?>
         
         <main class="main-content">
             <div class="top-bar">
@@ -387,7 +283,6 @@ $stats = [
                         <strong><?php echo htmlspecialchars($user['name']); ?></strong><br>
                         <small><?php echo htmlspecialchars($user['role']); ?></small>
                     </span>
-                    <a href="../handlers/logout.php" class="btn-logout">Logout</a>
                 </div>
             </div>
             
@@ -452,7 +347,7 @@ $stats = [
                 </div>
                 
                 <?php if (!empty($members)): ?>
-                <table>
+                <table class="data-table">
                     <thead>
                         <tr>
                             <th>Member ID</th>
@@ -467,19 +362,19 @@ $stats = [
                     <tbody>
                         <?php foreach (array_slice($members, 0, 10) as $member): ?>
                         <tr>
-                            <td><strong><?php echo htmlspecialchars($member['member_id']); ?></strong></td>
-                            <td><?php echo htmlspecialchars($member['first_name'] . ' ' . $member['last_name']); ?></td>
-                            <td><?php echo htmlspecialchars($member['email']); ?></td>
-                            <td><?php echo htmlspecialchars($member['course']); ?></td>
-                            <td>
+                            <td data-label="Member ID"><strong><?php echo htmlspecialchars($member['member_id']); ?></strong></td>
+                            <td data-label="Name"><?php echo htmlspecialchars($member['first_name'] . ' ' . $member['last_name']); ?></td>
+                            <td data-label="Email"><?php echo htmlspecialchars($member['email']); ?></td>
+                            <td data-label="Course"><?php echo htmlspecialchars($member['course']); ?></td>
+                            <td data-label="Status">
                                 <?php 
                                 $status = $member['membership_status'];
                                 $badgeClass = $status === 'active' ? 'badge-active' : ($status === 'pending' ? 'badge-pending' : 'badge-expired');
                                 echo '<span class="badge ' . $badgeClass . '">' . strtoupper($status) . '</span>';
                                 ?>
                             </td>
-                            <td><?php echo formatDate($member['joined_date'], 'M j, Y'); ?></td>
-                            <td>
+                            <td data-label="Joined"><?php echo formatDate($member['joined_date'], 'M j, Y'); ?></td>
+                            <td class="actions">
                                 <a href="members.php?action=edit&id=<?php echo $member['id']; ?>" class="btn btn-sm">Edit</a>
                             </td>
                         </tr>
@@ -501,7 +396,7 @@ $stats = [
                 $upcomingEvents = array_filter($events, fn($e) => strtotime($e['date']) >= time() && $e['status'] === 'active');
                 if (!empty($upcomingEvents)):
                 ?>
-                <table>
+                <table class="data-table">
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -514,11 +409,11 @@ $stats = [
                     <tbody>
                         <?php foreach (array_slice($upcomingEvents, 0, 5) as $event): ?>
                         <tr>
-                            <td><strong><?php echo htmlspecialchars($event['title']); ?></strong></td>
-                            <td><?php echo formatDate($event['date']); ?></td>
-                            <td><?php echo htmlspecialchars($event['location']); ?></td>
-                            <td><?php echo htmlspecialchars($event['max_participants']); ?></td>
-                            <td>
+                            <td data-label="Title"><strong><?php echo htmlspecialchars($event['title']); ?></strong></td>
+                            <td data-label="Date"><?php echo formatDate($event['date']); ?></td>
+                            <td data-label="Location"><?php echo htmlspecialchars($event['location']); ?></td>
+                            <td data-label="Max Participants"><?php echo htmlspecialchars($event['max_participants']); ?></td>
+                            <td class="actions">
                                 <a href="events.php?action=edit&id=<?php echo $event['id']; ?>" class="btn btn-sm">Edit</a>
                             </td>
                         </tr>
@@ -531,8 +426,5 @@ $stats = [
             </div>
         </main>
     </div>
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>
