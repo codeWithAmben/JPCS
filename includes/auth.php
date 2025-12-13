@@ -122,4 +122,22 @@ function isSessionValid() {
     
     return true;
 }
+/**
+ * Create a new user
+ * @param string $email
+ * @param string $password
+ * @param string $name
+ * @param string $role
+ * @return int|false Returns user ID on success, false on failure
+ */
+function createUser($email, $password, $name, $role) {
+    // Example implementation, replace with your actual database logic
+    // Assuming you have a PDO connection $pdo
+    global $pdo;
+    $stmt = $pdo->prepare("INSERT INTO users (email, password, name, role, status, email_verified) VALUES (?, ?, ?, ?, 'active', 'true')");
+    if ($stmt->execute([$email, password_hash($password, PASSWORD_DEFAULT), $name, $role])) {
+        return $pdo->lastInsertId();
+    }
+    return false;
+}
 ?>

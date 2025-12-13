@@ -46,11 +46,13 @@ if (strpos($_SERVER['PHP_SELF'], '/pages/') !== false) {
                     <a href="<?php echo $basePath; ?>pages/events.php">Events</a>
                     <a href="<?php echo $basePath; ?>pages/announcements.php">Announcements</a>
                     <a href="<?php echo $basePath; ?>pages/jpcsmart.php">JPCS.Mart</a>
+                    <a href="<?php echo $basePath; ?>pages/my_orders.php">My Orders</a>
                     <a href="<?php echo $basePath; ?>pages/gallery.php">Gallery</a>
                     <?php if ($isAdmin): ?>
                         <a href="<?php echo $basePath; ?>admin/dashboard.php">Admin Panel</a>
                     <?php else: ?>
                         <a href="<?php echo $basePath; ?>member/profile.php">My Profile</a>
+                        <a href="<?php echo $basePath; ?>pages/my_orders.php">My Orders</a>
                     <?php endif; ?>
                     <a href="<?php echo $basePath; ?>handlers/logout.php" class="logout-link">Logout</a>
                 </div>
@@ -97,6 +99,7 @@ if (strpos($_SERVER['PHP_SELF'], '/pages/') !== false) {
             <?php else: ?>
                 <a href="<?php echo $basePath; ?>member/dashboard.php">Dashboard</a>
                 <a href="<?php echo $basePath; ?>member/profile.php">My Profile</a>
+                <a href="<?php echo $basePath; ?>pages/my_orders.php">My Orders</a>
             <?php endif; ?>
         <?php else: ?>
             <a href="<?php echo $basePath; ?>login.php">Login</a>
@@ -119,69 +122,4 @@ if (strpos($_SERVER['PHP_SELF'], '/pages/') !== false) {
 <!-- Mobile Navigation Overlay -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Menu dropdown
-    const menuBtn = document.getElementById('menuBtn');
-    const dropdown = document.getElementById('dropdownMenu');
-    
-    if (menuBtn && dropdown) {
-        menuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdown.classList.toggle('active');
-        });
-        
-        document.addEventListener('click', function() {
-            dropdown.classList.remove('active');
-        });
-    }
-    
-    // Mobile nav
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-    
-    function openMobileNav() {
-        if (mobileNav) mobileNav.classList.add('active');
-        if (hamburger) hamburger.classList.add('active');
-        if (mobileNavOverlay) mobileNavOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeMobileNav() {
-        if (mobileNav) mobileNav.classList.remove('active');
-        if (hamburger) hamburger.classList.remove('active');
-        if (mobileNavOverlay) mobileNavOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    if (hamburger) {
-        hamburger.addEventListener('click', function() {
-            if (mobileNav && mobileNav.classList.contains('active')) {
-                closeMobileNav();
-            } else {
-                openMobileNav();
-            }
-        });
-    }
-    
-    // Close on overlay click
-    if (mobileNavOverlay) {
-        mobileNavOverlay.addEventListener('click', closeMobileNav);
-    }
-    
-    // Close on link click
-    if (mobileNav) {
-        mobileNav.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', closeMobileNav);
-        });
-    }
-    
-    // Close on window resize if larger than tablet
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 900) {
-            closeMobileNav();
-        }
-    });
-});
-</script>
+<!-- Mobile nav logic handled in js/script.js -->

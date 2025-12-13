@@ -49,7 +49,7 @@ foreach ($products as $product) {
     <div class="products-grid">
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
-                <div class="product-card" data-category="<?php echo htmlspecialchars($product['category'] ?? 'Other'); ?>">
+                <div class="product-card" data-id="<?php echo htmlspecialchars($product['id']); ?>" data-category="<?php echo htmlspecialchars($product['category'] ?? 'Other'); ?>" data-image="<?php echo htmlspecialchars($product['image'] ?? ''); ?>" data-stock="<?php echo (int)($product['stock'] ?? 0); ?>">
                     <div class="product-image">
                         <?php if (!empty($product['image']) && $product['image'] !== 'default.jpg'): ?>
                             <img src="../assets/uploads/products/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
@@ -102,6 +102,12 @@ foreach ($products as $product) {
         <?php endif; ?>
     </div>
 
+    <!-- Floating Cart Summary -->
+    <div class="cart-summary" id="cartSummary" style="display:none;">
+        <div class="cart-count" id="cartCount">0</div>
+        <div class="cart-label">View Cart</div>
+    </div>
+
     <div class="coming-soon">
         <h2>More Products Coming Soon!</h2>
         <p>We're constantly adding new items to our collection. Stay tuned for exclusive merchandise drops!</p>
@@ -132,6 +138,51 @@ foreach ($products as $product) {
             });
         });
     });
+
+    // Simple localStorage cart
+    const CART_KEY = 'jpcs_cart';
+    function getCart() {
+        try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { return []; }
+    }
+    function saveCart(cart) { localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateCartSummary(); }
+
+    function addToCart(product) {
+        const cart = getCart();
+        const existing = cart.find(item => item.product_id === product.product_id);
+        if (existing) existing.quantity += product.quantity;
+        else cart.push(product);
+        saveCart(cart);
+    }
+
+    function updateCartSummary() {
+        const cart = getCart();
+        const count = cart.reduce((s,i)=> s + (i.quantity || 1), 0);
+        document.getElementById('cartCount').textContent = count;
+        document.getElementById('cartSummary').style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    // Attach add to cart buttons
+    document.querySelectorAll('.product-card').forEach(card => {
+        const btn = card.querySelector('.product-btn');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+            const id = card.getAttribute('data-id') || card.querySelector('.product-info h3').textContent.trim();
+            const name = card.querySelector('.product-info h3').textContent.trim();
+            const priceText = card.querySelector('.product-price').textContent.replace(/[^0-9\.\,]/g,'').replace(',','');
+            const price = parseFloat(priceText) || 0;
+            const image = card.getAttribute('data-image') || '';
+            const stock = parseInt(card.getAttribute('data-stock') || '0', 10) || 0;
+            if (stock <= 0) { alert('Item is out of stock'); return; }
+            const product = { product_id: id, name, price, quantity: 1, image };
+            addToCart(product);
+            alert('Added to cart: ' + name);
+        });
+    });
+
+    // Cart summary click: go to checkout page
+    document.getElementById('cartSummary').addEventListener('click', function(){ window.location.href = '../pages/checkout.php'; });
+
+    updateCartSummary();
 </script>
 
 <?php include '../includes/tawk_chat.php'; ?>

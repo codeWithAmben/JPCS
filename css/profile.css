@@ -1,0 +1,141 @@
+/* Profile page specific styles */
+
+/* Constrain and center content on profile pages */
+.content-inner {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Keep top-bar full-bleed like dashboard */
+.content-inner .top-bar {
+    margin: -40px -40px 35px -40px;
+    width: calc(100% + 80px);
+    padding: 30px 40px;
+    border-bottom: 1px solid #ffe8db;
+    box-shadow: 0 2px 8px rgba(255, 106, 0, 0.1);
+}
+
+.section {
+    margin-bottom: 35px;
+}
+
+.profile-form {
+    max-width: 800px;
+}
+
+.password-form {
+    max-width: 500px;
+}
+
+.profile-photo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, rgba(255, 106, 0, 0.05) 0%, rgba(224, 94, 0, 0.05) 100%);
+    border-radius: 12px;
+}
+
+.profile-photo-section .form-group {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 0;
+}
+
+.profile-photo-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    display: block;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ecf0f1 0%, #d5dde3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo-placeholder i,
+.profile-photo-placeholder svg {
+    width: 80px;
+    height: 80px;
+    color: #95a5a6;
+}
+
+.member-info-box {
+    background: linear-gradient(135deg, rgba(255, 106, 0, 0.05) 0%, rgba(224, 94, 0, 0.05) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #ff6a00;
+    margin-bottom: 25px;
+}
+
+.member-info-box p {
+    margin: 10px 0;
+    color: #2d3748;
+    font-size: 0.95rem;
+}
+
+.member-info-box p:first-child {
+    margin-top: 0;
+}
+
+.member-info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.member-info-box strong {
+    color: #1a202c;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+/* Responsive Forms */
+@media (max-width: 768px) {
+    .content-inner { padding: 0 12px; }
+
+    .form-row,
+    .form-row-2 {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+    
+    .profile-form,
+    .password-form {
+        max-width: 100%;
+    }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #718096;
+}
+
+.empty-state i {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+    color: #ff6a00;
+}
+
+.empty-state p {
+    font-size: 1.05rem;
+}

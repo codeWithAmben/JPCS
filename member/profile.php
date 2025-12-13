@@ -92,6 +92,7 @@ $member = getMemberByUserId($user['id']);
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/member.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -99,6 +100,7 @@ $member = getMemberByUserId($user['id']);
         <?php include 'includes/sidebar.php'; ?>
         
         <main class="main-content">
+            <div class="content-inner">
             <div class="top-bar">
                 <div class="welcome-section">
                     <div class="welcome-text">
@@ -129,6 +131,44 @@ $member = getMemberByUserId($user['id']);
                 </div>
             </div>
             <?php else: ?>
+
+            <!-- Dashboard-style profile hero -->
+            <div class="profile-hero">
+                <div class="profile-hero-content">
+                    <div class="profile-avatar">
+                        <?php if (!empty($member['profile_photo'])): ?>
+                            <img src="../<?php echo htmlspecialchars($member['profile_photo']); ?>" alt="Profile">
+                        <?php else: ?>
+                            <i data-lucide="user"></i>
+                        <?php endif; ?>
+                    </div>
+                    <div class="profile-details">
+                        <h2><?php echo htmlspecialchars($member['first_name'] . ' ' . $member['last_name']); ?></h2>
+                        <div class="profile-meta">
+                            <div class="profile-meta-item">
+                                <i data-lucide="id-card"></i>
+                                <span><?php echo htmlspecialchars($member['member_id']); ?></span>
+                            </div>
+                            <div class="profile-meta-item">
+                                <i data-lucide="graduation-cap"></i>
+                                <span><?php echo htmlspecialchars($member['course']); ?> - Year <?php echo $member['year_level']; ?></span>
+                            </div>
+                            <div class="profile-meta-item">
+                                <i data-lucide="mail"></i>
+                                <span><?php echo htmlspecialchars($member['email']); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="membership-badge">
+                        <h4>Membership Status</h4>
+                        <div class="status"><?php echo strtoupper($member['membership_status']); ?></div>
+                        <div style="margin-top: 10px; font-size: 0.85rem; opacity: 0.9;">Expires: <?php echo formatDate($member['expiry_date']); ?></div>
+                    </div>
+                </div>
+            </div>
+
+            <?php endif; ?>
+
             
             <div class="section">
                 <div class="section-header">
@@ -278,7 +318,7 @@ $member = getMemberByUserId($user['id']);
                 </div>
             </div>
             
-            <?php endif; ?>
+            </div><!-- .content-inner -->
         </main>
     </div>
     

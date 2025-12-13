@@ -39,6 +39,7 @@
 - [🗺️ Image Maps](#️-image-maps)
 - [🎨 Live Chat](#-live-chat)
 - [📱 Responsive Design](#-responsive-design)
+ - [🛍️ Checkout & Orders](#-checkout--orders)
 - [👤 User Roles](#-user-roles)
 - [🗄️ Database Schema](#️-database-schema)
 - [🤝 Contributing](#-contributing)
@@ -56,6 +57,7 @@ A comprehensive, modern PHP-based membership management system designed specific
 - **💬 Live Chat Support** - Integrated Tawk.to widget
 - **🗺️ Interactive Image Maps** - Enhanced navigation experience
 - **📱 Mobile-First Design** - Responsive across all devices
+- **🛍️ Checkout & Orders** - Built-in shopping cart and order management
 - **🛡️ Role-Based Security** - Granular access control
 - **🎨 Modern UI/UX** - JPCS-themed orange design system
 
@@ -72,6 +74,7 @@ A comprehensive, modern PHP-based membership management system designed specific
 | **👥 Membership Info** | Benefits, requirements, application process | ✅ Complete |
 | **📢 Announcements** | Latest news and updates | ✅ Complete |
 | **🛒 JPCS.Mart** | Official merchandise store with categories | ✅ Complete |
+| **🛍️ Checkout & Orders** | Add to cart, checkout, view orders | ✅ Complete |
 | **🎧 Help Desk** | Contact forms, FAQs, inquiry system | ✅ Complete |
 | **🖼️ Gallery** | Event photos with filtering and categories | ✅ Complete |
 | **📝 Registration** | Online membership application with validation | ✅ Complete |
@@ -85,6 +88,7 @@ A comprehensive, modern PHP-based membership management system designed specific
 | **👤 Profile Management** | Edit personal info, upload photo, change password | ✅ Complete |
 | **🎫 Event Registration** | Register for upcoming events and activities | ✅ Complete |
 | **📬 My Announcements** | Personalized announcement feed | ✅ Complete |
+| **🧾 My Orders** | View placed orders and status | ✅ Complete |
 | **📱 Mobile Responsive** | Full mobile optimization | ✅ Complete |
 
 ### 🔧 Admin Panel
@@ -156,6 +160,8 @@ JPCS/
 │   ├── announcements.php      # Announcement management
 │   ├── gallery.php            # Photo gallery management
 │   ├── products.php           # Merchandise management
+│   ├── orders.php             # Orders management
+│   ├── handle_order.php      # Order actions (mark paid/completed)
 │   ├── officers.php           # Officer management
 │   ├── registrations.php      # Review applications
 │   ├── inquiries.php          # Help desk management
@@ -172,6 +178,9 @@ JPCS/
 │   ├── membership.php         # Membership info
 │   ├── announcements.php      # Public announcements
 │   ├── jpcsmart.php           # Merchandise store
+│   ├── checkout.php           # Checkout page
+│   ├── order_success.php      # Order confirmation
+│   ├── my_orders.php          # Member orders listing
 │   ├── helpdesk.php           # Support page
 │   ├── gallery.php            # Photo gallery
 │   └── registration.php       # Sign-up form
@@ -188,6 +197,8 @@ JPCS/
 ├── 📁 handlers/                 # Form processing
 │   ├── register.php           # Registration handler
 │   ├── logout.php             # Logout handler
+│   ├── checkout.php           # Checkout handler
+│   ├── gcash_webhook.php      # GCash webhook handler
 │   ├── event_registration.php # Event signup
 │   └── sso_callback.php       # OAuth callback
 ├── 📁 database/                 # XML data storage
@@ -197,6 +208,7 @@ JPCS/
 │   ├── announcements.xml      # Announcements
 │   ├── products.xml           # Merchandise
 │   ├── gallery.xml            # Photo gallery
+│   ├── orders.xml             # Orders and transactions
 │   ├── officers.xml           # Chapter officers
 │   ├── registrations.xml      # Applications
 │   ├── inquiries.xml          # Help desk
@@ -209,6 +221,8 @@ JPCS/
 │   ├── index.css              # Homepage styles
 │   ├── admin.css              # Admin dashboard styles
 │   ├── member.css             # Member dashboard styles
+│   ├── login.css              # Login page styles
+│   ├── checkout.css           # Checkout page styles
 │   └── [page].css             # Page-specific styles
 ├── 📁 assets/                   # Static resources
 │   ├── images/                # Logos, photos, icons
@@ -270,6 +284,7 @@ composer install
 cp database/users.xml.example database/users.xml
 cp database/members.xml.example database/members.xml
 cp database/verifications.xml.example database/verifications.xml
+cp database/orders.xml.example database/orders.xml
 
 # Set write permissions
 chmod 666 database/*.xml
@@ -360,6 +375,28 @@ GOOGLE_CLIENT_SECRET=your-client-secret
 GOOGLE_REDIRECT_URI=http://localhost/JPCS/sso_callback.php
 ```
 
+### 🧾 Payment/Webhook Configuration
+
+If you plan to accept online payments (e.g., GCash), configure webhook signing to secure incoming payment notifications.
+
+1. Configure a webhook secret in `.env`:
+```env
+GCASH_WEBHOOK_SECRET=your-webhook-secret
+``` 
+2. Register your webhook URL with the payment provider pointing to `https://yourdomain.com/handlers/gcash_webhook.php`.
+
+#### Testing GCash Webhook (local / staging)
+If you want to test the webhook locally or from a staging environment, you can simulate a webhook request with a generated HMAC signature. Example using `openssl`:
+
+```bash
+payload='{"order_id":"ord_test_123","status":"paid"}'
+secret='your-webhook-secret'
+signature=$(printf "%s" "$payload" | openssl dgst -sha256 -hmac "$secret" -binary | xxd -p -c 256)
+curl -X POST -H "Content-Type: application/json" -H "X-GCASH-SIGNATURE: $signature" -d "$payload" https://yourdomain.com/handlers/gcash_webhook.php
+```
+
+This will help you validate that the webhook handler correctly verifies signature and updates the order. Check `admin/orders.php` to validate the payment status change.
+
 ### 💬 Live Chat Setup (Tawk.to)
 
 1. **Create Tawk.to Account**: https://www.tawk.to/
@@ -374,6 +411,37 @@ Visit `http://localhost/JPCS/test_email.php` to verify:
 - ✅ PHPMailer setup
 
 **⚠️ Important**: Delete `test_email.php` in production!
+
+---
+
+## 🛍️ Checkout & Orders
+
+This project now includes a functioning shopping cart and order management flow for JPCS.Mart. Below is a quick overview of what was added and how it works.
+
+- Cart: Client-side `localStorage`-based cart (key `jpcs_cart`). Products can be added from `pages/jpcsmart.php`.
+- Checkout: `pages/checkout.php` is the user-facing checkout page. It supports GCash payment (receipt upload) and Onsite payment for manual verification.
+- Order Storage: `database/orders.xml` (constant `DB_ORDERS`) stores orders. CRUD helpers (`getAllOrders`, `getOrderById`, `createOrder`, `updateOrder`) are available in `includes/db_helper.php`.
+- Order Status: Newly created orders have `payment_status = pending` and `status = processing`. Stock decrementation occurs only when payment is confirmed (admin marks as paid or webhook marks as paid).
+- Admin Controls: Admins can view and manage orders within `admin/orders.php` and change status using `admin/handle_order.php`.
+- GCash Integration: There's a webhook handler `handlers/gcash_webhook.php` that validates HMAC-signed payloads and marks orders as paid when verified. Configure `GCASH_WEBHOOK_SECRET` in your `.env` for secure signature verification.
+
+### Files Added/Updated
+- New pages: `pages/checkout.php`, `pages/order_success.php`, `pages/my_orders.php`
+- New handlers: `handlers/checkout.php`, `handlers/gcash_webhook.php`
+- Administration: `admin/orders.php`, `admin/handle_order.php` (for marking invoices paid/completed)
+- New CSS: `css/checkout.css` for checkout styles; `css/login.css` (login CSS was moved to a dedicated file and made responsive)
+- Database: `database/orders.xml` (orders) — the system will create this file automatically during initialization if it does not exist; you may also create it from a template if you prefer.
+
+### Notes for Deployment
+- GCash webhook requires a public HTTPS endpoint for the webhook URL and a configured `GCASH_WEBHOOK_SECRET` to validate the payload signature.
+- For Onsite payments, staff will verify and mark the order as paid from the admin interface.
+
+### Testing Checkout (Local)
+1. Create a product using `admin/products.php` with a stock > 0.
+2. Visit `pages/jpcsmart.php`, add the product to the cart, then go to `pages/checkout.php`.
+3. Choose `Onsite` (or upload a GCash receipt) and place the order.
+4. Verify the order appears in `admin/orders.php` (or in `pages/my_orders.php` for a member).
+5. If using GCash webhook, simulate a webhook using the `curl` example above.
 
 ---
 | Registration Approvals | Review and approve applications |
@@ -665,7 +733,7 @@ session_name('JPCS_SESSION');
 
 ## 🗄 Database Schema
 
-### XML Database Files (11 Total)
+### XML Database Files (12 Total)
 
 #### users.xml
 ```xml
@@ -713,6 +781,28 @@ session_name('JPCS_SESSION');
     <expiry_date>2025-01-01</expiry_date>
     <profile_photo>profile.jpg</profile_photo>
 </member>
+```
+
+#### orders.xml
+```xml
+<order>
+  <id>ord_abc123</id>
+  <user_id>user_abc123</user_id>
+  <total>599.00</total>
+  <payment_method>gcash|onsite</payment_method>
+  <payment_status>pending|paid</payment_status>
+  <status>processing|on-hold|completed</status>
+  <payment_info>uploads/payments/receipt.png</payment_info>
+  <created_at>2025-12-13 12:34:56</created_at>
+  <items>
+    <item>
+      <product_id>prd_xyz</product_id>
+      <name>JPCS Shirt</name>
+      <price>299.00</price>
+      <quantity>2</quantity>
+    </item>
+  </items>
+</order>
 ```
 
 #### officers.xml

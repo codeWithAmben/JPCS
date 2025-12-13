@@ -63,7 +63,20 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
 
 <!-- Interactive Image Map Navigation -->
 <?php include 'includes/image_map.php'; ?>
+<?php include 'includes/google_map.php'; ?>
+<?php include 'includes/leaflet_map.php'; ?>
 <section class="quick-links-map">
+    <?php
+    // Use Leaflet + OpenStreetMap by default (no API key required)
+    $markers = [
+        // Batangas State University Malvar Campus coordinates (OpenStreetMap)
+        ['lat' => 14.0449123, 'lng' => 121.1563294, 'title' => 'Batangas State University Malvar Campus', 'description' => 'JPCS Malvar Chapter - Batangas State University Malvar Campus', 'link' => 'pages/about.php', 'navigateOnClick' => false]
+    ];
+    echo renderLeafletMap($markers, ['center' => ['lat' => 14.0449123, 'lng' => 121.1563294], 'zoom' => 17, 'id' => 'orgLeaflet', 'height' => '360px']);
+
+  
+    ?>
+
     <h2 class="anton-font" style="font-size: 2rem; margin-bottom: 10px;">🗺️ Interactive Navigation</h2>
     <p style="color: #666; margin-bottom: 25px;">Click on any section to explore</p>
     <div class="nav-image-map">

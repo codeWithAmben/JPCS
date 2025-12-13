@@ -8,7 +8,12 @@
     font-family: var(--font-primary, "Poppins", sans-serif); 
 }
 
+html, body { height: 100%; background: #f5f5f5; }
+
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background: #f5f5f5;
     color: #333;
     overflow-x: hidden;
@@ -114,7 +119,7 @@ body.inner-page header {
     display: none;
     flex-direction: column;
     gap: 6px;
-    z-index: 1001;
+    z-index: 1101; /* ensure above overlays */
     position: relative;
     padding: 10px;
     margin: -10px;
@@ -216,10 +221,12 @@ body.inner-page header {
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
+    pointer-events: none; /* don't block when hidden */
 }
 .mobile-nav-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .hero { position: relative; height: 100vh; background: #000; }

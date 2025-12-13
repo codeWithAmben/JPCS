@@ -197,21 +197,9 @@ function renderOrganizationMap($baseUrl = '') {
     z-index: 1000;
     white-space: nowrap;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.map-tooltip.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.map-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -6px;
-    border-width: 6px;
-    border-style: solid;
+    max-width: 90vw; /* responsive */
+    overflow: hidden;
+    text-overflow: ellipsis;
     border-color: rgba(26, 35, 126, 0.95) transparent transparent transparent;
 }
 
@@ -356,6 +344,10 @@ document.addEventListener('DOMContentLoaded', function() {
     tooltip.className = 'map-tooltip';
     document.body.appendChild(tooltip);
     
+    // Support mouse hover and touch interactions for tooltips
+    let lastTouchedArea = null;
+    let lastTouchTime = 0;
+
     document.querySelectorAll('area[data-tooltip]').forEach(function(area) {
         area.addEventListener('mouseenter', function(e) {
             tooltip.textContent = this.dataset.tooltip;
@@ -383,6 +375,47 @@ document.addEventListener('DOMContentLoaded', function() {
         area.addEventListener('mouseleave', function() {
             tooltip.classList.remove('visible');
         });
+
+        // For touch devices, show tooltip on first tap and allow navigation on second tap
+        area.addEventListener('touchstart', function(e) {
+            const now = Date.now();
+            if (lastTouchedArea !== this || (now - lastTouchTime) > 700) {
+                // prevent following the link on first tap
+                e.preventDefault();
+                lastTouchedArea = this;
+                lastTouchTime = now;
+
+                // Show tooltip where the center of the area is
+                tooltip.textContent = this.dataset.tooltip;
+                tooltip.classList.add('visible');
+
+                const img = document.querySelector('img[usemap="#' + this.closest('map').name + '"]');
+                const rect = img.getBoundingClientRect();
+                const coords = this.getAttribute('coords').split(',');
+                let x, y;
+                if (this.getAttribute('shape') === 'circle') {
+                    x = parseInt(coords[0]) + rect.left;
+                    y = parseInt(coords[1]) + rect.top - 40;
+                } else {
+                    x = (parseInt(coords[0]) + parseInt(coords[2])) / 2 + rect.left;
+                    y = parseInt(coords[1]) + rect.top - 40;
+                }
+                tooltip.style.left = x + 'px';
+                tooltip.style.top = y + 'px';
+
+                // Hide it after 3 seconds
+                setTimeout(() => tooltip.classList.remove('visible'), 3000);
+            } else {
+                // allow the link to be followed on second tap
+            }
+        });
+    });
+
+    // Hide tooltip when touching anywhere else
+    document.addEventListener('touchstart', function(e) {
+        if (!e.target.closest('area')) {
+            tooltip.classList.remove('visible');
+        }
     });
 });
 </script>

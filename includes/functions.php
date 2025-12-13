@@ -286,7 +286,8 @@ function initializeDatabase() {
         DB_GALLERY => '<gallery></gallery>',
         DB_REGISTRATIONS => '<registrations></registrations>',
         DB_NEWSLETTER => '<newsletter></newsletter>',
-        DB_INQUIRIES => '<inquiries></inquiries>'
+        DB_INQUIRIES => '<inquiries></inquiries>',
+        DB_ORDERS => '<orders></orders>'
     ];
     
     foreach ($databases as $file => $content) {

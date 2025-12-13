@@ -35,6 +35,7 @@ define('DB_INQUIRIES', DATABASE_PATH . '/inquiries.xml');
 define('DB_OFFICERS', DATABASE_PATH . '/officers.xml');
 define('DB_EVENT_REGISTRATIONS', DATABASE_PATH . '/event_registrations.xml');
 define('DB_VERIFICATIONS', DATABASE_PATH . '/verifications.xml');
+define('DB_ORDERS', DATABASE_PATH . '/orders.xml');
 
 // Session Configuration
 ini_set('session.cookie_httponly', 1);
@@ -72,6 +73,9 @@ define('ITEMS_PER_PAGE', 10);
 
 // Load environment variables FIRST (before mailer needs them)
 require_once INCLUDES_PATH . '/env_loader.php';
+
+// Google Maps API Key (set GOOGLE_MAPS_API_KEY in your .env or here)
+define('GOOGLE_MAPS_API_KEY', env('GOOGLE_MAPS_API_KEY', ''));
 
 // Include required files
 require_once INCLUDES_PATH . '/functions.php';

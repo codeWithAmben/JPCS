@@ -5,7 +5,7 @@
     <name>Official JPCS T-Shirt</name>
     <description>Premium quality cotton t-shirt with the official JPCS Malvar Chapter logo. Available in S, M, L, XL.</description>
     <price>350.00</price>
-    <stock>100</stock>
+    <stock>99</stock>
     <status>active</status>
     <created_at>2025-12-01 10:00:00</created_at>
   </product>
@@ -23,7 +23,7 @@
     <name>Programming Notebook</name>
     <description>Special notebook for coders with grid pages and quick reference guides. 200 pages.</description>
     <price>150.00</price>
-    <stock>200</stock>
+    <stock>199</stock>
     <status>active</status>
     <created_at>2025-12-01 10:00:00</created_at>
   </product>

@@ -28,6 +28,9 @@
         <li><a href="products.php" <?php echo basename($_SERVER['PHP_SELF']) === 'products.php' ? 'class="active"' : ''; ?>>
             <i data-lucide="shopping-cart"></i> Products
         </a></li>
+        <li><a href="orders.php" <?php echo basename($_SERVER['PHP_SELF']) === 'orders.php' ? 'class="active"' : ''; ?>>
+            <i data-lucide="package"></i> Orders
+        </a></li>
         <li><a href="registrations.php" <?php echo basename($_SERVER['PHP_SELF']) === 'registrations.php' ? 'class="active"' : ''; ?>>
             <i data-lucide="clipboard-list"></i> Registrations
         </a></li>

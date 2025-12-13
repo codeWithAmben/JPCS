@@ -255,6 +255,104 @@ function getAllMembers() {
 }
 
 /**
+ * Get all orders
+ */
+function getAllOrders() {
+    $xml = loadXML(DB_ORDERS);
+    if (!$xml) return [];
+    $orders = [];
+    foreach ($xml->order as $order) {
+        $items = [];
+        if (isset($order->items)) {
+            foreach ($order->items->item as $item) {
+                $items[] = [
+                    'product_id' => (string)$item->product_id,
+                    'name' => (string)$item->name,
+                    'price' => (float)$item->price,
+                    'quantity' => (int)$item->quantity
+                ];
+            }
+        }
+        $orders[] = [
+            'id' => (string)$order->id,
+            'user_id' => (string)$order->user_id,
+            'items' => $items,
+            'total' => (float)$order->total,
+            'payment_method' => (string)($order->payment_method ?? ''),
+            'payment_status' => (string)($order->payment_status ?? 'pending'),
+            'status' => (string)($order->status ?? 'pending'),
+            'payment_info' => (string)($order->payment_info ?? ''),
+            'created_at' => (string)$order->created_at
+        ];
+    }
+    return $orders;
+}
+
+/**
+ * Get order by id
+ */
+function getOrderById($id) {
+    $orders = getAllOrders();
+    foreach ($orders as $order) {
+        if ($order['id'] === $id) return $order;
+    }
+    return null;
+}
+
+/**
+ * Create order
+ */
+function createOrder($data) {
+    $xml = loadXML(DB_ORDERS);
+    if (!$xml) {
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><orders></orders>');
+    }
+    $orderId = generateUniqueId('ord_');
+    $order = $xml->addChild('order');
+    $order->addChild('id', $orderId);
+    $order->addChild('user_id', $data['user_id'] ?? '');
+    $order->addChild('total', number_format((float)($data['total'] ?? 0), 2, '.', ''));
+    $order->addChild('payment_method', $data['payment_method'] ?? 'onsite');
+    $order->addChild('payment_status', $data['payment_status'] ?? 'pending');
+    $order->addChild('status', $data['status'] ?? 'pending');
+    $order->addChild('payment_info', $data['payment_info'] ?? '');
+    $order->addChild('created_at', date('Y-m-d H:i:s'));
+
+    // Items
+    $itemsNode = $order->addChild('items');
+    foreach ($data['items'] as $it) {
+        $itemNode = $itemsNode->addChild('item');
+        $itemNode->addChild('product_id', $it['product_id']);
+        $itemNode->addChild('name', htmlspecialchars($it['name']));
+        $itemNode->addChild('price', number_format((float)$it['price'], 2, '.', ''));
+        $itemNode->addChild('quantity', (int)$it['quantity']);
+    }
+
+    return saveXML($xml, DB_ORDERS) ? $orderId : false;
+}
+
+/**
+ * Update order
+ */
+function updateOrder($id, $data) {
+    $xml = loadXML(DB_ORDERS);
+    if (!$xml) return false;
+    foreach ($xml->order as $order) {
+        if ((string)$order->id === $id) {
+            foreach ($data as $key => $value) {
+                if (isset($order->$key)) {
+                    $order->$key = $value;
+                } else {
+                    $order->addChild($key, $value);
+                }
+            }
+            return saveXML($xml, DB_ORDERS);
+        }
+    }
+    return false;
+}
+
+/**
  * Get member by ID
  */
 function getMemberById($id) {
