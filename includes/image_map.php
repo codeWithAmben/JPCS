@@ -167,6 +167,33 @@ function renderOrganizationMap($baseUrl = '') {
     max-width: 100%;
 }
 
+/* Organization map specific styling */
+.org-image-map {
+    max-width: 420px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+/* Add an orange background behind the organization logo for contrast */
+.org-image-map {
+    background: linear-gradient(180deg, #ff6a00 0%, #ff8c42 100%);
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(255,106,0,0.12);
+}
+
+/* Highlight overlay for hovered/touched areas */
+.map-highlight {
+    position: absolute;
+    pointer-events: none;
+    border: 3px dashed rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.06);
+    transition: all 0.18s ease;
+    transform-origin: center center;
+    z-index: 999;
+    border-radius: 8px;
+}
+
 .image-map-container img {
     max-width: 100%;
     height: auto;
@@ -416,6 +443,77 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!e.target.closest('area')) {
             tooltip.classList.remove('visible');
         }
+    });
+
+    // Create highlight element for hover/focus
+    const highlight = document.createElement('div');
+    highlight.className = 'map-highlight';
+    document.body.appendChild(highlight);
+
+    function positionHighlight(area, img){
+        const rect = img.getBoundingClientRect();
+        const coords = area.getAttribute('coords').split(',').map(c => parseInt(c));
+        let left, top, width, height;
+        if (area.getAttribute('shape') === 'circle') {
+            const cx = coords[0];
+            const cy = coords[1];
+            const r = coords[2];
+            width = height = r * 2;
+            left = rect.left + cx - r;
+            top = rect.top + cy - r;
+            highlight.style.borderRadius = '50%';
+        } else {
+            // rect
+            const x1 = coords[0];
+            const y1 = coords[1];
+            const x2 = coords[2];
+            const y2 = coords[3];
+            left = rect.left + Math.min(x1, x2);
+            top = rect.top + Math.min(y1, y2);
+            width = Math.abs(x2 - x1);
+            height = Math.abs(y2 - y1);
+            highlight.style.borderRadius = '8px';
+        }
+        highlight.style.left = left + 'px';
+        highlight.style.top = top + 'px';
+        highlight.style.width = width + 'px';
+        highlight.style.height = height + 'px';
+        highlight.style.opacity = '1';
+    }
+
+    function hideHighlight(){
+        highlight.style.opacity = '0';
+    }
+
+    // Add interactions: highlight on hover and ensure click navigation works
+    document.querySelectorAll('map area').forEach(function(area) {
+        const img = document.querySelector('img[usemap="#' + area.closest('map').name + '"]');
+
+        area.addEventListener('mouseenter', function(){
+            positionHighlight(this, img);
+        });
+        area.addEventListener('mouseleave', function(){
+            hideHighlight();
+        });
+
+        // On focus (keyboard), show highlight too
+        area.addEventListener('focus', function(){ positionHighlight(this, img); });
+        area.addEventListener('blur', hideHighlight);
+
+        // Ensure click behavior is reliable across browsers/devices
+        area.addEventListener('click', function(e){
+            // Let normal behavior happen for ctrl/cmd clicks or if target set
+            if (e.ctrlKey || e.metaKey) return;
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const target = this.getAttribute('target');
+            if (!href) return;
+            if (target === '_blank') {
+                window.open(href, '_blank');
+            } else {
+                window.location.href = href;
+            }
+        });
     });
 });
 </script>

@@ -1,0 +1,293 @@
+/* ============================================
+   JPCS Malvar - Homepage Styles
+   ============================================ */
+
+@import 'variables.css';
+
+/* ----- Hero Section ----- */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 420px;
+    width: 100%;
+    background-color: var(--bg-dark);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: height 0.28s ease;
+}
+
+.hero-gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(17,24,39,0.3), rgba(17,24,39,0.9));
+    z-index: 1;
+}
+
+/* We don't put content in .hero directly in HTML, but if we did, z-index: 2 */
+
+/* ----- Intro Section ----- */
+.intro {
+    position: relative;
+    z-index: 2;
+    margin-top: 40px; /* No overlap with hero */
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 80px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.intro h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.intro h1 {
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    color: var(--gray-900);
+}
+
+.intro-right {
+    padding-left: 40px;
+    border-left: 4px solid var(--primary);
+}
+
+.intro-right p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* ----- Featured Event ----- */
+.event {
+    padding: 100px 5%;
+    text-align: center;
+    background-color: var(--gray-50);
+}
+
+#eventContainer {
+    max-width: 800px;
+    margin: 40px auto 0;
+    background: var(--white);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+/* ----- Interactive Navigation ----- */
+.quick-links-map {
+    padding: 80px 5%;
+    text-align: center;
+    background: var(--white);
+}
+
+.nav-image-map {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-map-item {
+    width: 140px;
+    height: 140px;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-main);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.nav-map-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-orange);
+    border-color: var(--primary);
+    background: var(--primary);
+}
+
+.nav-map-item:hover .icon,
+.nav-map-item:hover .label {
+    color: var(--white);
+}
+
+.nav-map-item .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    transition: var(--transition);
+}
+
+.nav-map-item .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+}
+
+/* ----- Quick Links Grid ----- */
+.quick-links {
+    padding: 80px 5%;
+    background-color: var(--gray-900);
+    color: var(--white);
+    text-align: center;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto 0;
+}
+
+.qcard {
+    padding: 25px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: var(--transition);
+    backdrop-filter: blur(5px);
+}
+
+.qcard:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+/* ----- Newsletter ----- */
+.newsletter {
+    padding: 80px 5%;
+    text-align: center;
+    background: var(--white);
+}
+
+.newsletter form {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.newsletter input {
+    padding: 15px 20px;
+    width: 400px;
+    max-width: 100%;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.newsletter input:focus {
+    border-color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .intro {
+        margin: 0;
+        border-radius: 0;
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .intro-right {
+        border-left: none;
+        padding-left: 0;
+        padding-top: 30px;
+        border-top: 2px solid var(--primary);
+    }
+}
+
+@media (max-width: 768px) {
+    .intro h1 { font-size: 2.5rem; }
+    
+    .newsletter form {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .newsletter input { width: 100%; }
+}
+
+/* Hero responsiveness adjustments */
+@media (max-width: 1200px) {
+    .hero { height: 72vh; }
+}
+
+@media (max-width: 992px) {
+    .hero { height: 65vh; }
+    .hero-gif { opacity: 0.36; object-position: center top; }
+    .intro { padding: 40px 24px; margin-top: -48px; }
+}
+
+@media (max-width: 768px) {
+    .hero { height: 55vh; min-height: 320px; }
+    .hero-gif { opacity: 0.32; }
+    .intro { padding: 34px 18px; margin-top: -60px; }
+    .intro h1 { font-size: 2rem; }
+    .intro-right { display: none; }
+}
+
+@media (max-width: 480px) {
+    .hero { height: 45vh; min-height: 260px; }
+    /* Keep GIF visible on small screens but lower opacity and adjust position */
+    .hero-gif { display: block; opacity: 0.48; object-position: center top; }
+    .intro { padding: 28px 14px; margin-top: -48px; }
+    .intro h1 { font-size: 1.6rem; }
+    .intro h3 { font-size: 0.95rem; }
+    .nav-map-item { width: 110px; height: 110px; }
+}
+
+/* Lessen the overlay darkness on smaller screens so the GIF shows through */
+@media (max-width: 768px) {
+    .hero::after {
+        background: linear-gradient(to bottom, rgba(17,24,39,0.18), rgba(17,24,39,0.72));
+    }
+}
+@media (max-width: 480px) {
+    .hero::after {
+        background: linear-gradient(to bottom, rgba(17,24,39,0.12), rgba(17,24,39,0.6));
+    }
+}

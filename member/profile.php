@@ -137,32 +137,32 @@ $member = getMemberByUserId($user['id']);
                 <div class="profile-hero-content">
                     <div class="profile-avatar">
                         <?php if (!empty($member['profile_photo'])): ?>
-                            <img src="../<?php echo htmlspecialchars($member['profile_photo']); ?>" alt="Profile">
+                            <img src="../<?php echo htmlspecialchars($member['profile_photo'] ?? ''); ?>" alt="Profile">
                         <?php else: ?>
                             <i data-lucide="user"></i>
                         <?php endif; ?>
                     </div>
                     <div class="profile-details">
-                        <h2><?php echo htmlspecialchars($member['first_name'] . ' ' . $member['last_name']); ?></h2>
+                        <h2><?php echo htmlspecialchars(($member['first_name'] ?? '') . ' ' . ($member['last_name'] ?? '')); ?></h2>
                         <div class="profile-meta">
                             <div class="profile-meta-item">
                                 <i data-lucide="id-card"></i>
-                                <span><?php echo htmlspecialchars($member['member_id']); ?></span>
+                                <span><?php echo htmlspecialchars($member['member_id'] ?? ''); ?></span>
                             </div>
                             <div class="profile-meta-item">
                                 <i data-lucide="graduation-cap"></i>
-                                <span><?php echo htmlspecialchars($member['course']); ?> - Year <?php echo $member['year_level']; ?></span>
+                                <span><?php echo htmlspecialchars($member['course'] ?? ''); ?> - Year <?php echo htmlspecialchars($member['year_level'] ?? ''); ?></span>
                             </div>
                             <div class="profile-meta-item">
                                 <i data-lucide="mail"></i>
-                                <span><?php echo htmlspecialchars($member['email']); ?></span>
+                                <span><?php echo htmlspecialchars($member['email'] ?? ''); ?></span>
                             </div>
                         </div>
                     </div>
                     <div class="membership-badge">
                         <h4>Membership Status</h4>
-                        <div class="status"><?php echo strtoupper($member['membership_status']); ?></div>
-                        <div style="margin-top: 10px; font-size: 0.85rem; opacity: 0.9;">Expires: <?php echo formatDate($member['expiry_date']); ?></div>
+                        <div class="status"><?php echo strtoupper($member['membership_status'] ?? ''); ?></div>
+                        <div style="margin-top: 10px; font-size: 0.85rem; opacity: 0.9;">Expires: <?php echo formatDate($member['expiry_date'] ?? ''); ?></div>
                     </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@ $member = getMemberByUserId($user['id']);
                         
                         <div class="profile-photo-section">
                             <?php if (!empty($member['profile_photo'])): ?>
-                                <img src="../<?php echo htmlspecialchars($member['profile_photo']); ?>" 
+                                <img src="../<?php echo htmlspecialchars($member['profile_photo'] ?? ''); ?>" 
                                      alt="Profile Photo" 
                                      class="profile-photo-preview">
                             <?php else: ?>
@@ -268,16 +268,16 @@ $member = getMemberByUserId($user['id']);
                         </div>
                     
                         <div class="member-info-box">
-                            <p><strong>Member ID:</strong> <?php echo htmlspecialchars($member['member_id']); ?></p>
+                            <p><strong>Member ID:</strong> <?php echo htmlspecialchars($member['member_id'] ?? ''); ?></p>
                             <p><strong>Membership Status:</strong> 
                                 <?php 
-                                $status = $member['membership_status'];
+                                $status = $member['membership_status'] ?? '';
                                 $badgeClass = $status === 'active' ? 'badge-active' : ($status === 'pending' ? 'badge-pending' : 'badge-expired');
-                                echo '<span class="badge ' . $badgeClass . '">' . strtoupper($status) . '</span>';
+                                echo '<span class="badge ' . $badgeClass . '">' . strtoupper($status ?? '') . '</span>';
                                 ?>
                             </p>
-                            <p><strong>Joined:</strong> <?php echo formatDate($member['joined_date']); ?></p>
-                            <p><strong>Expires:</strong> <?php echo formatDate($member['expiry_date']); ?></p>
+                            <p><strong>Joined:</strong> <?php echo formatDate($member['joined_date'] ?? ''); ?></p>
+                            <p><strong>Expires:</strong> <?php echo formatDate($member['expiry_date'] ?? ''); ?></p>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">

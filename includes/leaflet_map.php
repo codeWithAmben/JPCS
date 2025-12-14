@@ -51,7 +51,28 @@ function renderLeafletMap($markers = [], $options = []) {
       if (m.description) content += '<div>' + m.description + '</div>';
       if (m.link) content += '<div style="margin-top:8px;"><a href="' + m.link + '">Open</a></div>';
       marker.bindPopup(content);
-      if (m.navigateOnClick) marker.on('popupopen', function(){ window.location.href = m.link; });
+
+      if (m.navigateOnClick) {
+        // On click: fly to maximum zoom level with a smooth, slower animation
+        marker.on('click', function(e){
+          var maxZ = (map.getMaxZoom && map.getMaxZoom()) || 18;
+          var desiredZoom = maxZ;
+
+          // Use flyTo for a smooth, slow animated zoom; adjust duration for slower effect
+          var flyOptions = {animate: true, duration: 2.2, easeLinearity: 0.25};
+
+          // If already at or above desired zoom, just open popup
+          if (map.getZoom() >= desiredZoom) {
+            marker.openPopup();
+            return;
+          }
+
+          // Fly to the marker and open popup after animation completes
+          map.flyTo(marker.getLatLng(), desiredZoom, flyOptions);
+          var navTimeout = setTimeout(function(){ marker.openPopup(); }, 2600);
+          map.once('moveend', function(){ clearTimeout(navTimeout); marker.openPopup(); });
+        });
+      }
     });
   } catch (err) {
     console.error('Error initializing Leaflet map:', err);
@@ -61,6 +82,7 @@ function renderLeafletMap($markers = [], $options = []) {
 </script>
 <style>.leaflet-map-container{width:100%; height:{$height}; border-radius:10px;}
 .map-error{font-size:0.95rem;}
+.map-instructions{max-width:900px;margin:0 auto 12px;background:rgba(255,255,255,0.95);padding:10px 14px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06);font-size:0.95rem;color:#333;text-align:center}
 </style>
 HTML;
 

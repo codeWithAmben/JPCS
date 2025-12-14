@@ -62,7 +62,6 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
 </section>
 
 <!-- Interactive Image Map Navigation -->
-<?php include 'includes/image_map.php'; ?>
 <?php include 'includes/google_map.php'; ?>
 <?php include 'includes/leaflet_map.php'; ?>
 <section class="quick-links-map">
@@ -70,9 +69,10 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
     // Use Leaflet + OpenStreetMap by default (no API key required)
     $markers = [
         // Batangas State University Malvar Campus coordinates (OpenStreetMap)
-        ['lat' => 14.0449123, 'lng' => 121.1563294, 'title' => 'Batangas State University Malvar Campus', 'description' => 'JPCS Malvar Chapter - Batangas State University Malvar Campus', 'link' => 'pages/about.php', 'navigateOnClick' => false]
+        ['lat' => 14.0449123, 'lng' => 121.1563294, 'title' => 'Batangas State University Malvar Campus', 'description' => 'JPCS Malvar Chapter - Batangas State University Malvar Campus', 'link' => 'pages/about.php', 'navigateOnClick' => true]
     ];
-    echo renderLeafletMap($markers, ['center' => ['lat' => 14.0449123, 'lng' => 121.1563294], 'zoom' => 17, 'id' => 'orgLeaflet', 'height' => '360px']);
+    echo '<div class="map-instructions"><strong>How it works:</strong> Click a map marker to view details. Tap or click the <em>Open</em> link in the popup (or click the marker again) to navigate to the linked page. Use pinch/scroll to zoom and drag to pan.</div>';
+    echo renderLeafletMap($markers, ['center' => ['lat' => 14.0449123, 'lng' => 121.1563294], 'zoom' => 17, 'id' => 'orgLeaflet', 'height' => '420px']);
 
   
     ?>
@@ -115,16 +115,7 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
     </div>
 </section>
 
-<section class="quick-links">
-    <h2 class="anton-font" style="font-size: 2rem;">Quick Links</h2>
-    <div class="links-grid">
-        <a href="pages/membership.php" class="qcard">Membership</a>
-        <a href="pages/events.php" class="qcard">Events</a>
-        <a href="pages/announcements.php" class="qcard">Announcements</a>
-        <a href="pages/helpdesk.php" class="qcard">Help Desk</a>
-        <a href="pages/jpcsmart.php" class="qcard">JPCS.Mart</a>
-    </div>
-</section>
+<!-- Quick Links removed per request -->
 
 <section class="newsletter">
     <h2 class="anton-font" style="font-size: 2rem; margin-bottom: 20px;">Subscribe to Our Newsletter</h2>
@@ -138,6 +129,14 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
     <p><strong>JPCS Malvar Chapter</strong></p>
     <p>Batangas State University TNEU - JPLPC Malvar</p>
     <p>Email: jpcs.malvar@g.batstate-u.edu.ph</p>
+
+    <div class="footer-social" aria-label="Share this page">
+        <a href="#" class="btn btn-outline" data-share="facebook" aria-label="Share on Facebook">📘 Facebook</a>
+        <a href="#" class="btn btn-outline" data-share="twitter" aria-label="Share on Twitter">🐦 Twitter</a>
+        <a href="#" class="btn btn-outline" data-share="linkedin" aria-label="Share on LinkedIn">🔗 LinkedIn</a>
+        <a href="#" class="btn btn-outline" data-share="whatsapp" aria-label="Share on WhatsApp">💬 WhatsApp</a>
+        <a href="#" class="btn btn-outline" data-share="copy" aria-label="Copy link">📋 Copy Link</a>
+    </div>
 </footer>
 
 <?php include 'includes/tawk_chat.php'; ?>

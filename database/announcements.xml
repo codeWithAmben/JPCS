@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <announcements>
-    <announcement>
-        <id>ann_001</id>
-        <title>Membership Drive 2026 Now Open!</title>
-        <content>We are excited to announce that our membership drive for 2026 is now officially open! This is your chance to become part of the JPCS Malvar Chapter family. Early bird registration is available until January 15, 2026, with special discounts for those who sign up early. Benefits include: Access to all workshops, priority registration for events, exclusive networking opportunities, and much more!</content>
-        <category>Membership</category>
-        <author>Admin</author>
-        <badge>NEW</badge>
-        <attachment></attachment>
-        <posted_date>2025-12-01</posted_date>
-        <status>active</status>
-    </announcement>
-    <announcement>
-        <id>ann_002</id>
-        <title>Tech Summit 2026 - Call for Volunteers</title>
-        <content>We need enthusiastic volunteers to help make our Annual Tech Summit 2026 a grand success! If you're interested in gaining event management experience while contributing to our community, this is the perfect opportunity. Positions available: Registration desk, technical support, logistics, and hospitality. Contact the organizing committee for more details.</content>
-        <category>Events</category>
-        <author>Events Committee</author>
-        <badge>URGENT</badge>
-        <attachment></attachment>
-        <posted_date>2025-11-28</posted_date>
-        <status>active</status>
-    </announcement>
-    <announcement>
-        <id>ann_003</id>
-        <title>Workshop Schedule for January Released</title>
-        <content>Check out our exciting lineup of workshops for January 2026! Topics include Web Development with React, Python for Data Science, Mobile App Development, and Cybersecurity Fundamentals. Registration opens December 5th. Limited slots available!</content>
-        <category>Academic</category>
-        <author>Admin</author>
-        <badge></badge>
-        <attachment></attachment>
-        <posted_date>2025-11-25</posted_date>
-        <status>active</status>
-    </announcement>
+  <announcement>
+    <id>ann_001</id>
+    <title>Membership Drive 2026 Now Open!</title>
+    <content>We are excited to announce that our membership drive for 2026 is now officially open! This is your chance to become part of the JPCS Malvar Chapter family. Early bird registration is available until January 15, 2026, with special discounts for those who sign up early. Benefits include: Access to all workshops, priority registration for events, exclusive networking opportunities, and much more!</content>
+    <category>Membership</category>
+    <author>Admin</author>
+    <badge>NEW</badge>
+    <attachment/>
+    <posted_date>2025-12-01</posted_date>
+    <status>active</status>
+  </announcement>
+  <announcement>
+    <id>ann_002</id>
+    <title>Tech Summit 2026 - Call for Volunteers</title>
+    <content>We need enthusiastic volunteers to help make our Annual Tech Summit 2026 a grand success! If you're interested in gaining event management experience while contributing to our community, this is the perfect opportunity. Positions available: Registration desk, technical support, logistics, and hospitality. Contact the organizing committee for more details.</content>
+    <category>Events</category>
+    <author>Events Committee</author>
+    <badge>URGENT</badge>
+    <attachment/>
+    <posted_date>2025-11-28</posted_date>
+    <status>active</status>
+  </announcement>
+  <announcement>
+    <id>ann_003</id>
+    <title>Workshop Schedule for January Released</title>
+    <content>Check out our exciting lineup of workshops for January 2026! Topics include Web Development with React, Python for Data Science, Mobile App Development, and Cybersecurity Fundamentals. Registration opens December 5th. Limited slots available!</content>
+    <category>Academic</category>
+    <author>Admin</author>
+    <badge/>
+    <attachment/>
+    <posted_date>2025-11-25</posted_date>
+    <status>active</status>
+  </announcement>
 </announcements>

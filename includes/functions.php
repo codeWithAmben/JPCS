@@ -44,14 +44,28 @@ function generateUniqueId($prefix = '') {
  * Format date for display
  */
 function formatDate($date, $format = 'F j, Y') {
-    return date($format, strtotime($date));
+    if (empty($date) || $date === null) {
+        return '';
+    }
+    $timestamp = strtotime($date);
+    if ($timestamp === false || $timestamp === -1) {
+        return '';
+    }
+    return date($format, $timestamp);
 }
 
 /**
  * Format time for display
  */
 function formatTime($time, $format = 'g:i A') {
-    return date($format, strtotime($time));
+    if (empty($time) || $time === null) {
+        return '';
+    }
+    $timestamp = strtotime($time);
+    if ($timestamp === false || $timestamp === -1) {
+        return '';
+    }
+    return date($format, $timestamp);
 }
 
 /**

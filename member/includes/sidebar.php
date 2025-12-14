@@ -3,6 +3,9 @@
  * Member Sidebar Navigation
  */
 $currentPage = basename($_SERVER['PHP_SELF']);
+// Make sure $user and $member are available in this scope
+if (!isset($user)) $user = getCurrentUser();
+if (!isset($member) && $user) $member = getMemberByUserId($user['id']);
 ?>
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -40,6 +43,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <li>
             <a href="../pages/jpcsmart.php">
                 <i data-lucide="shopping-cart"></i> JPCS.Mart
+            </a>
+        </li>
+        <?php if ($member && ($member['membership_status'] ?? '') === 'active'): ?>
+        <li>
+            <a href="certificate.php" class="<?php echo $currentPage === 'certificate.php' ? 'active' : ''; ?>">
+                <i data-lucide="award"></i> My Certificate
+            </a>
+        </li>
+        <?php endif; ?>
+        <li>
+            <a href="../pages/my_orders.php" class="<?php echo $currentPage === 'my_orders.php' ? 'active' : ''; ?>">
+                <i data-lucide="shopping-cart"></i> My Orders
             </a>
         </li>
         <li>

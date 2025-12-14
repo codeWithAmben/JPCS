@@ -30,6 +30,10 @@ body {
     padding: 25px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .sidebar-header .admin-logo {
@@ -40,20 +44,22 @@ body {
     padding: 10px;
     position: relative;
     
-    /* Glassmorphism Effect */
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    /* Use dark orange background; keep logo image color as-is (white) */
+    background: var(--primary);
+    background-blend-mode: multiply;
+    -webkit-background-clip: padding-box;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 2px solid rgba(255,255,255,0.18);
     
     /* 3D Transform & Shadow */
     transform-style: preserve-3d;
     transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
     box-shadow: 
-        0 8px 32px 0 rgba(255, 106, 0, 0.25),
-        0 2px 8px 0 rgba(255, 106, 0, 0.15),
-        inset 0 2px 4px 0 rgba(255, 255, 255, 0.4),
-        inset 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+        0 8px 32px 0 rgba(var(--primary-rgb), 0.28),
+        0 2px 8px 0 rgba(var(--primary-rgb), 0.16),
+        inset 0 2px 4px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -2px 4px 0 rgba(0, 0, 0, 0.08);
     
     /* Animation */
     animation: float 6s ease-in-out infinite, glassShine 3s ease-in-out infinite;
@@ -63,12 +69,15 @@ body {
 .sidebar-header .admin-logo:hover {
     transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(-5px) scale(1.05);
     box-shadow: 
-        0 12px 48px 0 rgba(255, 106, 0, 0.35),
-        0 4px 16px 0 rgba(255, 106, 0, 0.25),
-        inset 0 3px 6px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -3px 6px 0 rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 140, 66, 0.4);
+        0 12px 48px 0 rgba(var(--primary-rgb), 0.42),
+        0 4px 16px 0 rgba(var(--primary-rgb), 0.32),
+        inset 0 3px 6px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -3px 6px 0 rgba(0, 0, 0, 0.12);
+    border-color: rgba(var(--primary-rgb), 0.4);
 }
+
+/* Keep actual logo image colors unchanged so the white logo remains white */
+.sidebar-header .admin-logo { filter: none; }
 
 /* Glass Reflection Overlay */
 .sidebar-header .admin-logo::before {
@@ -118,31 +127,39 @@ body {
 
 /* Float Animation */
 @keyframes float {
-    0%, 100% {
-        transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(0px);
+    .topbar, .top-bar {
+        background: white;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
-    50% {
-        transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px);
-    }
-}
 
-/* Glass Shine Animation */
-@keyframes glassShine {
-    0%, 100% {
-        background: rgba(255, 255, 255, 0.15);
+    .topbar h1,
+    .top-bar h1,
+    .top-bar .welcome,
+    .topbar .welcome {
+        font-size: 1.6rem;
+        color: #2c3e50;
+        font-weight: 700;
     }
-    50% {
-        background: rgba(255, 255, 255, 0.25);
-    }
-}
 
-/* Reflection Animation */
-@keyframes glassReflection {
-    0%, 100% {
-        opacity: 0.8;
-        transform: rotate(0deg);
+    /* user-menu compatibility with previous markup */
+    .user-info,
+    .user-menu {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-shrink: 0;
     }
-    50% {
+
+    .user-menu span {
+        text-align: right;
+    }
         opacity: 0.5;
         transform: rotate(180deg);
     }

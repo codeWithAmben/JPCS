@@ -74,7 +74,7 @@ $upcomingEvents = array_filter($events, function($event) {
                     <div class="membership-badge">
                         <h4>Membership Status</h4>
                         <div class="status">
-                            <?php echo strtoupper($member['membership_status']); ?>
+                            <?php echo strtoupper($member['membership_status'] ?? ''); ?>
                         </div>
                         <div style="margin-top: 10px; font-size: 0.85rem; opacity: 0.9;">
                             Expires: <?php echo formatDate($member['expiry_date']); ?>
