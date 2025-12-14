@@ -60,8 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
                 
             case 'delete':
-                if (deleteMember($_POST['id'])) {
-                    setFlash('Member deleted successfully!', 'success');
+                // Find the member to get user_id
+                $member = getMemberById($_POST['id']);
+                $userDeleted = true;
+                if ($member && !empty($member['user_id'])) {
+                    // Also delete the user if user_id is set
+                    $userDeleted = deleteUser($member['user_id']);
+                }
+                $memberDeleted = deleteMember($_POST['id']);
+                if ($memberDeleted && $userDeleted) {
+                    setFlash('Member and user deleted successfully!', 'success');
+                } else if ($memberDeleted) {
+                    setFlash('Member deleted, but user record could not be deleted.', 'warning');
                 } else {
                     setFlash('Failed to delete member.', 'error');
                 }
