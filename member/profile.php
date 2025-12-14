@@ -100,7 +100,6 @@ $member = getMemberByUserId($user['id']);
         <?php include 'includes/sidebar.php'; ?>
         
         <main class="main-content">
-            <div class="content-inner">
             <div class="top-bar">
                 <div class="welcome-section">
                     <div class="welcome-text">
@@ -112,6 +111,8 @@ $member = getMemberByUserId($user['id']);
                     </div>
                 </div>
             </div>
+            
+            <div class="content-inner">
             
             <?php displayFlash(); ?>
             

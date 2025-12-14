@@ -122,4 +122,27 @@ if (strpos($_SERVER['PHP_SELF'], '/pages/') !== false) {
 <!-- Mobile Navigation Overlay -->
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
+<!-- Exit Intent Subscribe Modal -->
+<div id="exitModal" class="exit-modal" aria-hidden="true">
+    <div class="exit-modal-backdrop"></div>
+    <div class="exit-modal-panel" role="dialog" aria-modal="true" aria-labelledby="exitModalTitle">
+        <button class="exit-modal-close" id="exitModalClose" aria-label="Close">×</button>
+        <h3 id="exitModalTitle">Wait — Join Our Newsletter!</h3>
+        <p>Subscribe to get the latest JPCS events and updates.</p>
+        <form id="exitNewsletterForm">
+            <input type="email" id="exitEmail" name="email" placeholder="Your email address" required>
+            <div style="display:flex; gap:10px; margin-top:12px;">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+                <button type="button" class="btn" id="exitModalNoThanks">No, thanks</button>
+            </div>
+            <div id="exitModalMessage" style="margin-top:12px; font-size:0.95rem;"></div>
+        </form>
+    </div>
+    <!-- Expose site URL to JS in a safe way -->
+    <script>
+        window.JPCS = window.JPCS || {};
+        window.JPCS.siteUrl = '<?php echo rtrim(SITE_URL, "/"); ?>';
+    </script>
+</div>
+
 <!-- Mobile nav logic handled in js/script.js -->

@@ -3,6 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileNav = document.getElementById("mobileNav");
     const mobileNavOverlay = document.getElementById("mobileNavOverlay");
 
+    // UX Improvement: Auto-dismiss flash messages after 4 seconds
+    const flashAlerts = document.querySelectorAll('.alert-dismissible');
+    if (flashAlerts.length > 0) {
+        setTimeout(() => {
+            flashAlerts.forEach(alert => {
+                alert.style.transition = 'opacity 0.5s ease';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 4000);
+    }
+
     function openMobileNav() {
         if (mobileNav) mobileNav.classList.add('active');
         if (hamburger) hamburger.classList.add('active');
@@ -10,6 +22,126 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = 'hidden';
     }
 
+    // Exit-intent Subscribe Modal Logic
+    (function(){
+        const modal = document.getElementById('exitModal');
+        const closeBtn = document.getElementById('exitModalClose');
+        const noThanks = document.getElementById('exitModalNoThanks');
+        const form = document.getElementById('exitNewsletterForm');
+        const emailInput = document.getElementById('exitEmail');
+        const msg = document.getElementById('exitModalMessage');
+        const storageKey = 'jpcs_exit_subscribed';
+        const sessionKey = 'jpcs_exit_dismissed_session';
+
+        if (!modal || !form) return;
+
+        // Helpers
+        function showModal(){
+            if (localStorage.getItem(storageKey)) return;
+            if (sessionStorage.getItem(sessionKey)) return;
+            modal.setAttribute('aria-hidden','false');
+            modal.style.display = 'block';
+            if (emailInput) emailInput.focus();
+        }
+        function hideModal(){
+            modal.setAttribute('aria-hidden','true');
+            modal.style.display = 'none';
+        }
+
+        closeBtn?.addEventListener('click', function(){
+            // Suppress for this session if closed via X
+            sessionStorage.setItem(sessionKey, 'true');
+            hideModal();
+        });
+
+        noThanks?.addEventListener('click', function(){ localStorage.setItem(storageKey,'true'); hideModal(); });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape' && modal.style.display === 'block') hideModal();
+        });
+
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            if (msg) msg.textContent = '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            
+            if (!email) { 
+                if (msg) msg.textContent = 'Please enter your email.'; 
+                return; 
+            }
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                if (msg) msg.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            let endpoint = 'handlers/newsletter_subscribe.php';
+            if (window.JPCS && window.JPCS.siteUrl) {
+                endpoint = window.JPCS.siteUrl + '/handlers/newsletter_subscribe.php';
+            } else {
+                // Dynamic path resolution based on depth
+                const pathSegments = window.location.pathname.split('/').filter(p => p.length > 0);
+                // Assuming standard structure: /JPCS/index.php (depth 1) vs /JPCS/member/dashboard.php (depth 2)
+                // If we are deeper than the root folder (ignoring the project folder itself if localhost/JPCS)
+                // A safer fallback for standard XAMPP structure:
+                if (window.location.pathname.includes('/pages/') || window.location.pathname.includes('/member/') || window.location.pathname.includes('/admin/')) {
+                     endpoint = '../handlers/newsletter_subscribe.php';
+                }
+            }
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'email=' + encodeURIComponent(email)
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    if (msg) {
+                        msg.style.color = 'green';
+                        msg.textContent = data.message || 'Subscribed!';
+                    }
+                    localStorage.setItem(storageKey,'true');
+                    setTimeout(hideModal, 1200);
+                } else {
+                    if (msg) {
+                        msg.style.color = 'red';
+                        msg.textContent = data.message || 'Subscription failed';
+                    }
+                }
+            }).catch(err => {
+                if (msg) {
+                    msg.style.color = 'red';
+                    msg.textContent = 'Network error. Try again later.';
+                }
+            });
+        });
+
+        // Exit intent detection (desktop mouse leave at top)
+        let exitListenerEnabled = false;
+        setTimeout(() => { exitListenerEnabled = true; }, 2000); // don't show immediately
+
+        function handleMouseLeave(e){
+            if (!exitListenerEnabled) return;
+            if (e.clientY <= 10) {
+                showModal();
+            }
+        }
+
+        document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+
+        // Mobile: show on visibility change when user switches away (best-effort)
+        // Added check: only if user has been on page for > 5 seconds to avoid immediate triggers
+        const loadTime = Date.now();
+        document.addEventListener('visibilitychange', function(){
+            if (document.hidden && !localStorage.getItem(storageKey) && !sessionStorage.getItem(sessionKey)) {
+                if (Date.now() - loadTime < 5000) return; // Too soon
+                // do not show immediately – defer slightly
+                setTimeout(() => { showModal(); }, 400);
+            }
+        });
+    })();
     function closeMobileNav() {
         if (mobileNav) mobileNav.classList.remove('active');
         if (hamburger) hamburger.classList.remove('active');
@@ -21,20 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
         hamburger.addEventListener("click", () => {
             if (mobileNav.classList.contains('active')) {
                 closeMobileNav();
+                hamburger.setAttribute('aria-expanded', 'false');
             } else {
                 openMobileNav();
-            }
-
-            // Animate hamburger lines using CSS class control when possible
-            const spans = hamburger.querySelectorAll('span');
-            if(hamburger.classList.contains('active')){
-                spans[0].style.transform = "rotate(45deg) translate(6px, 6px)";
-                spans[1].style.opacity = "0";
-                spans[2].style.transform = "rotate(-45deg) translate(6px, -6px)";
-            } else {
-                spans[0].style.transform = "none";
-                spans[1].style.opacity = "1";
-                spans[2].style.transform = "none";
+                hamburger.setAttribute('aria-expanded', 'true');
             }
         });
     }
@@ -83,66 +205,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const eventContainer = document.getElementById("eventContainer");
 
     if (eventContainer) {
-        const candidatePaths = [
-            '/JPCS/database/events.xml',
-            '/database/events.xml',
-            'database/events.xml',
-            '../database/events.xml',
-            './database/events.xml'
-        ];
-
-        async function fetchFirstAvailable(paths) {
-            for (const p of paths) {
-                try {
-                    const res = await fetch(p);
-                    if (res.ok) return await res.text();
-                } catch (e) {
-                    // try next path
-                }
-            }
-            throw new Error('All event XML fetch attempts failed');
+        // Determine correct path to handler based on current location
+        let endpoint = 'handlers/get_events.php';
+        if (window.JPCS && window.JPCS.siteUrl) {
+            endpoint = window.JPCS.siteUrl + '/handlers/get_events.php';
+        } else if (window.location.pathname.includes('/pages/') || window.location.pathname.includes('/member/') || window.location.pathname.includes('/admin/')) {
+            endpoint = '../handlers/get_events.php';
         }
 
-        (async () => {
-            try {
-                const xmlText = await fetchFirstAvailable(candidatePaths);
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(xmlText, "application/xml");
-                const eventNodes = Array.from(xml.querySelectorAll('event'));
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(result => {
+                if (!result.success || !result.data || result.data.length === 0) {
+                    eventContainer.innerHTML = "<p>No upcoming events found.</p>";
+                    return;
+                }
 
-                // Map to object and pick the next active upcoming event
-                const events = eventNodes.map(node => ({
-                    title: node.querySelector('title')?.textContent || '',
-                    date: node.querySelector('date')?.textContent || '',
-                    time: node.querySelector('time')?.textContent || '',
-                    description: node.querySelector('description')?.textContent || '',
-                    location: node.querySelector('location')?.textContent || '',
-                    status: node.querySelector('status')?.textContent || ''
-                }))
-                .filter(e => (e.status || '').toLowerCase() === 'active');
-
+                const events = result.data;
                 const today = new Date();
                 today.setHours(0,0,0,0);
 
-                const parseDateTs = (d, t) => {
-                    if (!d) return NaN;
-                    // Normalize date string YYYY-MM-DD
-                    const dateOnly = d.trim();
-                    // If time exists, try to parse it, otherwise default to midnight
-                    let iso = dateOnly;
-                    if (t) {
-                        // Convert time like '09:00 AM' to '09:00:00'
-                        const tm = t.trim();
-                        // Use Date.parse on combined string for best result
-                        const dt = new Date(`${dateOnly} ${tm}`);
-                        return isNaN(dt.getTime()) ? new Date(`${dateOnly}T00:00:00`).getTime() : dt.getTime();
-                    }
-                    return new Date(`${dateOnly}T00:00:00`).getTime();
-                };
+                // Helper to parse date string
+                const getEventTime = (e) => {
+                    const dStr = e.date + (e.time ? ' ' + e.time : '');
+                    return new Date(dStr).getTime();
+                }
 
-                // Find earliest event with date >= today
-                events.sort((a,b) => parseDateTs(a.date,a.time) - parseDateTs(b.date,b.time));
-                const upcoming = events.find(e => parseDateTs(e.date,e.time) >= today.getTime()) || events[0];
+                // Find the next upcoming event
+                let upcoming = events.find(e => getEventTime(e) >= today.getTime());
+                
+                // If no future events, show the most recent one
+                if (!upcoming) {
+                    // Sort descending to get latest
+                    events.sort((a,b) => getEventTime(b) - getEventTime(a));
+                    upcoming = events[0];
+                }
 
                 if (upcoming) {
                     const displayDate = (upcoming.date) ? new Date(`${upcoming.date}T00:00:00`) : null;
@@ -153,15 +250,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p style="color: #ff6a00; font-weight: bold; margin-bottom: 15px;">${escapeHtml(dateStr)} ${upcoming.time ? '- ' + escapeHtml(upcoming.time) : ''}</p>
                         <p>${escapeHtml(upcoming.description)}</p>
                         ${upcoming.location ? `<p style="margin-top:10px; font-size:0.95rem; color:#666">Location: ${escapeHtml(upcoming.location)}</p>` : ''}
+                        <div style="margin-top: 20px;">
+                            <a href="events.php" class="btn-cta">View Details</a>
+                        </div>
                     `;
                 } else {
                     eventContainer.innerHTML = "<p>No upcoming events found.</p>";
                 }
-            } catch (error) {
-                console.error('Error loading events XML:', error);
+            })
+            .catch(error => {
+                console.error('Error loading events:', error);
                 eventContainer.innerHTML = "<p>Unable to load event details at this time.</p>";
-            }
-        })();
+            });
     }
 
     // Social share handlers (footer)

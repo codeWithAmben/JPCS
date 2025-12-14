@@ -1,0 +1,11 @@
+{
+  "name": "jpcs-site-tests",
+  "version": "1.0.0",
+  "description": "Simple Puppeteer tests for JPCS exit-intent modal",
+  "scripts": {
+    "test:exit-intent": "node scripts/puppeteer_exit_intent_test.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.33.0"
+  }
+}

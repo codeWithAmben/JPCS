@@ -24,7 +24,16 @@ function saveXML($xml, $filepath) {
     $dom->preserveWhiteSpace = false;
     $dom->formatOutput = true;
     $dom->loadXML($xml->asXML());
-    return $dom->save($filepath);
+    
+    $fp = fopen($filepath, 'w');
+    if (flock($fp, LOCK_EX)) {
+        fwrite($fp, $dom->saveXML());
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        return true;
+    }
+    fclose($fp);
+    return false;
 }
 
 /**
@@ -1238,7 +1247,12 @@ function registerForEvent($eventId, $userId, $memberId, $paymentAmount = 0) {
     $registration->addChild('certificate_issued', 'false');
     $registration->addChild('notes', '');
     
-    return saveXML($xml, DB_EVENT_REGISTRATIONS) ? (string)$registration->id : false;
+    $saved = saveXML($xml, DB_EVENT_REGISTRATIONS);
+    if (!$saved) {
+        error_log('Failed to save event registration to ' . DB_EVENT_REGISTRATIONS);
+        return false;
+    }
+    return (string)$registration->id;
 }
 
 /**
@@ -1296,6 +1310,34 @@ function issueCertificate($registrationId) {
         }
     }
     return false;
+}
+
+/**
+ * Add an email to newsletter subscribers
+ */
+function addNewsletterSubscriber($email) {
+    $email = trim(strtolower($email));
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) return false;
+
+    $xml = loadXML(DB_NEWSLETTER);
+    if (!$xml) return false;
+
+    // Prevent duplicates
+    foreach ($xml->subscriber as $sub) {
+        if (strtolower((string)$sub->email) === $email) return true;
+    }
+
+    $subscriber = $xml->addChild('subscriber');
+    $subscriber->addChild('id', generateUniqueId('nl_'));
+    $subscriber->addChild('email', $email);
+    $subscriber->addChild('subscribed_at', date('Y-m-d H:i:s'));
+
+    $saved = saveXML($xml, DB_NEWSLETTER);
+    if (!$saved) {
+        error_log('Failed to save newsletter subscriber to ' . DB_NEWSLETTER);
+        return false;
+    }
+    return true;
 }
 
 /**

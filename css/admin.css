@@ -127,44 +127,58 @@ body {
 
 /* Float Animation */
 @keyframes float {
-    .topbar, .top-bar {
-        background: white;
-        padding: 20px 30px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-
-    .topbar h1,
-    .top-bar h1,
-    .top-bar .welcome,
-    .topbar .welcome {
-        font-size: 1.6rem;
-        color: #2c3e50;
-        font-weight: 700;
-    }
-
-    /* user-menu compatibility with previous markup */
-    .user-info,
-    .user-menu {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-shrink: 0;
-    }
-
-    .user-menu span {
-        text-align: right;
-    }
-        opacity: 0.5;
-        transform: rotate(180deg);
-    }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
+.topbar, .top-bar {
+    background: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar h1,
+.top-bar h1,
+.top-bar .welcome,
+.topbar .welcome {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* user-menu compatibility with previous markup */
+.user-info,
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.user-menu span {
+    text-align: right;
+}
+
+@keyframes glassShine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes glassReflection {
+    0% { transform: translateX(-100%) rotate(30deg); }
+    50% { transform: translateX(100%) rotate(30deg); }
+    100% { transform: translateX(-100%) rotate(30deg); }
+}
+
+/* Sidebar Header Text */
 .sidebar-header h2 {
     font-size: 1.2rem;
     margin-bottom: 8px;
@@ -215,30 +229,7 @@ body {
     overflow-x: hidden;
 }
 
-.topbar {
-    background: white;
-    padding: 20px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.topbar h1 {
-    font-size: 1.6rem;
-    color: #2c3e50;
-    font-weight: 700;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 0;
-}
+/* Topbar styles are now defined above */
 
 .content-wrapper {
     padding: 25px;
@@ -713,7 +704,7 @@ body {
 }
 
 /* Tablet Portrait & Mobile (< 768px) - Sidebar collapses */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     /* Sidebar Toggle */
     .sidebar-toggle {
         display: flex;
@@ -1028,3 +1019,4 @@ body {
         left: 10px;
     }
 }
+    

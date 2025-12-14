@@ -8,15 +8,6 @@
     padding: 0 16px;
 }
 
-/* Keep top-bar full-bleed like dashboard */
-.content-inner .top-bar {
-    margin: -40px -40px 35px -40px;
-    width: calc(100% + 80px);
-    padding: 30px 40px;
-    border-bottom: 1px solid #ffe8db;
-    box-shadow: 0 2px 8px rgba(255, 106, 0, 0.1);
-}
-
 .section {
     margin-bottom: 35px;
 }

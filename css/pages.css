@@ -5,6 +5,11 @@
 
 @import 'variables.css';
 
+/* UX: Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
 /* ----- Layout Container ----- */
 .page-section {
     max-width: var(--container-max);
@@ -162,6 +167,22 @@
     font-size: 0.95rem;
 }
 
+/* UX: Call to Action Button */
+.btn-cta {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: var(--primary);
+    color: white !important;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .page-title { font-size: 2rem; }
@@ -197,12 +218,18 @@
     .data-table thead { display: none; }
     .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
     .data-table tr { margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
-    .data-table td { padding: 12px; border-bottom: none; }
+    .data-table td { 
+        padding: 12px 16px; 
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+    }
     .data-table td::before {
         content: attr(data-label);
         font-weight: 700;
-        display: block;
-        margin-bottom: 8px;
+        margin-right: 1rem;
         color: var(--gray-700);
     }
 }

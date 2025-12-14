@@ -3,7 +3,7 @@ require_once '../config.php';
 requireLogin();
 
 $action = $_POST['action'] ?? '';
-$redirect = $_POST['redirect'] ?? '../member/events.php';
+$redirect = $_POST['redirect'] ?? rtrim(SITE_URL, '/') . '/member/events.php';
 
 $user = getCurrentUser();
 $member = getMemberByUserId($user['id']);

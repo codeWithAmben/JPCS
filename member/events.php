@@ -226,7 +226,7 @@ usort($filteredEvents, function($a, $b) {
                                             <form method="POST" action="../handlers/event_registration.php" onsubmit="return confirm('Are you sure you want to cancel your registration?');">
                                                 <input type="hidden" name="action" value="cancel">
                                                 <input type="hidden" name="registration_id" value="<?php echo $isRegistered['id']; ?>">
-                                                <input type="hidden" name="redirect" value="events.php">
+                                                <input type="hidden" name="redirect" value="<?php echo rtrim(SITE_URL, '/'); ?>/member/events.php">
                                                 <button type="submit" class="btn" style="background: #e74c3c;">
                                                     <i data-lucide="x-circle"></i> Cancel Registration
                                                 </button>
@@ -244,7 +244,7 @@ usort($filteredEvents, function($a, $b) {
                                             <form method="POST" action="../handlers/event_registration.php">
                                                 <input type="hidden" name="action" value="register">
                                                 <input type="hidden" name="event_id" value="<?php echo $event['id']; ?>">
-                                                <input type="hidden" name="redirect" value="events.php">
+                                                <input type="hidden" name="redirect" value="<?php echo rtrim(SITE_URL, '/'); ?>/member/events.php">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i data-lucide="user-plus"></i> Register Now
                                                 </button>

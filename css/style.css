@@ -14,6 +14,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -24,6 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -218,6 +220,16 @@ body.inner-page header .menu-button button {
     animation: slideUp 0.2s ease-out;
 }
 
+/* Exit Intent Modal */
+.exit-modal { display:none; }
+.exit-modal[aria-hidden="false"] { display:block; position:fixed; inset:0; z-index:2000; }
+.exit-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+.exit-modal-panel { position:relative; width:100%; max-width:480px; margin:80px auto; background:var(--white); padding:24px; border-radius:12px; box-shadow:var(--shadow-xl); z-index:2001; }
+.exit-modal-panel h3 { margin:0 0 8px 0; }
+.exit-modal-panel input[type="email"] { width:100%; padding:10px 12px; border:1px solid var(--border-color); border-radius:6px; }
+.exit-modal-close { position:absolute; top:10px; right:12px; background:none; border:none; font-size:20px; cursor:pointer; }
+.exit-modal .btn { min-width:120px; }
+
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -258,12 +270,23 @@ body.inner-page header .menu-button button {
 }
 
 body.home-page header:not(.scrolled) .hamburger span { background-color: var(--white); }
+body.home-page header:not(.scrolled) .hamburger.active span { background-color: var(--gray-800); }
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
 
 /* Mobile Nav */
 .mobile-nav {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -280px; /* Match width to hide completely */
     width: 280px;
     height: 100vh;
     background: var(--white);
@@ -274,9 +297,13 @@ body.home-page header:not(.scrolled) .hamburger span { background-color: var(--w
     box-shadow: -5px 0 30px rgba(0,0,0,0.1);
     transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
     z-index: 999;
+    visibility: hidden;
 }
 
-.mobile-nav.active { right: 0; }
+.mobile-nav.active { 
+    right: 0; 
+    visibility: visible;
+}
 
 .mobile-nav a {
     padding: 12px 15px;
@@ -288,6 +315,38 @@ body.home-page header:not(.scrolled) .hamburger span { background-color: var(--w
 .mobile-nav a:hover, .mobile-nav a.active {
     background-color: var(--primary-light);
     color: var(--primary);
+}
+
+/* Mobile User Info Styles */
+.mobile-nav-header {
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mobile-user-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.mobile-user-name {
+    font-weight: 600;
+    color: var(--gray-900);
+    font-size: 0.95rem;
 }
 
 .mobile-nav-overlay {
@@ -349,5 +408,5 @@ footer p {
 
 /* Ensure mobile nav and overlay are hidden on desktop widths */
 @media (min-width: 901px) {
-    .mobile-nav, .mobile-nav-overlay { display: none !important; right: -100% !important; }
+    .mobile-nav, .mobile-nav-overlay { display: none !important; right: -280px !important; }
 }

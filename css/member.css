@@ -50,6 +50,8 @@ body {
     width: calc(100% + 80px);
     border-bottom: 1px solid #ffe8db;
     box-shadow: 0 2px 8px rgba(255, 106, 0, 0.1);
+    position: relative;
+    z-index: 10;
 }
 
 .welcome-section {
@@ -72,7 +74,7 @@ body {
 .welcome-text h1 svg {
     width: 32px;
     height: 32px;
-    color: #ff6a00;
+    color: var(--primary);
 }
 
 .welcome-text p {
@@ -88,7 +90,7 @@ body {
 
 .btn-logout {
     padding: 10px 24px;
-    background: linear-gradient(135deg, #ff6a00, #ff8c42);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -98,7 +100,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
     border: none;
     cursor: pointer;
 }
@@ -111,17 +113,17 @@ body {
 
 .btn-logout:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 106, 0, 0.35);
-    background: linear-gradient(135deg, #e05e00, #ff6a00);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.35);
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary));
 }
 
 /* Profile Card - Hero Style */
 .profile-hero {
-    background: linear-gradient(135deg, #ff6a00 0%, #ff8c42 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
     padding: 35px;
     border-radius: 16px;
     margin-bottom: 30px;
-    box-shadow: 0 10px 40px rgba(255, 106, 0, 0.25);
+    box-shadow: 0 10px 40px rgba(var(--primary-rgb), 0.25);
     position: relative;
     overflow: hidden;
 }
@@ -167,7 +169,7 @@ body {
 .profile-avatar i {
     width: 50px;
     height: 50px;
-    color: #ff6a00;
+    color: var(--primary);
 }
 
 .profile-details h2 {
@@ -246,12 +248,12 @@ body {
     left: 0;
     width: 4px;
     height: 100%;
-    background: var(--card-accent, #ff6a00);
+    background: var(--card-accent, var(--primary));
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(255, 106, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.15);
 }
 
 .stat-card-header {
@@ -276,13 +278,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--icon-bg, rgba(255, 106, 0, 0.1));
+    background: var(--icon-bg, rgba(var(--primary-rgb), 0.1));
 }
 
 .stat-icon i {
     width: 24px;
     height: 24px;
-    color: var(--card-accent, #ff6a00);
+    color: var(--card-accent, var(--primary));
 }
 
 .stat-card .value {
@@ -295,7 +297,7 @@ body {
 
 .stat-card .trend {
     font-size: 0.8rem;
-    color: #ff6a00;
+    color: var(--primary);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -339,11 +341,11 @@ body {
 .section-header h2 i {
     width: 24px;
     height: 24px;
-    color: #ff6a00;
+    color: var(--primary);
 }
 
 .view-all-link {
-    color: #ff6a00;
+    color: var(--primary);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
@@ -355,7 +357,7 @@ body {
 
 .view-all-link:hover {
     gap: 8px;
-    color: #e05e00;
+    color: var(--primary-hover);
 }
 
 .view-all-link i {
@@ -383,9 +385,9 @@ body {
 }
 
 .event-item:hover {
-    border-color: #ff6a00;
+    border-color: var(--primary);
     transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.15);
 }
 
 .event-item-header {
@@ -434,22 +436,22 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: linear-gradient(135deg, #ff6a00, #ff8c42);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     color: white;
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.3s;
     font-weight: 600;
     font-size: 0.9rem;
-    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
     border: none;
     cursor: pointer;
 }
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 106, 0, 0.35);
-    background: linear-gradient(135deg, #e05e00, #ff6a00);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.35);
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary));
 }
 
 .btn i,
@@ -459,7 +461,7 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ff6a00, #ff8c42);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
 }
 
 .btn-secondary {
@@ -480,13 +482,13 @@ body {
     padding: 20px 25px;
     background: #fffaf7;
     border-radius: 12px;
-    border-left: 4px solid #ff6a00;
+    border-left: 4px solid var(--primary);
     transition: all 0.3s;
 }
 
 .announcement-item:hover {
     background: white;
-    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
 }
 
 .announcement-header {
@@ -541,18 +543,18 @@ body {
 }
 
 .badge-active {
-    background: #d4edda;
-    color: #27ae60;
+    background: var(--bg-success);
+    color: var(--text-success);
 }
 
 .badge-pending {
-    background: #fff3cd;
-    color: #f39c12;
+    background: var(--bg-warning);
+    color: var(--text-warning);
 }
 
 .badge-expired {
-    background: #f8d7da;
-    color: #e74c3c;
+    background: var(--bg-danger);
+    color: var(--text-danger);
 }
 
 /* Forms */
@@ -580,8 +582,8 @@ body {
 
 .form-control:focus {
     outline: none;
-    border-color: #ff6a00;
-    box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
 .form-text {
@@ -624,26 +626,26 @@ body {
 }
 
 .alert-success {
-    background: #d4edda;
-    color: #27ae60;
-    border: 1px solid #c3e6cb;
+    background: var(--bg-success);
+    color: var(--text-success);
+    border: 1px solid var(--success);
 }
 
 .alert-error, .alert-danger {
-    background: #f8d7da;
-    color: #e74c3c;
-    border: 1px solid #f5c6cb;
+    background: var(--bg-danger);
+    color: var(--text-danger);
+    border: 1px solid var(--danger);
 }
 
 .alert-warning {
-    background: #fff3cd;
-    color: #f39c12;
-    border: 1px solid #ffeeba;
+    background: var(--bg-warning);
+    color: var(--text-warning);
+    border: 1px solid var(--warning);
 }
 
 .alert-info {
-    background: #ffe8db;
-    color: #ff6a00;
+    background: var(--bg-info);
+    color: var(--text-info);
     border: 1px solid #ffd4b8;
 }
 
@@ -654,7 +656,7 @@ body {
     border-radius: 12px;
     margin-bottom: 25px;
     border: 1px solid #ffe8db;
-    box-shadow: 0 2px 8px rgba(255, 106, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.08);
 }
 
 .filters-form {
@@ -682,14 +684,14 @@ body {
     z-index: 1001;
     width: 45px;
     height: 45px;
-    background: linear-gradient(135deg, #ff6a00, #ff8c42);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
     border: none;
     border-radius: 10px;
     cursor: pointer;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    box-shadow: 0 4px 15px rgba(255, 106, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
     transition: 0.3s;
     flex-direction: column;
     padding: 0;
@@ -737,18 +739,21 @@ body {
     pointer-events: auto;
 }
 
-/* Tablet Landscape */
-@media (max-width: 1024px) {
+/* Laptop / Small Desktop (1366px) */
+@media (max-width: 1366px) {
     .main-content {
         padding: 30px;
     }
     
     .top-bar {
-        padding: 25px 30px;
+        padding: 20px 30px;
         margin: -30px -30px 25px -30px;
         width: calc(100% + 60px);
     }
-    
+}
+
+/* Tablet Landscape */
+@media (max-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -786,7 +791,6 @@ body {
     .main-content {
         margin-left: 0;
         padding: 20px;
-        padding-top: 70px;
     }
     
     .top-bar {
@@ -858,7 +862,6 @@ body {
 @media (max-width: 480px) {
     .main-content {
         padding: 15px;
-        padding-top: 65px;
     }
     
     .top-bar {
@@ -877,6 +880,10 @@ body {
     .welcome-text h1 svg {
         width: 24px;
         height: 24px;
+    }
+    
+    .welcome-text p {
+        display: none;
     }
     
     .welcome-text p {

@@ -6,6 +6,7 @@
   background: var(--card-bg, #ffffff);
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(34, 34, 34, 0.06);
+}
 .checkout-container {
   --card-bg: #ffffff;
 }

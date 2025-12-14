@@ -56,6 +56,7 @@ A comprehensive, modern PHP-based membership management system designed specific
 - **📧 Email Verification System** - PHPMailer with SMTP support
 - **💬 Live Chat Support** - Integrated Tawk.to widget
 - **🗺️ Interactive Image Maps** - Enhanced navigation experience
+  - Note: The homepage uses a Leaflet (OpenStreetMap) interactive map for navigation; clicking a marker zooms in and opens a popup — click the popup's "Open" link to navigate to the relevant page.
 - **📱 Mobile-First Design** - Responsive across all devices
 - **🛍️ Checkout & Orders** - Built-in shopping cart and order management
 - **🛡️ Role-Based Security** - Granular access control
@@ -853,7 +854,7 @@ session_name('JPCS_SESSION');
 
 | Color | Hex | CSS Variable | Usage |
 |-------|-----|--------------|-------|
-| Primary Orange | `#ff6a00` | `--primary-color` | Buttons, accents |
+| Primary Orange | `#ff6a00` | `--primary` | Buttons, accents |
 | Primary Dark | `#e05e00` | `--primary-dark` | Hover states |
 | Primary Light | `#ff8c42` | `--primary-light` | Secondary elements |
 | Dark Background | `#1a1a2e` | `--dark` | Dark sections |
