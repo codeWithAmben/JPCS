@@ -47,11 +47,16 @@ function getAllUsers() {
     foreach ($xml->user as $user) {
         $users[] = [
             'id' => (string)$user->id,
+            'username' => (string)($user->username ?? ''),
             'email' => (string)$user->email,
             'password' => (string)$user->password,
-            'role' => (string)$user->role,
+            'first_name' => (string)($user->first_name ?? ''),
+            'last_name' => (string)($user->last_name ?? ''),
             'name' => (string)$user->name,
+            'role' => (string)$user->role,
             'status' => (string)$user->status,
+            'google_id' => (string)($user->google_id ?? ''),
+            'profile_photo' => (string)($user->profile_photo ?? ''),
             'created_at' => (string)$user->created_at
         ];
     }

@@ -12,6 +12,64 @@ function generateVerificationToken() {
 }
 
 /**
+ * Send registration received email to user confirming their registration (pending activation)
+ */
+function sendRegistrationReceivedEmail($email, $name = '', $memberId = '', $code = '') {
+    $subject = 'Registration Received - ' . SITE_NAME;
+
+    $message = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        . '<style>body{font-family:Arial,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#333} .container{max-width:600px;margin:0 auto;padding:20px} .btn{display:inline-block;background:#3949ab;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none}</style>'
+        . '</head><body><div class="container">'
+        . '<h2>Registration Received</h2>'
+        . '<p>Hello' . ($name ? ' <strong>' . htmlspecialchars($name) . '</strong>' : '') . ',</p>'
+        . '<p>We have received your membership registration. Your account is pending and will be reviewed by our team. Just wait to active your membership. We will notify you by email once your membership is active.</p>'
+        . ($memberId ? '<p><strong>Member ID:</strong> ' . htmlspecialchars($memberId) . '</p>' : '')
+        . ($code ? '<h3>Your Verification Code</h3><div class="code-box" style="background:#1a237e;color:#fff;font-size:28px;padding:14px;text-align:center;border-radius:6px;margin:12px 0;font-family:monospace;">' . htmlspecialchars($code) . '</div>' : '')
+        . '<p>If you have any questions, reply to this email: ' . SITE_EMAIL . '</p>'
+        . '<p>Thank you,<br>' . SITE_NAME . '</p>'
+        . '</div></body></html>';
+
+        if (function_exists('sendEmail')) {
+        $res = sendEmail($email, $subject, $message);
+        // Also notify admin
+        if (defined('SITE_EMAIL') && SITE_EMAIL) {
+            $adminMsg = 'A new registration was received for ' . htmlspecialchars($email) . ' (Member ID: ' . htmlspecialchars($memberId) . ').';
+            $adminMsg .= ($code ? ' Verification code: ' . htmlspecialchars($code) . '.' : '');
+            sendEmail(SITE_EMAIL, 'New Registration Received - ' . SITE_NAME, $adminMsg);
+        }
+        return $res['success'] ?? false;
+    }
+
+    return false;
+}
+
+/**
+ * Send welcome email for SSO-created accounts
+ */
+function sendSSOWelcomeEmail($email, $name = '') {
+    $subject = 'Welcome to ' . SITE_NAME;
+    $message = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        . '<style>body{font-family:Arial,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#333} .container{max-width:600px;margin:0 auto;padding:20px} .btn{display:inline-block;background:#3949ab;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none}</style>'
+        . '</head><body><div class="container">'
+        . '<h2>Welcome to ' . SITE_NAME . '</h2>'
+        . '<p>Hello' . ($name ? ' <strong>' . htmlspecialchars($name) . '</strong>' : '') . ',</p>'
+        . '<p>Your account was created via Single Sign-On (Google). Your membership is active and you may now log in and access member features.</p>'
+        . '<p>If you have any questions, reply to this email: ' . SITE_EMAIL . '</p>'
+        . '<p>Thank you,<br>' . SITE_NAME . '</p>'
+        . '</div></body></html>';
+
+    if (function_exists('sendEmail')) {
+        $res = sendEmail($email, $subject, $message);
+        if (defined('SITE_EMAIL') && SITE_EMAIL) {
+            sendEmail(SITE_EMAIL, 'New SSO Registration - ' . SITE_NAME, 'A new user signed up via SSO: ' . htmlspecialchars($email));
+        }
+        return $res['success'] ?? false;
+    }
+
+    return false;
+}
+
+/**
  * Generate a 6-digit verification code
  */
 function generateVerificationCode() {
@@ -96,9 +154,10 @@ function verifyToken($token) {
             $userId = (string)$verification->user_id;
             if (activateUserAccount($userId)) {
                 saveXML($xml, DB_VERIFICATIONS);
+                // Optionally include a friendly note and suggest next step
                 return [
                     'success' => true,
-                    'message' => 'Email verified successfully! Your account is now active.',
+                    'message' => 'Email verified successfully! Your account is now active. You may now log in.',
                     'user_id' => $userId
                 ];
             }
@@ -139,7 +198,7 @@ function verifyCode($email, $code) {
                 saveXML($xml, DB_VERIFICATIONS);
                 return [
                     'success' => true,
-                    'message' => 'Email verified successfully! Your account is now active.',
+                    'message' => 'Email verified successfully! Your account is now active. You may now log in.',
                     'user_id' => $userId
                 ];
             }
@@ -229,13 +288,6 @@ function getPendingVerification($email) {
  * Uses PHPMailer for reliable email delivery
  */
 function sendVerificationEmail($email, $token, $code, $name = '') {
-    // Use PHPMailer if available
-    if (function_exists('sendVerificationEmailPHPMailer')) {
-        $result = sendVerificationEmailPHPMailer($email, $token, $code, $name);
-        return $result['success'];
-    }
-    
-    // Fallback to basic mail() function
     $verificationLink = SITE_URL . '/verify.php?token=' . $token;
     
     $subject = 'Verify Your Email - ' . SITE_NAME;
@@ -280,6 +332,7 @@ function sendVerificationEmail($email, $token, $code, $name = '') {
                 
                 <p><strong>⏰ This verification expires in 24 hours.</strong></p>
                 <p>If you did not create an account, please ignore this email.</p>
+                <p style="margin-top:10px; color:#666; font-size:0.95rem;">If you do not see this email in your inbox within a few minutes, please check your spam or promotions folder.</p>
             </div>
             <div class="footer">
                 <p>&copy; ' . date('Y') . ' ' . SITE_NAME . ' | Batangas State University TNEU - JPLPC Malvar</p>
@@ -289,6 +342,12 @@ function sendVerificationEmail($email, $token, $code, $name = '') {
     </body>
     </html>';
     
+    // Use sendEmail from mailer.php if available (Preferred)
+    if (function_exists('sendEmail')) {
+        $result = sendEmail($email, $subject, $message);
+        return $result['success'];
+    }
+
     // Email headers
     $headers = [
         'MIME-Version: 1.0',
@@ -336,7 +395,7 @@ function resendVerification($email) {
         $verification = createVerificationRecord($pending['user_id'], $email, 'registration');
         if ($verification) {
             sendVerificationEmail($email, $verification['token'], $verification['code'], $name);
-            return ['success' => true, 'message' => 'Verification email resent successfully'];
+            return ['success' => true, 'message' => 'Verification email resent. Please check your inbox (including spam) for the verification link or code.'];
         }
     }
     
@@ -389,7 +448,7 @@ function createUserWithVerification($data) {
     
     return [
         'success' => true,
-        'message' => 'Account created! Please check your email to verify your account.',
+        'message' => 'Account created! We have sent a verification email to ' . $data['email'] . '. Please check your inbox (including spam) and click the verification link or enter the 6-digit code on the verification page to activate your account. Just wait to active your membership.',
         'user_id' => $userId,
         'verification_code' => $verification['code'] // For testing/display purposes
     ];

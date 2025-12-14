@@ -185,6 +185,22 @@ function handleGoogleOAuthLogin($googleUser) {
     
     if ($userId) {
         $newUser = getUserById($userId);
+        // Send welcome email for SSO-created account (only if available)
+        if (function_exists('sendSSOWelcomeEmail')) {
+            $sent = false;
+            try {
+                $sent = sendSSOWelcomeEmail($newUser['email'], $newUser['first_name'] . ' ' . $newUser['last_name']);
+            } catch (Throwable $t) {
+                error_log('Failed to send SSO welcome email (throwable): ' . $t->getMessage());
+            }
+            if ($sent) {
+                error_log('SSO welcome email sent to ' . $newUser['email']);
+            } else {
+                error_log('SSO welcome email not sent to ' . $newUser['email']);
+            }
+        } else {
+            error_log('sendSSOWelcomeEmail function not available.');
+        }
         return [
             'success' => true,
             'user' => $newUser,

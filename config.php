@@ -71,8 +71,22 @@ define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif']);
 // Pagination
 define('ITEMS_PER_PAGE', 10);
 
+// Load Composer Autoloader
+if (file_exists(BASE_PATH . '/vendor/autoload.php')) {
+    require_once BASE_PATH . '/vendor/autoload.php';
+}
+
 // Load environment variables FIRST (before mailer needs them)
 require_once INCLUDES_PATH . '/env_loader.php';
+
+// SMTP Configuration: prefer MAIL_* env vars (backwards-compatible with SMTP_* keys)
+define('SMTP_HOST', env('MAIL_HOST', env('SMTP_HOST', 'smtp.gmail.com')));
+define('SMTP_PORT', env('MAIL_PORT', env('SMTP_PORT', 587)));
+define('SMTP_USER', env('MAIL_USERNAME', env('SMTP_USER', '')));
+define('SMTP_PASS', env('MAIL_PASSWORD', env('SMTP_PASS', '')));
+define('SMTP_ENCRYPTION', env('MAIL_ENCRYPTION', env('SMTP_ENCRYPTION', 'tls')));
+define('SMTP_FROM_ADDRESS', env('MAIL_FROM_ADDRESS', env('SMTP_FROM_ADDRESS', SMTP_USER)));
+define('SMTP_FROM_NAME', env('MAIL_FROM_NAME', env('SMTP_FROM_NAME', 'JPCS Malvar Chapter')));
 
 // Google Maps API Key (set GOOGLE_MAPS_API_KEY in your .env or here)
 define('GOOGLE_MAPS_API_KEY', env('GOOGLE_MAPS_API_KEY', ''));

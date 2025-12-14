@@ -30,6 +30,19 @@ body {
     text-align: center;
 }
 
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .sidebar-header .admin-logo {
     margin: 0 auto 12px;
     display: block;
@@ -40,6 +53,7 @@ body {
     margin-left: 260px;
     padding: 40px;
     min-width: 0;
+    transition: margin-left 0.3s ease;
 }
 
 /* Top Bar */
@@ -672,6 +686,69 @@ body {
 }
 
 /* ===========================================
+   MINI SIDEBAR (Desktop Only)
+   =========================================== */
+
+.sidebar-footer {
+    padding: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.sidebar-collapse-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-collapse-btn:hover {
+    color: white;
+    background: rgba(255,255,255,0.1);
+}
+
+/* Collapsed State Styles */
+@media (min-width: 769px) {
+    body.sidebar-mini .sidebar {
+        width: 80px;
+    }
+
+    body.sidebar-mini .main-content {
+        margin-left: 80px;
+    }
+
+    body.sidebar-mini .sidebar-header h2,
+    body.sidebar-mini .sidebar-header p,
+    body.sidebar-mini .sidebar-menu li a span {
+        display: none;
+    }
+
+    body.sidebar-mini .sidebar-header .admin-logo {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    body.sidebar-mini .sidebar-menu li a {
+        justify-content: center;
+        padding: 15px 10px;
+    }
+
+    body.sidebar-mini .sidebar-collapse-btn {
+        transform: rotate(180deg);
+        margin: 0 auto;
+    }
+}
+
+/* ===========================================
    MEMBER DASHBOARD RESPONSIVE STYLES
    =========================================== */
 
@@ -761,6 +838,11 @@ body {
 
 /* Tablet Portrait */
 @media (max-width: 768px) {
+    /* Hide desktop collapse button on mobile */
+    .sidebar-footer {
+        display: none;
+    }
+    
     .sidebar-toggle {
         display: flex;
     }

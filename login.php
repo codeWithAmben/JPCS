@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Check if needs email verification
             if (isset($result['needs_verification']) && $result['needs_verification']) {
+                // Show a helpful flash and redirect to verification page
+                setFlash('info', $result['message']);
                 redirect(SITE_URL . '/verify.php?email=' . urlencode($result['email']));
             }
             setFlash('error', $result['message']);

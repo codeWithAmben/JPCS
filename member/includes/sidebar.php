@@ -17,52 +17,58 @@ if (!isset($member) && $user) $member = getMemberByUserId($user['id']);
     <ul class="sidebar-menu">
         <li>
             <a href="dashboard.php" class="<?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
-                <i data-lucide="layout-dashboard"></i> Dashboard
+                <i data-lucide="layout-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
         <li>
             <a href="profile.php" class="<?php echo $currentPage === 'profile.php' ? 'active' : ''; ?>">
-                <i data-lucide="user"></i> My Profile
+                <i data-lucide="user"></i> <span>My Profile</span>
             </a>
         </li>
         <li>
             <a href="events.php" class="<?php echo $currentPage === 'events.php' ? 'active' : ''; ?>">
-                <i data-lucide="calendar"></i> Events
+                <i data-lucide="calendar"></i> <span>Events</span>
             </a>
         </li>
         <li>
             <a href="announcements.php" class="<?php echo $currentPage === 'announcements.php' ? 'active' : ''; ?>">
-                <i data-lucide="megaphone"></i> Announcements
+                <i data-lucide="megaphone"></i> <span>Announcements</span>
             </a>
         </li>
         <li>
             <a href="../pages/gallery.php">
-                <i data-lucide="image"></i> Gallery
+                <i data-lucide="image"></i> <span>Gallery</span>
             </a>
         </li>
         <li>
             <a href="../pages/jpcsmart.php">
-                <i data-lucide="shopping-cart"></i> JPCS.Mart
+                <i data-lucide="shopping-cart"></i> <span>JPCS.Mart</span>
             </a>
         </li>
         <?php if ($member && ($member['membership_status'] ?? '') === 'active'): ?>
         <li>
             <a href="certificate.php" class="<?php echo $currentPage === 'certificate.php' ? 'active' : ''; ?>">
-                <i data-lucide="award"></i> My Certificate
+                <i data-lucide="award"></i> <span>My Certificate</span>
             </a>
         </li>
         <?php endif; ?>
         <li>
             <a href="../pages/my_orders.php" class="<?php echo $currentPage === 'my_orders.php' ? 'active' : ''; ?>">
-                <i data-lucide="shopping-cart"></i> My Orders
+                <i data-lucide="shopping-cart"></i> <span>My Orders</span>
             </a>
         </li>
         <li>
             <a href="../handlers/logout.php" class="logout-link">
-                <i data-lucide="log-out"></i> Logout
+                <i data-lucide="log-out"></i> <span>Logout</span>
             </a>
         </li>
     </ul>
+
+    <div class="sidebar-footer">
+        <button id="desktopSidebarToggle" class="sidebar-collapse-btn" title="Toggle Sidebar">
+            <i data-lucide="chevron-left"></i>
+        </button>
+    </div>
 </aside>
 
 <!-- Sidebar Toggle Button (Mobile Only) -->
@@ -123,5 +129,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Desktop Sidebar Collapse Logic
+    const desktopToggle = document.getElementById('desktopSidebarToggle');
+    
+    // Check saved preference
+    if (localStorage.getItem('jpcs_sidebar_mini') === 'true') {
+        document.body.classList.add('sidebar-mini');
+    }
+
+    if (desktopToggle) {
+        desktopToggle.addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-mini');
+            const isMini = document.body.classList.contains('sidebar-mini');
+            localStorage.setItem('jpcs_sidebar_mini', isMini);
+            // Re-render icons if needed (sometimes required for dynamic resizing)
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    }
 });
 </script>

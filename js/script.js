@@ -3,6 +3,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileNav = document.getElementById("mobileNav");
     const mobileNavOverlay = document.getElementById("mobileNavOverlay");
 
+    // Logout confirmation for all logout links
+    function addLogoutConfirmation(selector) {
+        document.querySelectorAll(selector).forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                const confirmed = confirm('Are you sure you want to logout?');
+                if (!confirmed) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+    addLogoutConfirmation('.logout-link');
+    addLogoutConfirmation('.mobile-logout');
+
     // UX Improvement: Auto-dismiss flash messages after 4 seconds
     const flashAlerts = document.querySelectorAll('.alert-dismissible');
     if (flashAlerts.length > 0) {
@@ -315,6 +329,111 @@ document.addEventListener("DOMContentLoaded", () => {
                 '`': '&#x60;',
                 '=': '&#x3D;'
             })[s];
+        });
+    }
+
+    // Responsive Image Map Logic
+    function resizeImageMap() {
+        const img = document.querySelector('img[usemap]');
+        if (!img) return;
+        
+        // Base the scale on the image's defined width attribute (the coordinate system), 
+        // falling back to natural width if not set.
+        const baseWidth = img.getAttribute('width') || img.naturalWidth || 1200;
+        if (baseWidth === 0) return;
+
+        const percent = img.clientWidth / baseWidth;
+        const map = document.querySelector('map[name="' + img.getAttribute('usemap').substr(1) + '"]');
+        
+        if (!map) return;
+
+        const areas = map.querySelectorAll('area');
+        areas.forEach(area => {
+            if (!area.dataset.originalCoords) {
+                area.dataset.originalCoords = area.getAttribute('coords');
+            }
+            const originalCoords = area.dataset.originalCoords.split(',');
+            const newCoords = originalCoords.map(c => Math.round(c * percent));
+            area.setAttribute('coords', newCoords.join(','));
+        });
+    }
+
+    // Initialize map resizing
+    window.addEventListener('resize', resizeImageMap);
+    // Run on load and immediately in case image is cached
+    window.addEventListener('load', resizeImageMap);
+    const mapImg = document.querySelector('img[usemap]');
+    if (mapImg) {
+        if (mapImg.complete) {
+            resizeImageMap();
+        } else {
+            mapImg.addEventListener('load', resizeImageMap);
+        }
+    }
+
+    // "Back to Map" floating button logic
+    if (document.referrer && document.referrer.includes('/pages/map.php') && !window.location.href.includes('/pages/map.php') && !document.body.classList.contains('home-page')) {
+        const backToMap = document.createElement('a');
+        backToMap.href = document.referrer;
+        backToMap.className = 'btn btn-primary';
+        backToMap.innerHTML = '🗺️ Back to Map';
+        backToMap.style.cssText = 'position: fixed; bottom: 30px; left: 30px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: slideUp 0.5s ease;';
+        document.body.appendChild(backToMap);
+    }
+
+    // Footer Newsletter Logic
+    const footerForm = document.getElementById('footerNewsletterForm');
+    if (footerForm) {
+        footerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('footerEmail');
+            const msg = document.getElementById('footerMsg');
+            const email = emailInput ? emailInput.value.trim() : '';
+
+            if (msg) msg.textContent = '';
+
+            if (!email) {
+                if (msg) { msg.style.color = 'var(--danger)'; msg.textContent = 'Please enter your email.'; }
+                return;
+            }
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                if (msg) { msg.style.color = 'var(--danger)'; msg.textContent = 'Please enter a valid email address.'; }
+                return;
+            }
+
+            // Determine endpoint
+            let endpoint = 'handlers/newsletter_subscribe.php';
+            if (window.JPCS && window.JPCS.siteUrl) {
+                endpoint = window.JPCS.siteUrl + '/handlers/newsletter_subscribe.php';
+            } else if (window.location.pathname.includes('/pages/') || window.location.pathname.includes('/member/') || window.location.pathname.includes('/admin/')) {
+                endpoint = '../handlers/newsletter_subscribe.php';
+            }
+
+            const btn = footerForm.querySelector('button');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Subscribing...';
+
+            fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'email=' + encodeURIComponent(email)
+            }).then(r => r.json()).then(data => {
+                if (data.success) {
+                    if (msg) { msg.style.color = 'var(--success)'; msg.textContent = data.message || 'Subscribed successfully!'; }
+                    emailInput.value = '';
+                } else {
+                    if (msg) { msg.style.color = 'var(--danger)'; msg.textContent = data.message || 'Subscription failed'; }
+                }
+            }).catch(err => {
+                if (msg) { msg.style.color = 'var(--danger)'; msg.textContent = 'Network error. Try again later.'; }
+            }).finally(() => {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            });
         });
     }
 });

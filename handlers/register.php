@@ -47,7 +47,7 @@ if ($existingUser) {
         $result = resendVerification($data['email']);
         echo json_encode([
             'success' => true,
-            'message' => 'A verification email has been resent to your email address.',
+            'message' => 'A verification email has been resent. Please check your inbox (including spam) and follow the instructions to verify your account.',
             'redirect' => SITE_URL . '/verify.php?email=' . urlencode($data['email'])
         ]);
         exit;
@@ -120,6 +120,13 @@ $memberId = createMember($memberData, $result['user_id']);
 if (!$memberId) {
     // Member record failed but user account exists - that's okay, they can complete profile later
     error_log("Member record creation failed for user: " . $result['user_id']);
+} else {
+    // Send registration received email to user (pending activation)
+    try {
+        sendRegistrationReceivedEmail($data['email'], trim($data['first_name'] . ' ' . $data['last_name']), $memberId, $result['verification_code'] ?? '');
+    } catch (Exception $e) {
+        error_log('Failed to send registration received email: ' . $e->getMessage());
+    }
 }
 
 echo json_encode([

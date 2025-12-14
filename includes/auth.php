@@ -17,7 +17,7 @@ function loginUser($email, $password) {
     if ($user['status'] === 'pending') {
         return [
             'success' => false, 
-            'message' => 'Please verify your email before logging in.',
+            'message' => 'Please verify your email before logging in. Check your email (including spam) for the verification link or the 6-digit code.',
             'needs_verification' => true,
             'email' => $email
         ];
@@ -31,7 +31,7 @@ function loginUser($email, $password) {
     if (isset($user['email_verified']) && $user['email_verified'] !== 'true') {
         return [
             'success' => false, 
-            'message' => 'Please verify your email before logging in.',
+            'message' => 'Please verify your email before logging in. Check your email (including spam) for the verification link or the 6-digit code.',
             'needs_verification' => true,
             'email' => $email
         ];

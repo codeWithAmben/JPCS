@@ -69,60 +69,22 @@ $galleryItems = array_slice($allGalleryItems, 0, 6); // Show only first 6 images
     // Use Leaflet + OpenStreetMap by default (no API key required)
     $markers = [
         // Batangas State University Malvar Campus coordinates (OpenStreetMap)
-        ['lat' => 14.0449123, 'lng' => 121.1563294, 'title' => 'Batangas State University Malvar Campus', 'description' => 'JPCS Malvar Chapter - Batangas State University Malvar Campus', 'link' => 'pages/about.php', 'navigateOnClick' => true]
+        ['lat' => 14.0449123, 'lng' => 121.1563294, 'title' => 'Batangas State University Malvar Campus', 'description' => 'JPCS Malvar Chapter - Batangas State University Malvar Campus', 'link' => 'pages/map.php', 'navigateOnClick' => true]
     ];
-    echo '<div class="map-instructions"><strong>How it works:</strong> Click a map marker to view details. Tap or click the <em>Open</em> link in the popup (or click the marker again) to navigate to the linked page. Use pinch/scroll to zoom and drag to pan.</div>';
+    echo '<div class="map-instructions"><strong>How it works:</strong> Click the map marker to launch our <strong>Interactive Campus Map</strong>. You can also use pinch/scroll to zoom and drag to pan around the campus vicinity.</div>';
     echo renderLeafletMap($markers, ['center' => ['lat' => 14.0449123, 'lng' => 121.1563294], 'zoom' => 17, 'id' => 'orgLeaflet', 'height' => '420px']);
-
-  
     ?>
-
-    <h2 class="anton-font" style="font-size: 2rem; margin-bottom: 10px;">🗺️ Interactive Navigation</h2>
-    <p style="color: #666; margin-bottom: 25px;">Click on any section to explore</p>
-    <div class="nav-image-map">
-        <a href="pages/membership.php" class="nav-map-item">
-            <span class="icon">👥</span>
-            <span class="label">Membership</span>
-        </a>
-        <a href="pages/events.php" class="nav-map-item">
-            <span class="icon">📅</span>
-            <span class="label">Events</span>
-        </a>
-        <a href="pages/announcements.php" class="nav-map-item">
-            <span class="icon">📢</span>
-            <span class="label">Announcements</span>
-        </a>
-        <a href="pages/helpdesk.php" class="nav-map-item">
-            <span class="icon">🎧</span>
-            <span class="label">Help Desk</span>
-        </a>
-        <a href="pages/jpcsmart.php" class="nav-map-item">
-            <span class="icon">🛒</span>
-            <span class="label">JPCS.Mart</span>
-        </a>
-        <a href="pages/gallery.php" class="nav-map-item">
-            <span class="icon">🖼️</span>
-            <span class="label">Gallery</span>
-        </a>
-        <a href="pages/about.php" class="nav-map-item">
-            <span class="icon">ℹ️</span>
-            <span class="label">About Us</span>
-        </a>
-        <a href="login.php" class="nav-map-item">
-            <span class="icon">🔐</span>
-            <span class="label">Login</span>
-        </a>
-    </div>
 </section>
 
 <!-- Quick Links removed per request -->
 
 <section class="newsletter">
     <h2 class="anton-font" style="font-size: 2rem; margin-bottom: 20px;">Subscribe to Our Newsletter</h2>
-    <form onsubmit="event.preventDefault(); alert('Subscribed!');">
-        <input type="email" placeholder="Your email address" required>
-        <button class="btn">Subscribe</button>
+    <form id="footerNewsletterForm">
+        <input type="email" id="footerEmail" name="email" placeholder="Your email address" required>
+        <button type="submit" class="btn">Subscribe</button>
     </form>
+    <div id="footerMsg" style="margin-top: 10px; font-weight: 500;"></div>
 </section>
 
 <footer>

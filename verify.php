@@ -272,6 +272,8 @@ if (isset($_GET['email'])) {
 
 <?php include 'includes/header.php'; ?>
 
+<?php displayFlash(); ?>
+
 <div class="verify-container">
     <div class="verify-header">
         <?php if ($messageType === 'success'): ?>
