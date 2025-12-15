@@ -19,6 +19,9 @@
         <li><a href="events.php" <?php echo basename($_SERVER['PHP_SELF']) === 'events.php' ? 'class="active"' : ''; ?>>
             <i data-lucide="calendar"></i> Manage Events
         </a></li>
+        <li><a href="event_registrations.php" <?php echo basename($_SERVER['PHP_SELF']) === 'event_registrations.php' ? 'class="active"' : ''; ?>>
+            <i data-lucide="ticket"></i> Event Registrations
+        </a></li>
         <li><a href="announcements.php" <?php echo basename($_SERVER['PHP_SELF']) === 'announcements.php' ? 'class="active"' : ''; ?>>
             <i data-lucide="megaphone"></i> Announcements
         </a></li>

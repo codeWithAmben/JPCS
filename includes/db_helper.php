@@ -432,7 +432,10 @@ function updateMember($id, $data) {
     foreach ($xml->member as $member) {
         if ((string)$member->id === $id) {
             foreach ($data as $key => $value) {
-                if (isset($member->$key)) {
+                if ($key === 'email' && empty($member->email)) {
+                    // If email field is missing, add it
+                    $member->addChild('email', $value);
+                } elseif (isset($member->$key)) {
                     $member->$key = $value;
                 } else {
                     $member->addChild($key, $value);
@@ -1190,6 +1193,7 @@ function getAllEventRegistrations() {
             'status' => (string)$reg->status,
             'payment_status' => (string)$reg->payment_status,
             'payment_amount' => (string)$reg->payment_amount,
+            'payment_proof' => (string)($reg->payment_proof ?? ''),
             'attended' => (string)$reg->attended === 'true',
             'certificate_issued' => (string)$reg->certificate_issued === 'true',
             'notes' => (string)$reg->notes
@@ -1230,7 +1234,7 @@ function isUserRegisteredForEvent($userId, $eventId) {
 /**
  * Register user for event
  */
-function registerForEvent($eventId, $userId, $memberId, $paymentAmount = 0) {
+function registerForEvent($eventId, $userId, $memberId, $paymentAmount = 0, $paymentProof = '') {
     $xml = loadXML(DB_EVENT_REGISTRATIONS);
     if (!$xml) return false;
     
@@ -1245,9 +1249,10 @@ function registerForEvent($eventId, $userId, $memberId, $paymentAmount = 0) {
     $registration->addChild('member_id', $memberId);
     $registration->addChild('user_id', $userId);
     $registration->addChild('registration_date', date('Y-m-d H:i:s'));
-    $registration->addChild('status', 'confirmed');
+    $registration->addChild('status', $paymentAmount > 0 ? 'pending' : 'confirmed'); // Pending if payment needs verification
     $registration->addChild('payment_status', $paymentAmount > 0 ? 'pending' : 'free');
     $registration->addChild('payment_amount', $paymentAmount);
+    $registration->addChild('payment_proof', $paymentProof);
     $registration->addChild('attended', 'false');
     $registration->addChild('certificate_issued', 'false');
     $registration->addChild('notes', '');
@@ -1294,6 +1299,25 @@ function updateEventAttendance($registrationId, $attended = true) {
             $reg->attended = $attended ? 'true' : 'false';
             if ($attended) {
                 $reg->status = 'completed';
+            }
+            return saveXML($xml, DB_EVENT_REGISTRATIONS);
+        }
+    }
+    return false;
+}
+
+/**
+ * Update event registration status
+ */
+function updateEventRegistrationStatus($id, $status, $paymentStatus = null) {
+    $xml = loadXML(DB_EVENT_REGISTRATIONS);
+    if (!$xml) return false;
+    
+    foreach ($xml->registration as $reg) {
+        if ((string)$reg->id === $id) {
+            $reg->status = $status;
+            if ($paymentStatus !== null) {
+                $reg->payment_status = $paymentStatus;
             }
             return saveXML($xml, DB_EVENT_REGISTRATIONS);
         }

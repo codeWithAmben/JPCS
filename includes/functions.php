@@ -236,12 +236,19 @@ function handleFileUpload($file, $subfolder = '') {
     }
     
     // Validate file type
-    $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $mimeType = $finfo->file($file['tmp_name']);
     
-    if (!in_array($mimeType, $allowedTypes)) {
+    if (!in_array($mimeType, $allowedMimeTypes)) {
         return ['success' => false, 'message' => 'Invalid file type. Only JPG, PNG, and GIF are allowed'];
+    }
+
+    // Also validate by extension as a fallback
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if (!in_array($extension, $allowedExtensions)) {
+        return ['success' => false, 'message' => 'Invalid file extension. Only JPG, PNG, and GIF are allowed.'];
     }
     
     // Create upload directory if it doesn't exist
@@ -250,8 +257,7 @@ function handleFileUpload($file, $subfolder = '') {
         mkdir($uploadDir, 0755, true);
     }
     
-    // Generate unique filename
-    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    // Generate unique filename to prevent overwrites and path traversal issues
     $filename = uniqid() . '_' . time() . '.' . $extension;
     $filepath = $uploadDir . $filename;
     

@@ -1,282 +1,88 @@
-/* ============================================
-   JPCS Malvar - Events Page Styles
-   ============================================ */
-
-@import 'variables.css';
-
-/* Events Section Container */
+/* Events Page Styles */
 .events-section {
+    padding: 40px 5%;
     max-width: 1200px;
-    margin: 50px auto;
-    padding: var(--space-5);
+    margin: 0 auto;
 }
 
-.events-section h1 {
-    text-align: center;
-    font-size: 3rem;
-    margin-bottom: 40px;
-    color: #ff6a00;
-}
-
-/* Events Grid Layout */
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-bottom: 50px;
+    margin-top: 30px;
 }
 
-/* Event Card */
 .event-card {
     background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
 }
 
 .event-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-color: var(--primary);
 }
 
-.event-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #ff6a00, #ff8c42);
+.event-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.event-category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .event-card h3 {
-    color: #ff6a00;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin-bottom: 15px;
-    line-height: 1.3;
+    color: var(--gray-900);
 }
 
-.event-date {
-    color: #666;
-    font-weight: 600;
-    margin-bottom: 15px;
+.event-meta p {
     display: flex;
     align-items: center;
     gap: 8px;
+    color: var(--gray-600);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
 }
 
-.event-date::before {
-    content: '📅';
+.event-desc {
+    color: var(--gray-600);
+    margin: 15px 0 20px;
+    line-height: 1.6;
+    flex-grow: 1;
 }
 
-.event-card p {
-    line-height: 1.7;
-    color: #555;
-}
-
-/* Event Card Tags */
-.event-tag {
-    display: inline-block;
-    background: rgba(255, 106, 0, 0.1);
-    color: #ff6a00;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-/* Event Actions */
 .event-actions {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+    margin-top: auto;
 }
 
-.event-actions .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #ff6a00;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: background 0.3s;
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(4px);
 }
-
-.event-actions .btn:hover {
-    background: #e05e00;
+.modal-content {
+    background-color: #fefefe; margin: 10% auto; padding: 30px; 
+    border: 1px solid #888; width: 90%; max-width: 500px; border-radius: 12px;
 }
-
-/* Event Filter Tabs */
-.event-filters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 40px;
-}
-
-.filter-btn {
-    padding: 10px 25px;
-    background: white;
-    border: 2px solid #ff6a00;
-    color: #ff6a00;
-    font-weight: 600;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: #ff6a00;
-    color: white;
-}
-
-/* Empty State */
-.no-events {
-    text-align: center;
-    padding: 80px 20px;
-    color: #999;
-    font-size: 1.2rem;
-}
-
-.no-events::before {
-    content: '📅';
-    display: block;
-    font-size: 4rem;
-    margin-bottom: 20px;
-    opacity: 0.5;
-}
-
-/* Responsive */
-@media (max-width: 991px) {
-    .events-section {
-        margin: 40px auto;
-    }
-    
-    .events-section h1 {
-        font-size: 2.5rem;
-        margin-bottom: 30px;
-    }
-    
-    .events-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
-}
-
-@media (max-width: 768px) {
-    .events-section {
-        margin: 30px auto;
-        padding: var(--space-4);
-    }
-    
-    .events-section h1 {
-        font-size: 2.2rem;
-    }
-    
-    .events-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .event-card {
-        padding: 25px;
-    }
-    
-    .event-card h3 {
-        font-size: 1.5rem;
-    }
-    
-    .event-filters {
-        gap: 10px;
-    }
-    
-    .filter-btn {
-        padding: 8px 18px;
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 575px) {
-    .events-section {
-        margin: 20px auto;
-        padding: var(--space-3);
-    }
-    
-    .events-section h1 {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
-    }
-    
-    .event-card {
-        padding: 20px;
-    }
-    
-    .event-card h3 {
-        font-size: 1.3rem;
-    }
-    
-    .event-date {
-        font-size: 0.9rem;
-    }
-    
-    .event-card p {
-        font-size: 0.9rem;
-    }
-    
-    .event-tag {
-        padding: 4px 10px;
-        font-size: 0.75rem;
-    }
-    
-    .filter-btn {
-        padding: 6px 14px;
-        font-size: 0.85rem;
-        border-radius: 20px;
-    }
-    
-    .event-actions .btn {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .no-events {
-        padding: 50px 15px;
-        font-size: 1rem;
-    }
-    
-    .no-events::before {
-        font-size: 3rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .events-section h1 {
-        font-size: 1.5rem;
-    }
-    
-    .event-card {
-        padding: 16px;
-        border-radius: 8px;
-    }
-    
-    .event-card h3 {
-        font-size: 1.15rem;
-    }
-    
-    .event-actions {
-        margin-top: 15px;
-        padding-top: 15px;
-    }
-    
-    .event-actions .btn {
-        display: block;
-        text-align: center;
-    }
-}
+.close-modal { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+.close-modal:hover { color: black; }

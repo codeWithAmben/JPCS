@@ -328,6 +328,11 @@ $stats = [
                         <h4>Create Event</h4>
                     </a>
                     
+                    <a href="event_registrations.php" class="action-card">
+                        <div class="icon"><i data-lucide="ticket"></i></div>
+                        <h4>Event Registrations</h4>
+                    </a>
+                    
                     <a href="announcements.php?action=add" class="action-card">
                         <div class="icon"><i data-lucide="megaphone"></i></div>
                         <h4>Post Announcement</h4>

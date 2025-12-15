@@ -31,6 +31,11 @@ if (!isset($member) && $user) $member = getMemberByUserId($user['id']);
             </a>
         </li>
         <li>
+            <a href="my_registrations.php" class="<?php echo $currentPage === 'my_registrations.php' ? 'active' : ''; ?>">
+                <i data-lucide="ticket"></i> <span>My Registrations</span>
+            </a>
+        </li>
+        <li>
             <a href="announcements.php" class="<?php echo $currentPage === 'announcements.php' ? 'active' : ''; ?>">
                 <i data-lucide="megaphone"></i> <span>Announcements</span>
             </a>

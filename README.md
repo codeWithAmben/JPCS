@@ -46,6 +46,40 @@
 
 ---
 
+## 🔁 Local Testing & Tunneling
+
+If you want to test the site from another device or make it temporarily accessible over the internet, you can use PHP's built-in server and an HTTP tunnel like `ngrok`.
+
+Quick start (serve the app locally):
+
+```sh
+# from project root
+composer serve
+```
+
+Expose to the internet with ngrok (separate terminal):
+
+```sh
+# requires ngrok installed and available in PATH
+ngrok http 8000
+```
+
+For Windows PowerShell you can use the helper script:
+
+```powershell
+.
+\scripts\start-ngrok.ps1 -Port 8000
+```
+
+Notes:
+- Update `SITE_URL` in `config.php` to the forwarded ngrok URL (e.g., `https://abcd1234.ngrok.io`) when testing OAuth callbacks or links that use absolute URLs.
+- If testing on a local network (LAN), use your machine's IPv4 address and open port 8000 in the firewall.
+- Remember to revert `SITE_URL` after testing.
+
+Want me to add a small script to start both the server and `ngrok` together? I can add a cross-platform helper that spawns both processes.
+
+---
+
 ## 🎯 About
 
 A comprehensive, modern PHP-based membership management system designed specifically for the JPCS Malvar Chapter. This system provides a complete digital infrastructure for student organization management, featuring member authentication, event coordination, announcements, merchandise management, and powerful administrative tools.

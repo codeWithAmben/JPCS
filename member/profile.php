@@ -4,6 +4,10 @@ requireLogin();
 
 $user = getCurrentUser();
 $member = getMemberByUserId($user['id']);
+// Auto-fill email from user record if missing in member record
+if (empty($member['email']) && !empty($user['email'])) {
+    $member['email'] = $user['email'];
+}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
